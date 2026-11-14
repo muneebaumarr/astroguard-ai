@@ -1,0 +1,822 @@
+{
+  "Mission": {
+    "id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+    "created_at": "2026-11-07T12:00:00Z",
+    "name": "Aurora Demo",
+    "environment": "microgravity",
+    "started_at": "2026-11-07T12:00:00Z",
+    "ended_at": null,
+    "description": "Entirely fictional educational mission",
+    "is_demo": true
+  },
+  "Astronaut": {
+    "id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+    "created_at": "2026-11-07T12:00:00Z",
+    "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+    "display_name": "Maya Demo",
+    "role": "Demo crew",
+    "is_demo": true
+  },
+  "DailyCheckin": {
+    "id": "40377fdd-ecee-5304-860c-5c427c2a9df1",
+    "created_at": "2026-11-07T12:00:00Z",
+    "checkin_date": "2026-11-07",
+    "observed_at": "2026-11-07T12:00:00Z",
+    "context": "resting",
+    "readings": [
+      {
+        "indicator": "heart_rate",
+        "value": 70.0,
+        "unit": "bpm"
+      }
+    ],
+    "sleep_hours": 7.0,
+    "mood": 4,
+    "stress": 2,
+    "symptoms": [],
+    "exercise_minutes": null,
+    "notes": "Fictional demo observation",
+    "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+    "is_demo": true
+  },
+  "HealthReading": {
+    "id": "972e847e-699c-51ee-b1ec-bd7dff41afd0",
+    "created_at": "2026-11-07T12:00:00Z",
+    "indicator": "heart_rate",
+    "value": 70.0,
+    "unit": "bpm",
+    "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+    "observed_at": "2026-11-07T12:00:00Z",
+    "source": "manual",
+    "context": "resting",
+    "checkin_id": "40377fdd-ecee-5304-860c-5c427c2a9df1",
+    "simulation_run_id": null,
+    "tick_index": null,
+    "is_demo": true
+  },
+  "EnvironmentalReading": {
+    "id": "d65f01bc-8333-553f-9263-c2ba72a4145e",
+    "created_at": "2026-11-07T12:00:00Z",
+    "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+    "indicator": "cabin_co2",
+    "value": 800.0,
+    "unit": "ppm",
+    "observed_at": "2026-11-07T12:00:00Z",
+    "source": "simulated",
+    "simulation_run_id": "2033e2db-74bf-5172-9be3-e9735d4c9b37",
+    "tick_index": 0,
+    "is_demo": true
+  },
+  "Assessment": {
+    "id": "5036e978-eebd-513a-90d8-39c59f01f546",
+    "created_at": "2026-11-07T12:00:00Z",
+    "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+    "evaluated_at": "2026-11-07T12:00:00Z",
+    "status": "insufficient_data",
+    "ruleset_version": "demo-v1",
+    "input_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+    "coverage": {
+      "evaluated_rule_ids": [],
+      "insufficient_rule_ids": [
+        "resting_hr_change"
+      ],
+      "not_applicable_rule_ids": []
+    },
+    "results": [
+      {
+        "rule_id": "resting_hr_change",
+        "outcome": "insufficient_data",
+        "workflow_status": "insufficient_data",
+        "explanation": "Not enough fictional samples",
+        "evidence": [],
+        "missing_data": [
+          "Three baseline and three recent resting samples"
+        ],
+        "guidance_slugs": []
+      }
+    ]
+  },
+  "Alert": {
+    "id": "24b51680-7db3-5989-a87e-0919d9b4afe6",
+    "created_at": "2026-11-07T12:00:00Z",
+    "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+    "rule_id": "demo_pattern",
+    "workflow_status": "review_suggested",
+    "state": "open",
+    "first_assessment_id": "c2237433-8a63-55bf-884a-e18bc1b60055",
+    "latest_assessment_id": "c2237433-8a63-55bf-884a-e18bc1b60055",
+    "opened_at": "2026-11-07T12:00:00Z",
+    "acknowledged_at": null,
+    "resolved_at": null
+  },
+  "SimulationRun": {
+    "id": "2033e2db-74bf-5172-9be3-e9735d4c9b37",
+    "created_at": "2026-11-07T12:00:00Z",
+    "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+    "scenario": "routine",
+    "seed": 42,
+    "simulation_start_at": "2026-11-07T12:00:00Z",
+    "interval_seconds": 5,
+    "step_seconds": 60,
+    "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+    "scenario_version": "demo-v1",
+    "status": "paused",
+    "started_at": null,
+    "last_tick_index": 0,
+    "last_error": null
+  },
+  "CommandReceipt": {
+    "id": "ad822780-6d0e-574f-a4a3-427d9042ec37",
+    "created_at": "2026-11-07T12:00:00Z",
+    "operation": "create_checkin",
+    "request_hash": "2222222222222222222222222222222222222222222222222222222222222222",
+    "result_type": "daily_checkin",
+    "result_id": "40377fdd-ecee-5304-860c-5c427c2a9df1"
+  },
+  "MissionCreate": {
+    "name": "Aurora Demo",
+    "environment": "microgravity",
+    "started_at": "2026-11-07T12:00:00Z",
+    "ended_at": null,
+    "description": "Entirely fictional educational mission"
+  },
+  "AstronautCreate": {
+    "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+    "display_name": "Maya Demo",
+    "role": "Demo crew"
+  },
+  "CheckinCreate": {
+    "checkin_date": "2026-11-07",
+    "observed_at": "2026-11-07T12:00:00Z",
+    "context": "resting",
+    "readings": [
+      {
+        "indicator": "heart_rate",
+        "value": 70.0,
+        "unit": "bpm"
+      }
+    ],
+    "sleep_hours": 7.0,
+    "mood": 4,
+    "stress": 2,
+    "symptoms": [],
+    "exercise_minutes": null,
+    "notes": "Fictional demo observation"
+  },
+  "ManualReadingBatch": {
+    "observed_at": "2026-11-07T12:00:00Z",
+    "context": "resting",
+    "readings": [
+      {
+        "indicator": "heart_rate",
+        "value": 70.0,
+        "unit": "bpm"
+      }
+    ]
+  },
+  "SimulationRunCreate": {
+    "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+    "scenario": "routine",
+    "seed": 42,
+    "simulation_start_at": "2026-11-07T12:00:00Z",
+    "interval_seconds": 5,
+    "step_seconds": 60
+  },
+  "CheckinResult": {
+    "checkin": {
+      "id": "40377fdd-ecee-5304-860c-5c427c2a9df1",
+      "created_at": "2026-11-07T12:00:00Z",
+      "checkin_date": "2026-11-07",
+      "observed_at": "2026-11-07T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 70.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "is_demo": true
+    },
+    "readings": [
+      {
+        "id": "972e847e-699c-51ee-b1ec-bd7dff41afd0",
+        "created_at": "2026-11-07T12:00:00Z",
+        "indicator": "heart_rate",
+        "value": 70.0,
+        "unit": "bpm",
+        "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+        "observed_at": "2026-11-07T12:00:00Z",
+        "source": "manual",
+        "context": "resting",
+        "checkin_id": "40377fdd-ecee-5304-860c-5c427c2a9df1",
+        "simulation_run_id": null,
+        "tick_index": null,
+        "is_demo": true
+      }
+    ],
+    "assessment": {
+      "id": "5036e978-eebd-513a-90d8-39c59f01f546",
+      "created_at": "2026-11-07T12:00:00Z",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "evaluated_at": "2026-11-07T12:00:00Z",
+      "status": "insufficient_data",
+      "ruleset_version": "demo-v1",
+      "input_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+      "coverage": {
+        "evaluated_rule_ids": [],
+        "insufficient_rule_ids": [
+          "resting_hr_change"
+        ],
+        "not_applicable_rule_ids": []
+      },
+      "results": [
+        {
+          "rule_id": "resting_hr_change",
+          "outcome": "insufficient_data",
+          "workflow_status": "insufficient_data",
+          "explanation": "Not enough fictional samples",
+          "evidence": [],
+          "missing_data": [
+            "Three baseline and three recent resting samples"
+          ],
+          "guidance_slugs": []
+        }
+      ]
+    },
+    "alerts": []
+  },
+  "ReadingBatchResult": {
+    "readings": [
+      {
+        "id": "972e847e-699c-51ee-b1ec-bd7dff41afd0",
+        "created_at": "2026-11-07T12:00:00Z",
+        "indicator": "heart_rate",
+        "value": 70.0,
+        "unit": "bpm",
+        "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+        "observed_at": "2026-11-07T12:00:00Z",
+        "source": "manual",
+        "context": "resting",
+        "checkin_id": "40377fdd-ecee-5304-860c-5c427c2a9df1",
+        "simulation_run_id": null,
+        "tick_index": null,
+        "is_demo": true
+      }
+    ],
+    "assessment": {
+      "id": "5036e978-eebd-513a-90d8-39c59f01f546",
+      "created_at": "2026-11-07T12:00:00Z",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "evaluated_at": "2026-11-07T12:00:00Z",
+      "status": "insufficient_data",
+      "ruleset_version": "demo-v1",
+      "input_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+      "coverage": {
+        "evaluated_rule_ids": [],
+        "insufficient_rule_ids": [
+          "resting_hr_change"
+        ],
+        "not_applicable_rule_ids": []
+      },
+      "results": [
+        {
+          "rule_id": "resting_hr_change",
+          "outcome": "insufficient_data",
+          "workflow_status": "insufficient_data",
+          "explanation": "Not enough fictional samples",
+          "evidence": [],
+          "missing_data": [
+            "Three baseline and three recent resting samples"
+          ],
+          "guidance_slugs": []
+        }
+      ]
+    },
+    "alerts": []
+  },
+  "Dashboard": {
+    "astronaut": {
+      "id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "created_at": "2026-11-07T12:00:00Z",
+      "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+      "display_name": "Maya Demo",
+      "role": "Demo crew",
+      "is_demo": true
+    },
+    "mission": {
+      "id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+      "created_at": "2026-11-07T12:00:00Z",
+      "name": "Aurora Demo",
+      "environment": "microgravity",
+      "started_at": "2026-11-07T12:00:00Z",
+      "ended_at": null,
+      "description": "Entirely fictional educational mission",
+      "is_demo": true
+    },
+    "latest_health": [
+      {
+        "id": "972e847e-699c-51ee-b1ec-bd7dff41afd0",
+        "created_at": "2026-11-07T12:00:00Z",
+        "indicator": "heart_rate",
+        "value": 70.0,
+        "unit": "bpm",
+        "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+        "observed_at": "2026-11-07T12:00:00Z",
+        "source": "manual",
+        "context": "resting",
+        "checkin_id": "40377fdd-ecee-5304-860c-5c427c2a9df1",
+        "simulation_run_id": null,
+        "tick_index": null,
+        "is_demo": true
+      }
+    ],
+    "latest_environment": [
+      {
+        "id": "d65f01bc-8333-553f-9263-c2ba72a4145e",
+        "created_at": "2026-11-07T12:00:00Z",
+        "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+        "indicator": "cabin_co2",
+        "value": 800.0,
+        "unit": "ppm",
+        "observed_at": "2026-11-07T12:00:00Z",
+        "source": "simulated",
+        "simulation_run_id": "2033e2db-74bf-5172-9be3-e9735d4c9b37",
+        "tick_index": 0,
+        "is_demo": true
+      },
+      {
+        "id": "cf840482-af48-5fd6-82e7-19216053f528",
+        "created_at": "2026-11-07T12:00:00Z",
+        "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+        "indicator": "radiation_dose_rate",
+        "value": 10.0,
+        "unit": "uSv/h",
+        "observed_at": "2026-11-07T12:00:00Z",
+        "source": "simulated",
+        "simulation_run_id": "2033e2db-74bf-5172-9be3-e9735d4c9b37",
+        "tick_index": 0,
+        "is_demo": true
+      }
+    ],
+    "checkin": {
+      "id": "40377fdd-ecee-5304-860c-5c427c2a9df1",
+      "created_at": "2026-11-07T12:00:00Z",
+      "checkin_date": "2026-11-07",
+      "observed_at": "2026-11-07T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 70.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "is_demo": true
+    },
+    "assessment": {
+      "id": "5036e978-eebd-513a-90d8-39c59f01f546",
+      "created_at": "2026-11-07T12:00:00Z",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "evaluated_at": "2026-11-07T12:00:00Z",
+      "status": "insufficient_data",
+      "ruleset_version": "demo-v1",
+      "input_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+      "coverage": {
+        "evaluated_rule_ids": [],
+        "insufficient_rule_ids": [
+          "resting_hr_change"
+        ],
+        "not_applicable_rule_ids": []
+      },
+      "results": [
+        {
+          "rule_id": "resting_hr_change",
+          "outcome": "insufficient_data",
+          "workflow_status": "insufficient_data",
+          "explanation": "Not enough fictional samples",
+          "evidence": [],
+          "missing_data": [
+            "Three baseline and three recent resting samples"
+          ],
+          "guidance_slugs": []
+        }
+      ]
+    },
+    "alerts": [],
+    "simulation_run": {
+      "id": "2033e2db-74bf-5172-9be3-e9735d4c9b37",
+      "created_at": "2026-11-07T12:00:00Z",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "scenario": "routine",
+      "seed": 42,
+      "simulation_start_at": "2026-11-07T12:00:00Z",
+      "interval_seconds": 5,
+      "step_seconds": 60,
+      "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+      "scenario_version": "demo-v1",
+      "status": "paused",
+      "started_at": null,
+      "last_tick_index": 0,
+      "last_error": null
+    },
+    "as_of": "2026-11-07T12:00:00Z"
+  },
+  "HealthResponse": {
+    "status": "ok",
+    "contract_version": "0.1.0",
+    "adapter": "memory"
+  },
+  "ReadinessResult": {
+    "ready": true,
+    "adapter": "sqlite",
+    "detail": null
+  },
+  "ErrorResponse": {
+    "error": {
+      "code": "not_found",
+      "message": "Astronaut not found",
+      "details": {},
+      "request_id": "4d388a07-8eca-5a64-9bc3-c043de623dac"
+    }
+  },
+  "HealthTelemetry": {
+    "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+    "readings": [
+      {
+        "id": "5d2dc24b-ed36-5ca5-b24d-18c2cf24a660",
+        "created_at": "2026-11-07T12:00:00Z",
+        "indicator": "spo2",
+        "value": 98.0,
+        "unit": "%",
+        "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+        "observed_at": "2026-11-07T12:00:00Z",
+        "source": "simulated",
+        "context": "resting",
+        "checkin_id": null,
+        "simulation_run_id": "2033e2db-74bf-5172-9be3-e9735d4c9b37",
+        "tick_index": 0,
+        "is_demo": true
+      }
+    ],
+    "as_of": "2026-11-07T12:00:00Z"
+  },
+  "EnvironmentalTelemetry": {
+    "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+    "readings": [
+      {
+        "id": "d65f01bc-8333-553f-9263-c2ba72a4145e",
+        "created_at": "2026-11-07T12:00:00Z",
+        "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+        "indicator": "cabin_co2",
+        "value": 800.0,
+        "unit": "ppm",
+        "observed_at": "2026-11-07T12:00:00Z",
+        "source": "simulated",
+        "simulation_run_id": "2033e2db-74bf-5172-9be3-e9735d4c9b37",
+        "tick_index": 0,
+        "is_demo": true
+      },
+      {
+        "id": "cf840482-af48-5fd6-82e7-19216053f528",
+        "created_at": "2026-11-07T12:00:00Z",
+        "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+        "indicator": "radiation_dose_rate",
+        "value": 10.0,
+        "unit": "uSv/h",
+        "observed_at": "2026-11-07T12:00:00Z",
+        "source": "simulated",
+        "simulation_run_id": "2033e2db-74bf-5172-9be3-e9735d4c9b37",
+        "tick_index": 0,
+        "is_demo": true
+      }
+    ],
+    "as_of": "2026-11-07T12:00:00Z"
+  },
+  "SimulationSteps": {
+    "steps": 1
+  },
+  "SimulationStepResult": {
+    "run": {
+      "id": "2033e2db-74bf-5172-9be3-e9735d4c9b37",
+      "created_at": "2026-11-07T12:00:00Z",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "scenario": "routine",
+      "seed": 42,
+      "simulation_start_at": "2026-11-07T12:00:00Z",
+      "interval_seconds": 5,
+      "step_seconds": 60,
+      "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+      "scenario_version": "demo-v1",
+      "status": "paused",
+      "started_at": null,
+      "last_tick_index": 0,
+      "last_error": null
+    },
+    "generated_health_count": 1,
+    "generated_environmental_count": 2
+  },
+  "ScenarioDefinition": {
+    "scenario": "routine",
+    "version": "demo-v1",
+    "description": "Fictional routine scenario",
+    "required_fixture_context": [],
+    "expected_outcomes": [
+      "No demonstration pattern after sufficient evidence"
+    ]
+  },
+  "GuidanceArticle": {
+    "slug": "heart-rate",
+    "title": "Understanding heart rate",
+    "indicators": [
+      "heart_rate"
+    ],
+    "hazard_slugs": [
+      "gravity_fields"
+    ],
+    "educational_text": "Fictional monitoring context, not a diagnosis.",
+    "limitations": "No clinical thresholds or treatment instructions.",
+    "references": [
+      {
+        "title": "NASA hazards",
+        "url": "https://www.nasa.gov/hrp/hazards/"
+      }
+    ],
+    "reviewed_on": "2026-11-07"
+  },
+  "Hazard": {
+    "slug": "space_radiation",
+    "title": "Space radiation",
+    "description": "Educational hazard overview",
+    "related_indicators": [
+      "radiation_dose_rate"
+    ],
+    "monitoring_limitations": "Cabin rate does not measure personal exposure",
+    "references": [
+      {
+        "title": "NASA hazards",
+        "url": "https://www.nasa.gov/hrp/hazards/"
+      }
+    ]
+  },
+  "Page[Mission]": {
+    "items": [
+      {
+        "id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+        "created_at": "2026-11-07T12:00:00Z",
+        "name": "Aurora Demo",
+        "environment": "microgravity",
+        "started_at": "2026-11-07T12:00:00Z",
+        "ended_at": null,
+        "description": "Entirely fictional educational mission",
+        "is_demo": true
+      }
+    ],
+    "total": 1,
+    "limit": 100,
+    "offset": 0
+  },
+  "Page[Astronaut]": {
+    "items": [
+      {
+        "id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+        "created_at": "2026-11-07T12:00:00Z",
+        "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+        "display_name": "Maya Demo",
+        "role": "Demo crew",
+        "is_demo": true
+      }
+    ],
+    "total": 1,
+    "limit": 100,
+    "offset": 0
+  },
+  "Page[DailyCheckin]": {
+    "items": [
+      {
+        "id": "40377fdd-ecee-5304-860c-5c427c2a9df1",
+        "created_at": "2026-11-07T12:00:00Z",
+        "checkin_date": "2026-11-07",
+        "observed_at": "2026-11-07T12:00:00Z",
+        "context": "resting",
+        "readings": [
+          {
+            "indicator": "heart_rate",
+            "value": 70.0,
+            "unit": "bpm"
+          }
+        ],
+        "sleep_hours": 7.0,
+        "mood": 4,
+        "stress": 2,
+        "symptoms": [],
+        "exercise_minutes": null,
+        "notes": "Fictional demo observation",
+        "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+        "is_demo": true
+      }
+    ],
+    "total": 1,
+    "limit": 100,
+    "offset": 0
+  },
+  "Page[HealthReading]": {
+    "items": [
+      {
+        "id": "972e847e-699c-51ee-b1ec-bd7dff41afd0",
+        "created_at": "2026-11-07T12:00:00Z",
+        "indicator": "heart_rate",
+        "value": 70.0,
+        "unit": "bpm",
+        "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+        "observed_at": "2026-11-07T12:00:00Z",
+        "source": "manual",
+        "context": "resting",
+        "checkin_id": "40377fdd-ecee-5304-860c-5c427c2a9df1",
+        "simulation_run_id": null,
+        "tick_index": null,
+        "is_demo": true
+      }
+    ],
+    "total": 1,
+    "limit": 100,
+    "offset": 0
+  },
+  "Page[EnvironmentalReading]": {
+    "items": [
+      {
+        "id": "d65f01bc-8333-553f-9263-c2ba72a4145e",
+        "created_at": "2026-11-07T12:00:00Z",
+        "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+        "indicator": "cabin_co2",
+        "value": 800.0,
+        "unit": "ppm",
+        "observed_at": "2026-11-07T12:00:00Z",
+        "source": "simulated",
+        "simulation_run_id": "2033e2db-74bf-5172-9be3-e9735d4c9b37",
+        "tick_index": 0,
+        "is_demo": true
+      }
+    ],
+    "total": 1,
+    "limit": 100,
+    "offset": 0
+  },
+  "Page[Assessment]": {
+    "items": [
+      {
+        "id": "5036e978-eebd-513a-90d8-39c59f01f546",
+        "created_at": "2026-11-07T12:00:00Z",
+        "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+        "evaluated_at": "2026-11-07T12:00:00Z",
+        "status": "insufficient_data",
+        "ruleset_version": "demo-v1",
+        "input_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+        "coverage": {
+          "evaluated_rule_ids": [],
+          "insufficient_rule_ids": [
+            "resting_hr_change"
+          ],
+          "not_applicable_rule_ids": []
+        },
+        "results": [
+          {
+            "rule_id": "resting_hr_change",
+            "outcome": "insufficient_data",
+            "workflow_status": "insufficient_data",
+            "explanation": "Not enough fictional samples",
+            "evidence": [],
+            "missing_data": [
+              "Three baseline and three recent resting samples"
+            ],
+            "guidance_slugs": []
+          }
+        ]
+      }
+    ],
+    "total": 1,
+    "limit": 100,
+    "offset": 0
+  },
+  "Page[Alert]": {
+    "items": [
+      {
+        "id": "24b51680-7db3-5989-a87e-0919d9b4afe6",
+        "created_at": "2026-11-07T12:00:00Z",
+        "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+        "rule_id": "demo_pattern",
+        "workflow_status": "review_suggested",
+        "state": "open",
+        "first_assessment_id": "c2237433-8a63-55bf-884a-e18bc1b60055",
+        "latest_assessment_id": "c2237433-8a63-55bf-884a-e18bc1b60055",
+        "opened_at": "2026-11-07T12:00:00Z",
+        "acknowledged_at": null,
+        "resolved_at": null
+      }
+    ],
+    "total": 1,
+    "limit": 100,
+    "offset": 0
+  },
+  "Page[SimulationRun]": {
+    "items": [
+      {
+        "id": "2033e2db-74bf-5172-9be3-e9735d4c9b37",
+        "created_at": "2026-11-07T12:00:00Z",
+        "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+        "scenario": "routine",
+        "seed": 42,
+        "simulation_start_at": "2026-11-07T12:00:00Z",
+        "interval_seconds": 5,
+        "step_seconds": 60,
+        "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+        "scenario_version": "demo-v1",
+        "status": "paused",
+        "started_at": null,
+        "last_tick_index": 0,
+        "last_error": null
+      }
+    ],
+    "total": 1,
+    "limit": 100,
+    "offset": 0
+  },
+  "Page[ScenarioDefinition]": {
+    "items": [
+      {
+        "scenario": "routine",
+        "version": "demo-v1",
+        "description": "Fictional routine scenario",
+        "required_fixture_context": [],
+        "expected_outcomes": [
+          "No demonstration pattern after sufficient evidence"
+        ]
+      }
+    ],
+    "total": 1,
+    "limit": 100,
+    "offset": 0
+  },
+  "Page[GuidanceArticle]": {
+    "items": [
+      {
+        "slug": "heart-rate",
+        "title": "Understanding heart rate",
+        "indicators": [
+          "heart_rate"
+        ],
+        "hazard_slugs": [
+          "gravity_fields"
+        ],
+        "educational_text": "Fictional monitoring context, not a diagnosis.",
+        "limitations": "No clinical thresholds or treatment instructions.",
+        "references": [
+          {
+            "title": "NASA hazards",
+            "url": "https://www.nasa.gov/hrp/hazards/"
+          }
+        ],
+        "reviewed_on": "2026-11-07"
+      }
+    ],
+    "total": 1,
+    "limit": 100,
+    "offset": 0
+  },
+  "Page[Hazard]": {
+    "items": [
+      {
+        "slug": "space_radiation",
+        "title": "Space radiation",
+        "description": "Educational hazard overview",
+        "related_indicators": [
+          "radiation_dose_rate"
+        ],
+        "monitoring_limitations": "Cabin rate does not measure personal exposure",
+        "references": [
+          {
+            "title": "NASA hazards",
+            "url": "https://www.nasa.gov/hrp/hazards/"
+          }
+        ]
+      }
+    ],
+    "total": 1,
+    "limit": 100,
+    "offset": 0
+  }
+}
