@@ -1,0 +1,6882 @@
+{
+  "DTO": {
+    "additionalProperties": false,
+    "properties": {},
+    "title": "DTO",
+    "type": "object"
+  },
+  "Record": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "created_at"
+    ],
+    "title": "Record",
+    "type": "object"
+  },
+  "MissionCreate": {
+    "$defs": {
+      "MissionEnvironment": {
+        "enum": [
+          "microgravity",
+          "lunar",
+          "martian",
+          "earth_analog"
+        ],
+        "title": "MissionEnvironment",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "environment": {
+        "$ref": "#/$defs/MissionEnvironment"
+      },
+      "started_at": {
+        "format": "date-time",
+        "title": "Started At",
+        "type": "string"
+      },
+      "ended_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Ended At"
+      },
+      "description": {
+        "default": "",
+        "title": "Description",
+        "type": "string"
+      }
+    },
+    "required": [
+      "name",
+      "environment",
+      "started_at"
+    ],
+    "title": "MissionCreate",
+    "type": "object"
+  },
+  "Mission": {
+    "$defs": {
+      "MissionEnvironment": {
+        "enum": [
+          "microgravity",
+          "lunar",
+          "martian",
+          "earth_analog"
+        ],
+        "title": "MissionEnvironment",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "name": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "environment": {
+        "$ref": "#/$defs/MissionEnvironment"
+      },
+      "started_at": {
+        "format": "date-time",
+        "title": "Started At",
+        "type": "string"
+      },
+      "ended_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Ended At"
+      },
+      "description": {
+        "default": "",
+        "title": "Description",
+        "type": "string"
+      },
+      "is_demo": {
+        "const": true,
+        "default": true,
+        "title": "Is Demo",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "id",
+      "created_at",
+      "name",
+      "environment",
+      "started_at"
+    ],
+    "title": "Mission",
+    "type": "object"
+  },
+  "AstronautCreate": {
+    "additionalProperties": false,
+    "properties": {
+      "mission_id": {
+        "title": "Mission Id",
+        "type": "string"
+      },
+      "display_name": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Display Name",
+        "type": "string"
+      },
+      "role": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Role",
+        "type": "string"
+      }
+    },
+    "required": [
+      "mission_id",
+      "display_name",
+      "role"
+    ],
+    "title": "AstronautCreate",
+    "type": "object"
+  },
+  "Astronaut": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "mission_id": {
+        "title": "Mission Id",
+        "type": "string"
+      },
+      "display_name": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Display Name",
+        "type": "string"
+      },
+      "role": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Role",
+        "type": "string"
+      },
+      "is_demo": {
+        "const": true,
+        "default": true,
+        "title": "Is Demo",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "id",
+      "created_at",
+      "mission_id",
+      "display_name",
+      "role"
+    ],
+    "title": "Astronaut",
+    "type": "object"
+  },
+  "HealthValue": {
+    "$defs": {
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "Unit": {
+        "enum": [
+          "bpm",
+          "mmHg",
+          "mg/dL",
+          "degC",
+          "%",
+          "ppm",
+          "uSv/h"
+        ],
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "indicator": {
+        "$ref": "#/$defs/HealthIndicator"
+      },
+      "value": {
+        "title": "Value",
+        "type": "number"
+      },
+      "unit": {
+        "$ref": "#/$defs/Unit"
+      }
+    },
+    "required": [
+      "indicator",
+      "value",
+      "unit"
+    ],
+    "title": "HealthValue",
+    "type": "object"
+  },
+  "HealthReading": {
+    "$defs": {
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "ObservationContext": {
+        "enum": [
+          "resting",
+          "exercise",
+          "recovery",
+          "unspecified"
+        ],
+        "title": "ObservationContext",
+        "type": "string"
+      },
+      "Source": {
+        "enum": [
+          "manual",
+          "simulated"
+        ],
+        "title": "Source",
+        "type": "string"
+      },
+      "Unit": {
+        "enum": [
+          "bpm",
+          "mmHg",
+          "mg/dL",
+          "degC",
+          "%",
+          "ppm",
+          "uSv/h"
+        ],
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "indicator": {
+        "$ref": "#/$defs/HealthIndicator"
+      },
+      "value": {
+        "title": "Value",
+        "type": "number"
+      },
+      "unit": {
+        "$ref": "#/$defs/Unit"
+      },
+      "astronaut_id": {
+        "title": "Astronaut Id",
+        "type": "string"
+      },
+      "observed_at": {
+        "format": "date-time",
+        "title": "Observed At",
+        "type": "string"
+      },
+      "source": {
+        "$ref": "#/$defs/Source"
+      },
+      "context": {
+        "$ref": "#/$defs/ObservationContext"
+      },
+      "checkin_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Checkin Id"
+      },
+      "simulation_run_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Simulation Run Id"
+      },
+      "tick_index": {
+        "anyOf": [
+          {
+            "minimum": 0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Tick Index"
+      },
+      "is_demo": {
+        "const": true,
+        "default": true,
+        "title": "Is Demo",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "id",
+      "created_at",
+      "indicator",
+      "value",
+      "unit",
+      "astronaut_id",
+      "observed_at",
+      "source",
+      "context"
+    ],
+    "title": "HealthReading",
+    "type": "object"
+  },
+  "EnvironmentalReading": {
+    "$defs": {
+      "EnvironmentalIndicator": {
+        "enum": [
+          "cabin_co2",
+          "radiation_dose_rate"
+        ],
+        "title": "EnvironmentalIndicator",
+        "type": "string"
+      },
+      "Unit": {
+        "enum": [
+          "bpm",
+          "mmHg",
+          "mg/dL",
+          "degC",
+          "%",
+          "ppm",
+          "uSv/h"
+        ],
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "mission_id": {
+        "title": "Mission Id",
+        "type": "string"
+      },
+      "indicator": {
+        "$ref": "#/$defs/EnvironmentalIndicator"
+      },
+      "value": {
+        "minimum": 0,
+        "title": "Value",
+        "type": "number"
+      },
+      "unit": {
+        "$ref": "#/$defs/Unit"
+      },
+      "observed_at": {
+        "format": "date-time",
+        "title": "Observed At",
+        "type": "string"
+      },
+      "source": {
+        "const": "simulated",
+        "default": "simulated",
+        "title": "Source",
+        "type": "string"
+      },
+      "simulation_run_id": {
+        "title": "Simulation Run Id",
+        "type": "string"
+      },
+      "tick_index": {
+        "minimum": 0,
+        "title": "Tick Index",
+        "type": "integer"
+      },
+      "is_demo": {
+        "const": true,
+        "default": true,
+        "title": "Is Demo",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "id",
+      "created_at",
+      "mission_id",
+      "indicator",
+      "value",
+      "unit",
+      "observed_at",
+      "simulation_run_id",
+      "tick_index"
+    ],
+    "title": "EnvironmentalReading",
+    "type": "object"
+  },
+  "CheckinCreate": {
+    "$defs": {
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "HealthValue": {
+        "additionalProperties": false,
+        "properties": {
+          "indicator": {
+            "$ref": "#/$defs/HealthIndicator"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/$defs/Unit"
+          }
+        },
+        "required": [
+          "indicator",
+          "value",
+          "unit"
+        ],
+        "title": "HealthValue",
+        "type": "object"
+      },
+      "ObservationContext": {
+        "enum": [
+          "resting",
+          "exercise",
+          "recovery",
+          "unspecified"
+        ],
+        "title": "ObservationContext",
+        "type": "string"
+      },
+      "Unit": {
+        "enum": [
+          "bpm",
+          "mmHg",
+          "mg/dL",
+          "degC",
+          "%",
+          "ppm",
+          "uSv/h"
+        ],
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "checkin_date": {
+        "format": "date",
+        "title": "Checkin Date",
+        "type": "string"
+      },
+      "observed_at": {
+        "format": "date-time",
+        "title": "Observed At",
+        "type": "string"
+      },
+      "context": {
+        "$ref": "#/$defs/ObservationContext"
+      },
+      "readings": {
+        "items": {
+          "$ref": "#/$defs/HealthValue"
+        },
+        "title": "Readings",
+        "type": "array"
+      },
+      "sleep_hours": {
+        "anyOf": [
+          {
+            "maximum": 24,
+            "minimum": 0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Sleep Hours"
+      },
+      "mood": {
+        "anyOf": [
+          {
+            "maximum": 5,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Mood"
+      },
+      "stress": {
+        "anyOf": [
+          {
+            "maximum": 5,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Stress"
+      },
+      "symptoms": {
+        "items": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        "maxItems": 20,
+        "title": "Symptoms",
+        "type": "array"
+      },
+      "exercise_minutes": {
+        "anyOf": [
+          {
+            "maximum": 1440,
+            "minimum": 0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Exercise Minutes"
+      },
+      "notes": {
+        "anyOf": [
+          {
+            "maxLength": 2000,
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Notes"
+      }
+    },
+    "required": [
+      "checkin_date",
+      "observed_at",
+      "context"
+    ],
+    "title": "CheckinCreate",
+    "type": "object"
+  },
+  "DailyCheckin": {
+    "$defs": {
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "HealthValue": {
+        "additionalProperties": false,
+        "properties": {
+          "indicator": {
+            "$ref": "#/$defs/HealthIndicator"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/$defs/Unit"
+          }
+        },
+        "required": [
+          "indicator",
+          "value",
+          "unit"
+        ],
+        "title": "HealthValue",
+        "type": "object"
+      },
+      "ObservationContext": {
+        "enum": [
+          "resting",
+          "exercise",
+          "recovery",
+          "unspecified"
+        ],
+        "title": "ObservationContext",
+        "type": "string"
+      },
+      "Unit": {
+        "enum": [
+          "bpm",
+          "mmHg",
+          "mg/dL",
+          "degC",
+          "%",
+          "ppm",
+          "uSv/h"
+        ],
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "checkin_date": {
+        "format": "date",
+        "title": "Checkin Date",
+        "type": "string"
+      },
+      "observed_at": {
+        "format": "date-time",
+        "title": "Observed At",
+        "type": "string"
+      },
+      "context": {
+        "$ref": "#/$defs/ObservationContext"
+      },
+      "readings": {
+        "items": {
+          "$ref": "#/$defs/HealthValue"
+        },
+        "title": "Readings",
+        "type": "array"
+      },
+      "sleep_hours": {
+        "anyOf": [
+          {
+            "maximum": 24,
+            "minimum": 0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Sleep Hours"
+      },
+      "mood": {
+        "anyOf": [
+          {
+            "maximum": 5,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Mood"
+      },
+      "stress": {
+        "anyOf": [
+          {
+            "maximum": 5,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Stress"
+      },
+      "symptoms": {
+        "items": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        "maxItems": 20,
+        "title": "Symptoms",
+        "type": "array"
+      },
+      "exercise_minutes": {
+        "anyOf": [
+          {
+            "maximum": 1440,
+            "minimum": 0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Exercise Minutes"
+      },
+      "notes": {
+        "anyOf": [
+          {
+            "maxLength": 2000,
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Notes"
+      },
+      "astronaut_id": {
+        "title": "Astronaut Id",
+        "type": "string"
+      },
+      "is_demo": {
+        "const": true,
+        "default": true,
+        "title": "Is Demo",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "id",
+      "created_at",
+      "checkin_date",
+      "observed_at",
+      "context",
+      "astronaut_id"
+    ],
+    "title": "DailyCheckin",
+    "type": "object"
+  },
+  "ManualReadingBatch": {
+    "$defs": {
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "HealthValue": {
+        "additionalProperties": false,
+        "properties": {
+          "indicator": {
+            "$ref": "#/$defs/HealthIndicator"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/$defs/Unit"
+          }
+        },
+        "required": [
+          "indicator",
+          "value",
+          "unit"
+        ],
+        "title": "HealthValue",
+        "type": "object"
+      },
+      "ObservationContext": {
+        "enum": [
+          "resting",
+          "exercise",
+          "recovery",
+          "unspecified"
+        ],
+        "title": "ObservationContext",
+        "type": "string"
+      },
+      "Unit": {
+        "enum": [
+          "bpm",
+          "mmHg",
+          "mg/dL",
+          "degC",
+          "%",
+          "ppm",
+          "uSv/h"
+        ],
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "observed_at": {
+        "format": "date-time",
+        "title": "Observed At",
+        "type": "string"
+      },
+      "context": {
+        "$ref": "#/$defs/ObservationContext"
+      },
+      "readings": {
+        "items": {
+          "$ref": "#/$defs/HealthValue"
+        },
+        "minItems": 1,
+        "title": "Readings",
+        "type": "array"
+      }
+    },
+    "required": [
+      "observed_at",
+      "context",
+      "readings"
+    ],
+    "title": "ManualReadingBatch",
+    "type": "object"
+  },
+  "Evidence": {
+    "additionalProperties": false,
+    "properties": {
+      "record_id": {
+        "title": "Record Id",
+        "type": "string"
+      },
+      "record_type": {
+        "enum": [
+          "health_reading",
+          "environmental_reading",
+          "daily_checkin"
+        ],
+        "title": "Record Type",
+        "type": "string"
+      },
+      "observed_at": {
+        "format": "date-time",
+        "title": "Observed At",
+        "type": "string"
+      },
+      "indicator": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Indicator",
+        "type": "string"
+      },
+      "value": {
+        "title": "Value",
+        "type": "number"
+      },
+      "unit": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "required": [
+      "record_id",
+      "record_type",
+      "observed_at",
+      "indicator",
+      "value",
+      "unit"
+    ],
+    "title": "Evidence",
+    "type": "object"
+  },
+  "Coverage": {
+    "additionalProperties": false,
+    "properties": {
+      "evaluated_rule_ids": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Evaluated Rule Ids",
+        "type": "array"
+      },
+      "insufficient_rule_ids": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Insufficient Rule Ids",
+        "type": "array"
+      },
+      "not_applicable_rule_ids": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Not Applicable Rule Ids",
+        "type": "array"
+      }
+    },
+    "title": "Coverage",
+    "type": "object"
+  },
+  "RuleResult": {
+    "$defs": {
+      "AssessmentStatus": {
+        "enum": [
+          "insufficient_data",
+          "no_rule_triggered",
+          "review_suggested",
+          "crew_medical_review"
+        ],
+        "title": "AssessmentStatus",
+        "type": "string"
+      },
+      "Evidence": {
+        "additionalProperties": false,
+        "properties": {
+          "record_id": {
+            "title": "Record Id",
+            "type": "string"
+          },
+          "record_type": {
+            "enum": [
+              "health_reading",
+              "environmental_reading",
+              "daily_checkin"
+            ],
+            "title": "Record Type",
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "indicator": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Indicator",
+            "type": "string"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Unit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "record_id",
+          "record_type",
+          "observed_at",
+          "indicator",
+          "value",
+          "unit"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      },
+      "RuleOutcome": {
+        "enum": [
+          "triggered",
+          "not_triggered",
+          "insufficient_data",
+          "not_applicable"
+        ],
+        "title": "RuleOutcome",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "rule_id": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Rule Id",
+        "type": "string"
+      },
+      "outcome": {
+        "$ref": "#/$defs/RuleOutcome"
+      },
+      "workflow_status": {
+        "$ref": "#/$defs/AssessmentStatus"
+      },
+      "explanation": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Explanation",
+        "type": "string"
+      },
+      "evidence": {
+        "items": {
+          "$ref": "#/$defs/Evidence"
+        },
+        "title": "Evidence",
+        "type": "array"
+      },
+      "missing_data": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Missing Data",
+        "type": "array"
+      },
+      "guidance_slugs": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Guidance Slugs",
+        "type": "array"
+      }
+    },
+    "required": [
+      "rule_id",
+      "outcome",
+      "workflow_status",
+      "explanation"
+    ],
+    "title": "RuleResult",
+    "type": "object"
+  },
+  "Assessment": {
+    "$defs": {
+      "AssessmentStatus": {
+        "enum": [
+          "insufficient_data",
+          "no_rule_triggered",
+          "review_suggested",
+          "crew_medical_review"
+        ],
+        "title": "AssessmentStatus",
+        "type": "string"
+      },
+      "Coverage": {
+        "additionalProperties": false,
+        "properties": {
+          "evaluated_rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evaluated Rule Ids",
+            "type": "array"
+          },
+          "insufficient_rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Insufficient Rule Ids",
+            "type": "array"
+          },
+          "not_applicable_rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Not Applicable Rule Ids",
+            "type": "array"
+          }
+        },
+        "title": "Coverage",
+        "type": "object"
+      },
+      "Evidence": {
+        "additionalProperties": false,
+        "properties": {
+          "record_id": {
+            "title": "Record Id",
+            "type": "string"
+          },
+          "record_type": {
+            "enum": [
+              "health_reading",
+              "environmental_reading",
+              "daily_checkin"
+            ],
+            "title": "Record Type",
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "indicator": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Indicator",
+            "type": "string"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Unit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "record_id",
+          "record_type",
+          "observed_at",
+          "indicator",
+          "value",
+          "unit"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      },
+      "RuleOutcome": {
+        "enum": [
+          "triggered",
+          "not_triggered",
+          "insufficient_data",
+          "not_applicable"
+        ],
+        "title": "RuleOutcome",
+        "type": "string"
+      },
+      "RuleResult": {
+        "additionalProperties": false,
+        "properties": {
+          "rule_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Rule Id",
+            "type": "string"
+          },
+          "outcome": {
+            "$ref": "#/$defs/RuleOutcome"
+          },
+          "workflow_status": {
+            "$ref": "#/$defs/AssessmentStatus"
+          },
+          "explanation": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Explanation",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "missing_data": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Missing Data",
+            "type": "array"
+          },
+          "guidance_slugs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Guidance Slugs",
+            "type": "array"
+          }
+        },
+        "required": [
+          "rule_id",
+          "outcome",
+          "workflow_status",
+          "explanation"
+        ],
+        "title": "RuleResult",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "astronaut_id": {
+        "title": "Astronaut Id",
+        "type": "string"
+      },
+      "evaluated_at": {
+        "format": "date-time",
+        "title": "Evaluated At",
+        "type": "string"
+      },
+      "status": {
+        "$ref": "#/$defs/AssessmentStatus"
+      },
+      "ruleset_version": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Ruleset Version",
+        "type": "string"
+      },
+      "input_fingerprint": {
+        "pattern": "^[0-9a-f]{64}$",
+        "title": "Input Fingerprint",
+        "type": "string"
+      },
+      "coverage": {
+        "$ref": "#/$defs/Coverage"
+      },
+      "results": {
+        "items": {
+          "$ref": "#/$defs/RuleResult"
+        },
+        "title": "Results",
+        "type": "array"
+      }
+    },
+    "required": [
+      "id",
+      "created_at",
+      "astronaut_id",
+      "evaluated_at",
+      "status",
+      "ruleset_version",
+      "input_fingerprint",
+      "coverage",
+      "results"
+    ],
+    "title": "Assessment",
+    "type": "object"
+  },
+  "Alert": {
+    "$defs": {
+      "AlertState": {
+        "enum": [
+          "open",
+          "acknowledged",
+          "resolved"
+        ],
+        "title": "AlertState",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "astronaut_id": {
+        "title": "Astronaut Id",
+        "type": "string"
+      },
+      "rule_id": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Rule Id",
+        "type": "string"
+      },
+      "workflow_status": {
+        "enum": [
+          "review_suggested",
+          "crew_medical_review"
+        ],
+        "title": "Workflow Status",
+        "type": "string"
+      },
+      "state": {
+        "$ref": "#/$defs/AlertState"
+      },
+      "first_assessment_id": {
+        "title": "First Assessment Id",
+        "type": "string"
+      },
+      "latest_assessment_id": {
+        "title": "Latest Assessment Id",
+        "type": "string"
+      },
+      "opened_at": {
+        "format": "date-time",
+        "title": "Opened At",
+        "type": "string"
+      },
+      "acknowledged_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Acknowledged At"
+      },
+      "resolved_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Resolved At"
+      }
+    },
+    "required": [
+      "id",
+      "created_at",
+      "astronaut_id",
+      "rule_id",
+      "workflow_status",
+      "state",
+      "first_assessment_id",
+      "latest_assessment_id",
+      "opened_at"
+    ],
+    "title": "Alert",
+    "type": "object"
+  },
+  "SimulationRunCreate": {
+    "$defs": {
+      "Scenario": {
+        "enum": [
+          "routine",
+          "exercise_recovery",
+          "reduced_sleep_stress",
+          "unusual_health_trend",
+          "environmental_change"
+        ],
+        "title": "Scenario",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "astronaut_id": {
+        "title": "Astronaut Id",
+        "type": "string"
+      },
+      "scenario": {
+        "$ref": "#/$defs/Scenario"
+      },
+      "seed": {
+        "title": "Seed",
+        "type": "integer"
+      },
+      "simulation_start_at": {
+        "format": "date-time",
+        "title": "Simulation Start At",
+        "type": "string"
+      },
+      "interval_seconds": {
+        "default": 5,
+        "maximum": 60,
+        "minimum": 1,
+        "title": "Interval Seconds",
+        "type": "integer"
+      },
+      "step_seconds": {
+        "default": 60,
+        "maximum": 3600,
+        "minimum": 1,
+        "title": "Step Seconds",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "astronaut_id",
+      "scenario",
+      "seed",
+      "simulation_start_at"
+    ],
+    "title": "SimulationRunCreate",
+    "type": "object"
+  },
+  "SimulationRun": {
+    "$defs": {
+      "RunStatus": {
+        "enum": [
+          "paused",
+          "running",
+          "stopped",
+          "failed"
+        ],
+        "title": "RunStatus",
+        "type": "string"
+      },
+      "Scenario": {
+        "enum": [
+          "routine",
+          "exercise_recovery",
+          "reduced_sleep_stress",
+          "unusual_health_trend",
+          "environmental_change"
+        ],
+        "title": "Scenario",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "astronaut_id": {
+        "title": "Astronaut Id",
+        "type": "string"
+      },
+      "scenario": {
+        "$ref": "#/$defs/Scenario"
+      },
+      "seed": {
+        "title": "Seed",
+        "type": "integer"
+      },
+      "simulation_start_at": {
+        "format": "date-time",
+        "title": "Simulation Start At",
+        "type": "string"
+      },
+      "interval_seconds": {
+        "default": 5,
+        "maximum": 60,
+        "minimum": 1,
+        "title": "Interval Seconds",
+        "type": "integer"
+      },
+      "step_seconds": {
+        "default": 60,
+        "maximum": 3600,
+        "minimum": 1,
+        "title": "Step Seconds",
+        "type": "integer"
+      },
+      "mission_id": {
+        "title": "Mission Id",
+        "type": "string"
+      },
+      "scenario_version": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Scenario Version",
+        "type": "string"
+      },
+      "status": {
+        "$ref": "#/$defs/RunStatus",
+        "default": "paused"
+      },
+      "started_at": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Started At"
+      },
+      "last_tick_index": {
+        "default": -1,
+        "minimum": -1,
+        "title": "Last Tick Index",
+        "type": "integer"
+      },
+      "last_error": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Last Error"
+      }
+    },
+    "required": [
+      "id",
+      "created_at",
+      "astronaut_id",
+      "scenario",
+      "seed",
+      "simulation_start_at",
+      "mission_id",
+      "scenario_version"
+    ],
+    "title": "SimulationRun",
+    "type": "object"
+  },
+  "CommandReceipt": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "operation": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Operation",
+        "type": "string"
+      },
+      "request_hash": {
+        "pattern": "^[0-9a-f]{64}$",
+        "title": "Request Hash",
+        "type": "string"
+      },
+      "result_type": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Result Type",
+        "type": "string"
+      },
+      "result_id": {
+        "title": "Result Id",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "created_at",
+      "operation",
+      "request_hash",
+      "result_type",
+      "result_id"
+    ],
+    "title": "CommandReceipt",
+    "type": "object"
+  },
+  "PageQuery": {
+    "additionalProperties": false,
+    "properties": {
+      "limit": {
+        "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "default": 0,
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      }
+    },
+    "title": "PageQuery",
+    "type": "object"
+  },
+  "MissionQuery": {
+    "additionalProperties": false,
+    "properties": {
+      "limit": {
+        "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "default": 0,
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      }
+    },
+    "title": "MissionQuery",
+    "type": "object"
+  },
+  "AstronautQuery": {
+    "additionalProperties": false,
+    "properties": {
+      "limit": {
+        "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "default": 0,
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      },
+      "mission_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Mission Id"
+      }
+    },
+    "title": "AstronautQuery",
+    "type": "object"
+  },
+  "TimeQuery": {
+    "additionalProperties": false,
+    "properties": {
+      "limit": {
+        "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "default": 0,
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      },
+      "from": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "From"
+      },
+      "to": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "To"
+      }
+    },
+    "title": "TimeQuery",
+    "type": "object"
+  },
+  "HealthReadingQuery": {
+    "$defs": {
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "Source": {
+        "enum": [
+          "manual",
+          "simulated"
+        ],
+        "title": "Source",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "limit": {
+        "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "default": 0,
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      },
+      "from": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "From"
+      },
+      "to": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "To"
+      },
+      "indicator": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/HealthIndicator"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "source": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/Source"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "simulation_run_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Simulation Run Id"
+      }
+    },
+    "title": "HealthReadingQuery",
+    "type": "object"
+  },
+  "EnvironmentalReadingQuery": {
+    "$defs": {
+      "EnvironmentalIndicator": {
+        "enum": [
+          "cabin_co2",
+          "radiation_dose_rate"
+        ],
+        "title": "EnvironmentalIndicator",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "limit": {
+        "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "default": 0,
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      },
+      "from": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "From"
+      },
+      "to": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "To"
+      },
+      "indicator": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/EnvironmentalIndicator"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "source": {
+        "anyOf": [
+          {
+            "const": "simulated",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Source"
+      },
+      "simulation_run_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Simulation Run Id"
+      }
+    },
+    "title": "EnvironmentalReadingQuery",
+    "type": "object"
+  },
+  "CheckinQuery": {
+    "additionalProperties": false,
+    "properties": {
+      "limit": {
+        "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "default": 0,
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      },
+      "from": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "From"
+      },
+      "to": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "To"
+      }
+    },
+    "title": "CheckinQuery",
+    "type": "object"
+  },
+  "AssessmentQuery": {
+    "additionalProperties": false,
+    "properties": {
+      "limit": {
+        "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "default": 0,
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      },
+      "from": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "From"
+      },
+      "to": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "To"
+      }
+    },
+    "title": "AssessmentQuery",
+    "type": "object"
+  },
+  "AlertQuery": {
+    "$defs": {
+      "AlertState": {
+        "enum": [
+          "open",
+          "acknowledged",
+          "resolved"
+        ],
+        "title": "AlertState",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "limit": {
+        "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "default": 0,
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      },
+      "state": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/AlertState"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "title": "AlertQuery",
+    "type": "object"
+  },
+  "SimulationRunQuery": {
+    "$defs": {
+      "RunStatus": {
+        "enum": [
+          "paused",
+          "running",
+          "stopped",
+          "failed"
+        ],
+        "title": "RunStatus",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "limit": {
+        "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "default": 0,
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      },
+      "status": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/RunStatus"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "title": "SimulationRunQuery",
+    "type": "object"
+  },
+  "Page": {
+    "additionalProperties": false,
+    "properties": {
+      "items": {
+        "items": {},
+        "title": "Items",
+        "type": "array"
+      },
+      "total": {
+        "minimum": 0,
+        "title": "Total",
+        "type": "integer"
+      },
+      "limit": {
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "items",
+      "total",
+      "limit",
+      "offset"
+    ],
+    "title": "Page",
+    "type": "object"
+  },
+  "ReadinessResult": {
+    "additionalProperties": false,
+    "properties": {
+      "ready": {
+        "title": "Ready",
+        "type": "boolean"
+      },
+      "adapter": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Adapter",
+        "type": "string"
+      },
+      "detail": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Detail"
+      }
+    },
+    "required": [
+      "ready",
+      "adapter"
+    ],
+    "title": "ReadinessResult",
+    "type": "object"
+  },
+  "CheckinResult": {
+    "$defs": {
+      "Alert": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "rule_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Rule Id",
+            "type": "string"
+          },
+          "workflow_status": {
+            "enum": [
+              "review_suggested",
+              "crew_medical_review"
+            ],
+            "title": "Workflow Status",
+            "type": "string"
+          },
+          "state": {
+            "$ref": "#/$defs/AlertState"
+          },
+          "first_assessment_id": {
+            "title": "First Assessment Id",
+            "type": "string"
+          },
+          "latest_assessment_id": {
+            "title": "Latest Assessment Id",
+            "type": "string"
+          },
+          "opened_at": {
+            "format": "date-time",
+            "title": "Opened At",
+            "type": "string"
+          },
+          "acknowledged_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Acknowledged At"
+          },
+          "resolved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Resolved At"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "astronaut_id",
+          "rule_id",
+          "workflow_status",
+          "state",
+          "first_assessment_id",
+          "latest_assessment_id",
+          "opened_at"
+        ],
+        "title": "Alert",
+        "type": "object"
+      },
+      "AlertState": {
+        "enum": [
+          "open",
+          "acknowledged",
+          "resolved"
+        ],
+        "title": "AlertState",
+        "type": "string"
+      },
+      "Assessment": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "evaluated_at": {
+            "format": "date-time",
+            "title": "Evaluated At",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/$defs/AssessmentStatus"
+          },
+          "ruleset_version": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Ruleset Version",
+            "type": "string"
+          },
+          "input_fingerprint": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Input Fingerprint",
+            "type": "string"
+          },
+          "coverage": {
+            "$ref": "#/$defs/Coverage"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/$defs/RuleResult"
+            },
+            "title": "Results",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "astronaut_id",
+          "evaluated_at",
+          "status",
+          "ruleset_version",
+          "input_fingerprint",
+          "coverage",
+          "results"
+        ],
+        "title": "Assessment",
+        "type": "object"
+      },
+      "AssessmentStatus": {
+        "enum": [
+          "insufficient_data",
+          "no_rule_triggered",
+          "review_suggested",
+          "crew_medical_review"
+        ],
+        "title": "AssessmentStatus",
+        "type": "string"
+      },
+      "Coverage": {
+        "additionalProperties": false,
+        "properties": {
+          "evaluated_rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evaluated Rule Ids",
+            "type": "array"
+          },
+          "insufficient_rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Insufficient Rule Ids",
+            "type": "array"
+          },
+          "not_applicable_rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Not Applicable Rule Ids",
+            "type": "array"
+          }
+        },
+        "title": "Coverage",
+        "type": "object"
+      },
+      "DailyCheckin": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "checkin_date": {
+            "format": "date",
+            "title": "Checkin Date",
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "context": {
+            "$ref": "#/$defs/ObservationContext"
+          },
+          "readings": {
+            "items": {
+              "$ref": "#/$defs/HealthValue"
+            },
+            "title": "Readings",
+            "type": "array"
+          },
+          "sleep_hours": {
+            "anyOf": [
+              {
+                "maximum": 24,
+                "minimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Sleep Hours"
+          },
+          "mood": {
+            "anyOf": [
+              {
+                "maximum": 5,
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Mood"
+          },
+          "stress": {
+            "anyOf": [
+              {
+                "maximum": 5,
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Stress"
+          },
+          "symptoms": {
+            "items": {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "title": "Symptoms",
+            "type": "array"
+          },
+          "exercise_minutes": {
+            "anyOf": [
+              {
+                "maximum": 1440,
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Exercise Minutes"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "maxLength": 2000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Notes"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "is_demo": {
+            "const": true,
+            "default": true,
+            "title": "Is Demo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "checkin_date",
+          "observed_at",
+          "context",
+          "astronaut_id"
+        ],
+        "title": "DailyCheckin",
+        "type": "object"
+      },
+      "Evidence": {
+        "additionalProperties": false,
+        "properties": {
+          "record_id": {
+            "title": "Record Id",
+            "type": "string"
+          },
+          "record_type": {
+            "enum": [
+              "health_reading",
+              "environmental_reading",
+              "daily_checkin"
+            ],
+            "title": "Record Type",
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "indicator": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Indicator",
+            "type": "string"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Unit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "record_id",
+          "record_type",
+          "observed_at",
+          "indicator",
+          "value",
+          "unit"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      },
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "HealthReading": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "indicator": {
+            "$ref": "#/$defs/HealthIndicator"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/$defs/Unit"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/$defs/Source"
+          },
+          "context": {
+            "$ref": "#/$defs/ObservationContext"
+          },
+          "checkin_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Checkin Id"
+          },
+          "simulation_run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Simulation Run Id"
+          },
+          "tick_index": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Tick Index"
+          },
+          "is_demo": {
+            "const": true,
+            "default": true,
+            "title": "Is Demo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "indicator",
+          "value",
+          "unit",
+          "astronaut_id",
+          "observed_at",
+          "source",
+          "context"
+        ],
+        "title": "HealthReading",
+        "type": "object"
+      },
+      "HealthValue": {
+        "additionalProperties": false,
+        "properties": {
+          "indicator": {
+            "$ref": "#/$defs/HealthIndicator"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/$defs/Unit"
+          }
+        },
+        "required": [
+          "indicator",
+          "value",
+          "unit"
+        ],
+        "title": "HealthValue",
+        "type": "object"
+      },
+      "ObservationContext": {
+        "enum": [
+          "resting",
+          "exercise",
+          "recovery",
+          "unspecified"
+        ],
+        "title": "ObservationContext",
+        "type": "string"
+      },
+      "RuleOutcome": {
+        "enum": [
+          "triggered",
+          "not_triggered",
+          "insufficient_data",
+          "not_applicable"
+        ],
+        "title": "RuleOutcome",
+        "type": "string"
+      },
+      "RuleResult": {
+        "additionalProperties": false,
+        "properties": {
+          "rule_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Rule Id",
+            "type": "string"
+          },
+          "outcome": {
+            "$ref": "#/$defs/RuleOutcome"
+          },
+          "workflow_status": {
+            "$ref": "#/$defs/AssessmentStatus"
+          },
+          "explanation": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Explanation",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "missing_data": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Missing Data",
+            "type": "array"
+          },
+          "guidance_slugs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Guidance Slugs",
+            "type": "array"
+          }
+        },
+        "required": [
+          "rule_id",
+          "outcome",
+          "workflow_status",
+          "explanation"
+        ],
+        "title": "RuleResult",
+        "type": "object"
+      },
+      "Source": {
+        "enum": [
+          "manual",
+          "simulated"
+        ],
+        "title": "Source",
+        "type": "string"
+      },
+      "Unit": {
+        "enum": [
+          "bpm",
+          "mmHg",
+          "mg/dL",
+          "degC",
+          "%",
+          "ppm",
+          "uSv/h"
+        ],
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "checkin": {
+        "$ref": "#/$defs/DailyCheckin"
+      },
+      "readings": {
+        "items": {
+          "$ref": "#/$defs/HealthReading"
+        },
+        "title": "Readings",
+        "type": "array"
+      },
+      "assessment": {
+        "$ref": "#/$defs/Assessment"
+      },
+      "alerts": {
+        "items": {
+          "$ref": "#/$defs/Alert"
+        },
+        "title": "Alerts",
+        "type": "array"
+      }
+    },
+    "required": [
+      "checkin",
+      "readings",
+      "assessment",
+      "alerts"
+    ],
+    "title": "CheckinResult",
+    "type": "object"
+  },
+  "ReadingBatchResult": {
+    "$defs": {
+      "Alert": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "rule_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Rule Id",
+            "type": "string"
+          },
+          "workflow_status": {
+            "enum": [
+              "review_suggested",
+              "crew_medical_review"
+            ],
+            "title": "Workflow Status",
+            "type": "string"
+          },
+          "state": {
+            "$ref": "#/$defs/AlertState"
+          },
+          "first_assessment_id": {
+            "title": "First Assessment Id",
+            "type": "string"
+          },
+          "latest_assessment_id": {
+            "title": "Latest Assessment Id",
+            "type": "string"
+          },
+          "opened_at": {
+            "format": "date-time",
+            "title": "Opened At",
+            "type": "string"
+          },
+          "acknowledged_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Acknowledged At"
+          },
+          "resolved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Resolved At"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "astronaut_id",
+          "rule_id",
+          "workflow_status",
+          "state",
+          "first_assessment_id",
+          "latest_assessment_id",
+          "opened_at"
+        ],
+        "title": "Alert",
+        "type": "object"
+      },
+      "AlertState": {
+        "enum": [
+          "open",
+          "acknowledged",
+          "resolved"
+        ],
+        "title": "AlertState",
+        "type": "string"
+      },
+      "Assessment": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "evaluated_at": {
+            "format": "date-time",
+            "title": "Evaluated At",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/$defs/AssessmentStatus"
+          },
+          "ruleset_version": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Ruleset Version",
+            "type": "string"
+          },
+          "input_fingerprint": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Input Fingerprint",
+            "type": "string"
+          },
+          "coverage": {
+            "$ref": "#/$defs/Coverage"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/$defs/RuleResult"
+            },
+            "title": "Results",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "astronaut_id",
+          "evaluated_at",
+          "status",
+          "ruleset_version",
+          "input_fingerprint",
+          "coverage",
+          "results"
+        ],
+        "title": "Assessment",
+        "type": "object"
+      },
+      "AssessmentStatus": {
+        "enum": [
+          "insufficient_data",
+          "no_rule_triggered",
+          "review_suggested",
+          "crew_medical_review"
+        ],
+        "title": "AssessmentStatus",
+        "type": "string"
+      },
+      "Coverage": {
+        "additionalProperties": false,
+        "properties": {
+          "evaluated_rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evaluated Rule Ids",
+            "type": "array"
+          },
+          "insufficient_rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Insufficient Rule Ids",
+            "type": "array"
+          },
+          "not_applicable_rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Not Applicable Rule Ids",
+            "type": "array"
+          }
+        },
+        "title": "Coverage",
+        "type": "object"
+      },
+      "Evidence": {
+        "additionalProperties": false,
+        "properties": {
+          "record_id": {
+            "title": "Record Id",
+            "type": "string"
+          },
+          "record_type": {
+            "enum": [
+              "health_reading",
+              "environmental_reading",
+              "daily_checkin"
+            ],
+            "title": "Record Type",
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "indicator": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Indicator",
+            "type": "string"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Unit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "record_id",
+          "record_type",
+          "observed_at",
+          "indicator",
+          "value",
+          "unit"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      },
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "HealthReading": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "indicator": {
+            "$ref": "#/$defs/HealthIndicator"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/$defs/Unit"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/$defs/Source"
+          },
+          "context": {
+            "$ref": "#/$defs/ObservationContext"
+          },
+          "checkin_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Checkin Id"
+          },
+          "simulation_run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Simulation Run Id"
+          },
+          "tick_index": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Tick Index"
+          },
+          "is_demo": {
+            "const": true,
+            "default": true,
+            "title": "Is Demo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "indicator",
+          "value",
+          "unit",
+          "astronaut_id",
+          "observed_at",
+          "source",
+          "context"
+        ],
+        "title": "HealthReading",
+        "type": "object"
+      },
+      "ObservationContext": {
+        "enum": [
+          "resting",
+          "exercise",
+          "recovery",
+          "unspecified"
+        ],
+        "title": "ObservationContext",
+        "type": "string"
+      },
+      "RuleOutcome": {
+        "enum": [
+          "triggered",
+          "not_triggered",
+          "insufficient_data",
+          "not_applicable"
+        ],
+        "title": "RuleOutcome",
+        "type": "string"
+      },
+      "RuleResult": {
+        "additionalProperties": false,
+        "properties": {
+          "rule_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Rule Id",
+            "type": "string"
+          },
+          "outcome": {
+            "$ref": "#/$defs/RuleOutcome"
+          },
+          "workflow_status": {
+            "$ref": "#/$defs/AssessmentStatus"
+          },
+          "explanation": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Explanation",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "missing_data": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Missing Data",
+            "type": "array"
+          },
+          "guidance_slugs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Guidance Slugs",
+            "type": "array"
+          }
+        },
+        "required": [
+          "rule_id",
+          "outcome",
+          "workflow_status",
+          "explanation"
+        ],
+        "title": "RuleResult",
+        "type": "object"
+      },
+      "Source": {
+        "enum": [
+          "manual",
+          "simulated"
+        ],
+        "title": "Source",
+        "type": "string"
+      },
+      "Unit": {
+        "enum": [
+          "bpm",
+          "mmHg",
+          "mg/dL",
+          "degC",
+          "%",
+          "ppm",
+          "uSv/h"
+        ],
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "readings": {
+        "items": {
+          "$ref": "#/$defs/HealthReading"
+        },
+        "title": "Readings",
+        "type": "array"
+      },
+      "assessment": {
+        "$ref": "#/$defs/Assessment"
+      },
+      "alerts": {
+        "items": {
+          "$ref": "#/$defs/Alert"
+        },
+        "title": "Alerts",
+        "type": "array"
+      }
+    },
+    "required": [
+      "readings",
+      "assessment",
+      "alerts"
+    ],
+    "title": "ReadingBatchResult",
+    "type": "object"
+  },
+  "Dashboard": {
+    "$defs": {
+      "Alert": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "rule_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Rule Id",
+            "type": "string"
+          },
+          "workflow_status": {
+            "enum": [
+              "review_suggested",
+              "crew_medical_review"
+            ],
+            "title": "Workflow Status",
+            "type": "string"
+          },
+          "state": {
+            "$ref": "#/$defs/AlertState"
+          },
+          "first_assessment_id": {
+            "title": "First Assessment Id",
+            "type": "string"
+          },
+          "latest_assessment_id": {
+            "title": "Latest Assessment Id",
+            "type": "string"
+          },
+          "opened_at": {
+            "format": "date-time",
+            "title": "Opened At",
+            "type": "string"
+          },
+          "acknowledged_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Acknowledged At"
+          },
+          "resolved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Resolved At"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "astronaut_id",
+          "rule_id",
+          "workflow_status",
+          "state",
+          "first_assessment_id",
+          "latest_assessment_id",
+          "opened_at"
+        ],
+        "title": "Alert",
+        "type": "object"
+      },
+      "AlertState": {
+        "enum": [
+          "open",
+          "acknowledged",
+          "resolved"
+        ],
+        "title": "AlertState",
+        "type": "string"
+      },
+      "Assessment": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "evaluated_at": {
+            "format": "date-time",
+            "title": "Evaluated At",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/$defs/AssessmentStatus"
+          },
+          "ruleset_version": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Ruleset Version",
+            "type": "string"
+          },
+          "input_fingerprint": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Input Fingerprint",
+            "type": "string"
+          },
+          "coverage": {
+            "$ref": "#/$defs/Coverage"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/$defs/RuleResult"
+            },
+            "title": "Results",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "astronaut_id",
+          "evaluated_at",
+          "status",
+          "ruleset_version",
+          "input_fingerprint",
+          "coverage",
+          "results"
+        ],
+        "title": "Assessment",
+        "type": "object"
+      },
+      "AssessmentStatus": {
+        "enum": [
+          "insufficient_data",
+          "no_rule_triggered",
+          "review_suggested",
+          "crew_medical_review"
+        ],
+        "title": "AssessmentStatus",
+        "type": "string"
+      },
+      "Astronaut": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "mission_id": {
+            "title": "Mission Id",
+            "type": "string"
+          },
+          "display_name": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Display Name",
+            "type": "string"
+          },
+          "role": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Role",
+            "type": "string"
+          },
+          "is_demo": {
+            "const": true,
+            "default": true,
+            "title": "Is Demo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "mission_id",
+          "display_name",
+          "role"
+        ],
+        "title": "Astronaut",
+        "type": "object"
+      },
+      "Coverage": {
+        "additionalProperties": false,
+        "properties": {
+          "evaluated_rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evaluated Rule Ids",
+            "type": "array"
+          },
+          "insufficient_rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Insufficient Rule Ids",
+            "type": "array"
+          },
+          "not_applicable_rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Not Applicable Rule Ids",
+            "type": "array"
+          }
+        },
+        "title": "Coverage",
+        "type": "object"
+      },
+      "DailyCheckin": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "checkin_date": {
+            "format": "date",
+            "title": "Checkin Date",
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "context": {
+            "$ref": "#/$defs/ObservationContext"
+          },
+          "readings": {
+            "items": {
+              "$ref": "#/$defs/HealthValue"
+            },
+            "title": "Readings",
+            "type": "array"
+          },
+          "sleep_hours": {
+            "anyOf": [
+              {
+                "maximum": 24,
+                "minimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Sleep Hours"
+          },
+          "mood": {
+            "anyOf": [
+              {
+                "maximum": 5,
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Mood"
+          },
+          "stress": {
+            "anyOf": [
+              {
+                "maximum": 5,
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Stress"
+          },
+          "symptoms": {
+            "items": {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "title": "Symptoms",
+            "type": "array"
+          },
+          "exercise_minutes": {
+            "anyOf": [
+              {
+                "maximum": 1440,
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Exercise Minutes"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "maxLength": 2000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Notes"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "is_demo": {
+            "const": true,
+            "default": true,
+            "title": "Is Demo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "checkin_date",
+          "observed_at",
+          "context",
+          "astronaut_id"
+        ],
+        "title": "DailyCheckin",
+        "type": "object"
+      },
+      "EnvironmentalIndicator": {
+        "enum": [
+          "cabin_co2",
+          "radiation_dose_rate"
+        ],
+        "title": "EnvironmentalIndicator",
+        "type": "string"
+      },
+      "EnvironmentalReading": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "mission_id": {
+            "title": "Mission Id",
+            "type": "string"
+          },
+          "indicator": {
+            "$ref": "#/$defs/EnvironmentalIndicator"
+          },
+          "value": {
+            "minimum": 0,
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/$defs/Unit"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "source": {
+            "const": "simulated",
+            "default": "simulated",
+            "title": "Source",
+            "type": "string"
+          },
+          "simulation_run_id": {
+            "title": "Simulation Run Id",
+            "type": "string"
+          },
+          "tick_index": {
+            "minimum": 0,
+            "title": "Tick Index",
+            "type": "integer"
+          },
+          "is_demo": {
+            "const": true,
+            "default": true,
+            "title": "Is Demo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "mission_id",
+          "indicator",
+          "value",
+          "unit",
+          "observed_at",
+          "simulation_run_id",
+          "tick_index"
+        ],
+        "title": "EnvironmentalReading",
+        "type": "object"
+      },
+      "Evidence": {
+        "additionalProperties": false,
+        "properties": {
+          "record_id": {
+            "title": "Record Id",
+            "type": "string"
+          },
+          "record_type": {
+            "enum": [
+              "health_reading",
+              "environmental_reading",
+              "daily_checkin"
+            ],
+            "title": "Record Type",
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "indicator": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Indicator",
+            "type": "string"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Unit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "record_id",
+          "record_type",
+          "observed_at",
+          "indicator",
+          "value",
+          "unit"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      },
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "HealthReading": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "indicator": {
+            "$ref": "#/$defs/HealthIndicator"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/$defs/Unit"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/$defs/Source"
+          },
+          "context": {
+            "$ref": "#/$defs/ObservationContext"
+          },
+          "checkin_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Checkin Id"
+          },
+          "simulation_run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Simulation Run Id"
+          },
+          "tick_index": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Tick Index"
+          },
+          "is_demo": {
+            "const": true,
+            "default": true,
+            "title": "Is Demo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "indicator",
+          "value",
+          "unit",
+          "astronaut_id",
+          "observed_at",
+          "source",
+          "context"
+        ],
+        "title": "HealthReading",
+        "type": "object"
+      },
+      "HealthValue": {
+        "additionalProperties": false,
+        "properties": {
+          "indicator": {
+            "$ref": "#/$defs/HealthIndicator"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/$defs/Unit"
+          }
+        },
+        "required": [
+          "indicator",
+          "value",
+          "unit"
+        ],
+        "title": "HealthValue",
+        "type": "object"
+      },
+      "Mission": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "environment": {
+            "$ref": "#/$defs/MissionEnvironment"
+          },
+          "started_at": {
+            "format": "date-time",
+            "title": "Started At",
+            "type": "string"
+          },
+          "ended_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Ended At"
+          },
+          "description": {
+            "default": "",
+            "title": "Description",
+            "type": "string"
+          },
+          "is_demo": {
+            "const": true,
+            "default": true,
+            "title": "Is Demo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "name",
+          "environment",
+          "started_at"
+        ],
+        "title": "Mission",
+        "type": "object"
+      },
+      "MissionEnvironment": {
+        "enum": [
+          "microgravity",
+          "lunar",
+          "martian",
+          "earth_analog"
+        ],
+        "title": "MissionEnvironment",
+        "type": "string"
+      },
+      "ObservationContext": {
+        "enum": [
+          "resting",
+          "exercise",
+          "recovery",
+          "unspecified"
+        ],
+        "title": "ObservationContext",
+        "type": "string"
+      },
+      "RuleOutcome": {
+        "enum": [
+          "triggered",
+          "not_triggered",
+          "insufficient_data",
+          "not_applicable"
+        ],
+        "title": "RuleOutcome",
+        "type": "string"
+      },
+      "RuleResult": {
+        "additionalProperties": false,
+        "properties": {
+          "rule_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Rule Id",
+            "type": "string"
+          },
+          "outcome": {
+            "$ref": "#/$defs/RuleOutcome"
+          },
+          "workflow_status": {
+            "$ref": "#/$defs/AssessmentStatus"
+          },
+          "explanation": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Explanation",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "missing_data": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Missing Data",
+            "type": "array"
+          },
+          "guidance_slugs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Guidance Slugs",
+            "type": "array"
+          }
+        },
+        "required": [
+          "rule_id",
+          "outcome",
+          "workflow_status",
+          "explanation"
+        ],
+        "title": "RuleResult",
+        "type": "object"
+      },
+      "RunStatus": {
+        "enum": [
+          "paused",
+          "running",
+          "stopped",
+          "failed"
+        ],
+        "title": "RunStatus",
+        "type": "string"
+      },
+      "Scenario": {
+        "enum": [
+          "routine",
+          "exercise_recovery",
+          "reduced_sleep_stress",
+          "unusual_health_trend",
+          "environmental_change"
+        ],
+        "title": "Scenario",
+        "type": "string"
+      },
+      "SimulationRun": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "scenario": {
+            "$ref": "#/$defs/Scenario"
+          },
+          "seed": {
+            "title": "Seed",
+            "type": "integer"
+          },
+          "simulation_start_at": {
+            "format": "date-time",
+            "title": "Simulation Start At",
+            "type": "string"
+          },
+          "interval_seconds": {
+            "default": 5,
+            "maximum": 60,
+            "minimum": 1,
+            "title": "Interval Seconds",
+            "type": "integer"
+          },
+          "step_seconds": {
+            "default": 60,
+            "maximum": 3600,
+            "minimum": 1,
+            "title": "Step Seconds",
+            "type": "integer"
+          },
+          "mission_id": {
+            "title": "Mission Id",
+            "type": "string"
+          },
+          "scenario_version": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Scenario Version",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/$defs/RunStatus",
+            "default": "paused"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Started At"
+          },
+          "last_tick_index": {
+            "default": -1,
+            "minimum": -1,
+            "title": "Last Tick Index",
+            "type": "integer"
+          },
+          "last_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Last Error"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "astronaut_id",
+          "scenario",
+          "seed",
+          "simulation_start_at",
+          "mission_id",
+          "scenario_version"
+        ],
+        "title": "SimulationRun",
+        "type": "object"
+      },
+      "Source": {
+        "enum": [
+          "manual",
+          "simulated"
+        ],
+        "title": "Source",
+        "type": "string"
+      },
+      "Unit": {
+        "enum": [
+          "bpm",
+          "mmHg",
+          "mg/dL",
+          "degC",
+          "%",
+          "ppm",
+          "uSv/h"
+        ],
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "astronaut": {
+        "$ref": "#/$defs/Astronaut"
+      },
+      "mission": {
+        "$ref": "#/$defs/Mission"
+      },
+      "latest_health": {
+        "items": {
+          "$ref": "#/$defs/HealthReading"
+        },
+        "title": "Latest Health",
+        "type": "array"
+      },
+      "latest_environment": {
+        "items": {
+          "$ref": "#/$defs/EnvironmentalReading"
+        },
+        "title": "Latest Environment",
+        "type": "array"
+      },
+      "checkin": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/DailyCheckin"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "assessment": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/Assessment"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "alerts": {
+        "items": {
+          "$ref": "#/$defs/Alert"
+        },
+        "title": "Alerts",
+        "type": "array"
+      },
+      "simulation_run": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/SimulationRun"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "as_of": {
+        "format": "date-time",
+        "title": "As Of",
+        "type": "string"
+      }
+    },
+    "required": [
+      "astronaut",
+      "mission",
+      "latest_health",
+      "latest_environment",
+      "checkin",
+      "assessment",
+      "alerts",
+      "simulation_run",
+      "as_of"
+    ],
+    "title": "Dashboard",
+    "type": "object"
+  },
+  "ErrorDetail": {
+    "additionalProperties": false,
+    "properties": {
+      "code": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Code",
+        "type": "string"
+      },
+      "message": {
+        "title": "Message",
+        "type": "string"
+      },
+      "details": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "title": "Details",
+        "type": "object"
+      },
+      "request_id": {
+        "title": "Request Id",
+        "type": "string"
+      }
+    },
+    "required": [
+      "code",
+      "message",
+      "request_id"
+    ],
+    "title": "ErrorDetail",
+    "type": "object"
+  },
+  "ErrorResponse": {
+    "$defs": {
+      "ErrorDetail": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "details": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "title": "Details",
+            "type": "object"
+          },
+          "request_id": {
+            "title": "Request Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "request_id"
+        ],
+        "title": "ErrorDetail",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "error": {
+        "$ref": "#/$defs/ErrorDetail"
+      }
+    },
+    "required": [
+      "error"
+    ],
+    "title": "ErrorResponse",
+    "type": "object"
+  },
+  "HealthResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "status": {
+        "const": "ok",
+        "default": "ok",
+        "title": "Status",
+        "type": "string"
+      },
+      "contract_version": {
+        "title": "Contract Version",
+        "type": "string"
+      },
+      "adapter": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Adapter",
+        "type": "string"
+      }
+    },
+    "required": [
+      "contract_version",
+      "adapter"
+    ],
+    "title": "HealthResponse",
+    "type": "object"
+  },
+  "SimulationSteps": {
+    "additionalProperties": false,
+    "properties": {
+      "steps": {
+        "maximum": 60,
+        "minimum": 1,
+        "title": "Steps",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "steps"
+    ],
+    "title": "SimulationSteps",
+    "type": "object"
+  },
+  "SimulationStepResult": {
+    "$defs": {
+      "RunStatus": {
+        "enum": [
+          "paused",
+          "running",
+          "stopped",
+          "failed"
+        ],
+        "title": "RunStatus",
+        "type": "string"
+      },
+      "Scenario": {
+        "enum": [
+          "routine",
+          "exercise_recovery",
+          "reduced_sleep_stress",
+          "unusual_health_trend",
+          "environmental_change"
+        ],
+        "title": "Scenario",
+        "type": "string"
+      },
+      "SimulationRun": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "scenario": {
+            "$ref": "#/$defs/Scenario"
+          },
+          "seed": {
+            "title": "Seed",
+            "type": "integer"
+          },
+          "simulation_start_at": {
+            "format": "date-time",
+            "title": "Simulation Start At",
+            "type": "string"
+          },
+          "interval_seconds": {
+            "default": 5,
+            "maximum": 60,
+            "minimum": 1,
+            "title": "Interval Seconds",
+            "type": "integer"
+          },
+          "step_seconds": {
+            "default": 60,
+            "maximum": 3600,
+            "minimum": 1,
+            "title": "Step Seconds",
+            "type": "integer"
+          },
+          "mission_id": {
+            "title": "Mission Id",
+            "type": "string"
+          },
+          "scenario_version": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Scenario Version",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/$defs/RunStatus",
+            "default": "paused"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Started At"
+          },
+          "last_tick_index": {
+            "default": -1,
+            "minimum": -1,
+            "title": "Last Tick Index",
+            "type": "integer"
+          },
+          "last_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Last Error"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "astronaut_id",
+          "scenario",
+          "seed",
+          "simulation_start_at",
+          "mission_id",
+          "scenario_version"
+        ],
+        "title": "SimulationRun",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "run": {
+        "$ref": "#/$defs/SimulationRun"
+      },
+      "generated_health_count": {
+        "minimum": 0,
+        "title": "Generated Health Count",
+        "type": "integer"
+      },
+      "generated_environmental_count": {
+        "minimum": 0,
+        "title": "Generated Environmental Count",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "run",
+      "generated_health_count",
+      "generated_environmental_count"
+    ],
+    "title": "SimulationStepResult",
+    "type": "object"
+  },
+  "ScenarioDefinition": {
+    "$defs": {
+      "Scenario": {
+        "enum": [
+          "routine",
+          "exercise_recovery",
+          "reduced_sleep_stress",
+          "unusual_health_trend",
+          "environmental_change"
+        ],
+        "title": "Scenario",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "scenario": {
+        "$ref": "#/$defs/Scenario"
+      },
+      "version": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Version",
+        "type": "string"
+      },
+      "description": {
+        "title": "Description",
+        "type": "string"
+      },
+      "required_fixture_context": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Required Fixture Context",
+        "type": "array"
+      },
+      "expected_outcomes": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Expected Outcomes",
+        "type": "array"
+      }
+    },
+    "required": [
+      "scenario",
+      "version",
+      "description",
+      "required_fixture_context",
+      "expected_outcomes"
+    ],
+    "title": "ScenarioDefinition",
+    "type": "object"
+  },
+  "SourceReference": {
+    "additionalProperties": false,
+    "properties": {
+      "title": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Title",
+        "type": "string"
+      },
+      "url": {
+        "pattern": "^https://",
+        "title": "Url",
+        "type": "string"
+      }
+    },
+    "required": [
+      "title",
+      "url"
+    ],
+    "title": "SourceReference",
+    "type": "object"
+  },
+  "GuidanceArticle": {
+    "$defs": {
+      "EnvironmentalIndicator": {
+        "enum": [
+          "cabin_co2",
+          "radiation_dose_rate"
+        ],
+        "title": "EnvironmentalIndicator",
+        "type": "string"
+      },
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "SourceReference": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "url": {
+            "pattern": "^https://",
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "url"
+        ],
+        "title": "SourceReference",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "slug": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Slug",
+        "type": "string"
+      },
+      "title": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Title",
+        "type": "string"
+      },
+      "indicators": {
+        "items": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/HealthIndicator"
+            },
+            {
+              "$ref": "#/$defs/EnvironmentalIndicator"
+            }
+          ]
+        },
+        "title": "Indicators",
+        "type": "array"
+      },
+      "hazard_slugs": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Hazard Slugs",
+        "type": "array"
+      },
+      "educational_text": {
+        "title": "Educational Text",
+        "type": "string"
+      },
+      "limitations": {
+        "title": "Limitations",
+        "type": "string"
+      },
+      "references": {
+        "items": {
+          "$ref": "#/$defs/SourceReference"
+        },
+        "title": "References",
+        "type": "array"
+      },
+      "reviewed_on": {
+        "format": "date",
+        "title": "Reviewed On",
+        "type": "string"
+      }
+    },
+    "required": [
+      "slug",
+      "title",
+      "indicators",
+      "hazard_slugs",
+      "educational_text",
+      "limitations",
+      "references",
+      "reviewed_on"
+    ],
+    "title": "GuidanceArticle",
+    "type": "object"
+  },
+  "Hazard": {
+    "$defs": {
+      "EnvironmentalIndicator": {
+        "enum": [
+          "cabin_co2",
+          "radiation_dose_rate"
+        ],
+        "title": "EnvironmentalIndicator",
+        "type": "string"
+      },
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "SourceReference": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "url": {
+            "pattern": "^https://",
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "url"
+        ],
+        "title": "SourceReference",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "slug": {
+        "enum": [
+          "space_radiation",
+          "isolation_confinement",
+          "distance_from_earth",
+          "gravity_fields",
+          "hostile_closed_environments"
+        ],
+        "title": "Slug",
+        "type": "string"
+      },
+      "title": {
+        "maxLength": 200,
+        "minLength": 1,
+        "title": "Title",
+        "type": "string"
+      },
+      "description": {
+        "title": "Description",
+        "type": "string"
+      },
+      "related_indicators": {
+        "items": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/HealthIndicator"
+            },
+            {
+              "$ref": "#/$defs/EnvironmentalIndicator"
+            }
+          ]
+        },
+        "title": "Related Indicators",
+        "type": "array"
+      },
+      "monitoring_limitations": {
+        "title": "Monitoring Limitations",
+        "type": "string"
+      },
+      "references": {
+        "items": {
+          "$ref": "#/$defs/SourceReference"
+        },
+        "title": "References",
+        "type": "array"
+      }
+    },
+    "required": [
+      "slug",
+      "title",
+      "description",
+      "related_indicators",
+      "monitoring_limitations",
+      "references"
+    ],
+    "title": "Hazard",
+    "type": "object"
+  },
+  "HealthTelemetry": {
+    "$defs": {
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "HealthReading": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "indicator": {
+            "$ref": "#/$defs/HealthIndicator"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/$defs/Unit"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/$defs/Source"
+          },
+          "context": {
+            "$ref": "#/$defs/ObservationContext"
+          },
+          "checkin_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Checkin Id"
+          },
+          "simulation_run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Simulation Run Id"
+          },
+          "tick_index": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Tick Index"
+          },
+          "is_demo": {
+            "const": true,
+            "default": true,
+            "title": "Is Demo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "indicator",
+          "value",
+          "unit",
+          "astronaut_id",
+          "observed_at",
+          "source",
+          "context"
+        ],
+        "title": "HealthReading",
+        "type": "object"
+      },
+      "ObservationContext": {
+        "enum": [
+          "resting",
+          "exercise",
+          "recovery",
+          "unspecified"
+        ],
+        "title": "ObservationContext",
+        "type": "string"
+      },
+      "Source": {
+        "enum": [
+          "manual",
+          "simulated"
+        ],
+        "title": "Source",
+        "type": "string"
+      },
+      "Unit": {
+        "enum": [
+          "bpm",
+          "mmHg",
+          "mg/dL",
+          "degC",
+          "%",
+          "ppm",
+          "uSv/h"
+        ],
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "astronaut_id": {
+        "title": "Astronaut Id",
+        "type": "string"
+      },
+      "readings": {
+        "items": {
+          "$ref": "#/$defs/HealthReading"
+        },
+        "title": "Readings",
+        "type": "array"
+      },
+      "as_of": {
+        "format": "date-time",
+        "title": "As Of",
+        "type": "string"
+      }
+    },
+    "required": [
+      "astronaut_id",
+      "readings",
+      "as_of"
+    ],
+    "title": "HealthTelemetry",
+    "type": "object"
+  },
+  "EnvironmentalTelemetry": {
+    "$defs": {
+      "EnvironmentalIndicator": {
+        "enum": [
+          "cabin_co2",
+          "radiation_dose_rate"
+        ],
+        "title": "EnvironmentalIndicator",
+        "type": "string"
+      },
+      "EnvironmentalReading": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "mission_id": {
+            "title": "Mission Id",
+            "type": "string"
+          },
+          "indicator": {
+            "$ref": "#/$defs/EnvironmentalIndicator"
+          },
+          "value": {
+            "minimum": 0,
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/$defs/Unit"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "source": {
+            "const": "simulated",
+            "default": "simulated",
+            "title": "Source",
+            "type": "string"
+          },
+          "simulation_run_id": {
+            "title": "Simulation Run Id",
+            "type": "string"
+          },
+          "tick_index": {
+            "minimum": 0,
+            "title": "Tick Index",
+            "type": "integer"
+          },
+          "is_demo": {
+            "const": true,
+            "default": true,
+            "title": "Is Demo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "mission_id",
+          "indicator",
+          "value",
+          "unit",
+          "observed_at",
+          "simulation_run_id",
+          "tick_index"
+        ],
+        "title": "EnvironmentalReading",
+        "type": "object"
+      },
+      "Unit": {
+        "enum": [
+          "bpm",
+          "mmHg",
+          "mg/dL",
+          "degC",
+          "%",
+          "ppm",
+          "uSv/h"
+        ],
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "mission_id": {
+        "title": "Mission Id",
+        "type": "string"
+      },
+      "readings": {
+        "items": {
+          "$ref": "#/$defs/EnvironmentalReading"
+        },
+        "title": "Readings",
+        "type": "array"
+      },
+      "as_of": {
+        "format": "date-time",
+        "title": "As Of",
+        "type": "string"
+      }
+    },
+    "required": [
+      "mission_id",
+      "readings",
+      "as_of"
+    ],
+    "title": "EnvironmentalTelemetry",
+    "type": "object"
+  },
+  "Page[Mission]": {
+    "$defs": {
+      "Mission": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "environment": {
+            "$ref": "#/$defs/MissionEnvironment"
+          },
+          "started_at": {
+            "format": "date-time",
+            "title": "Started At",
+            "type": "string"
+          },
+          "ended_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Ended At"
+          },
+          "description": {
+            "default": "",
+            "title": "Description",
+            "type": "string"
+          },
+          "is_demo": {
+            "const": true,
+            "default": true,
+            "title": "Is Demo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "name",
+          "environment",
+          "started_at"
+        ],
+        "title": "Mission",
+        "type": "object"
+      },
+      "MissionEnvironment": {
+        "enum": [
+          "microgravity",
+          "lunar",
+          "martian",
+          "earth_analog"
+        ],
+        "title": "MissionEnvironment",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "items": {
+        "items": {
+          "$ref": "#/$defs/Mission"
+        },
+        "title": "Items",
+        "type": "array"
+      },
+      "total": {
+        "minimum": 0,
+        "title": "Total",
+        "type": "integer"
+      },
+      "limit": {
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "items",
+      "total",
+      "limit",
+      "offset"
+    ],
+    "title": "Page[Mission]",
+    "type": "object"
+  },
+  "Page[Astronaut]": {
+    "$defs": {
+      "Astronaut": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "mission_id": {
+            "title": "Mission Id",
+            "type": "string"
+          },
+          "display_name": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Display Name",
+            "type": "string"
+          },
+          "role": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Role",
+            "type": "string"
+          },
+          "is_demo": {
+            "const": true,
+            "default": true,
+            "title": "Is Demo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "mission_id",
+          "display_name",
+          "role"
+        ],
+        "title": "Astronaut",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "items": {
+        "items": {
+          "$ref": "#/$defs/Astronaut"
+        },
+        "title": "Items",
+        "type": "array"
+      },
+      "total": {
+        "minimum": 0,
+        "title": "Total",
+        "type": "integer"
+      },
+      "limit": {
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "items",
+      "total",
+      "limit",
+      "offset"
+    ],
+    "title": "Page[Astronaut]",
+    "type": "object"
+  },
+  "Page[DailyCheckin]": {
+    "$defs": {
+      "DailyCheckin": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "checkin_date": {
+            "format": "date",
+            "title": "Checkin Date",
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "context": {
+            "$ref": "#/$defs/ObservationContext"
+          },
+          "readings": {
+            "items": {
+              "$ref": "#/$defs/HealthValue"
+            },
+            "title": "Readings",
+            "type": "array"
+          },
+          "sleep_hours": {
+            "anyOf": [
+              {
+                "maximum": 24,
+                "minimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Sleep Hours"
+          },
+          "mood": {
+            "anyOf": [
+              {
+                "maximum": 5,
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Mood"
+          },
+          "stress": {
+            "anyOf": [
+              {
+                "maximum": 5,
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Stress"
+          },
+          "symptoms": {
+            "items": {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "title": "Symptoms",
+            "type": "array"
+          },
+          "exercise_minutes": {
+            "anyOf": [
+              {
+                "maximum": 1440,
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Exercise Minutes"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "maxLength": 2000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Notes"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "is_demo": {
+            "const": true,
+            "default": true,
+            "title": "Is Demo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "checkin_date",
+          "observed_at",
+          "context",
+          "astronaut_id"
+        ],
+        "title": "DailyCheckin",
+        "type": "object"
+      },
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "HealthValue": {
+        "additionalProperties": false,
+        "properties": {
+          "indicator": {
+            "$ref": "#/$defs/HealthIndicator"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/$defs/Unit"
+          }
+        },
+        "required": [
+          "indicator",
+          "value",
+          "unit"
+        ],
+        "title": "HealthValue",
+        "type": "object"
+      },
+      "ObservationContext": {
+        "enum": [
+          "resting",
+          "exercise",
+          "recovery",
+          "unspecified"
+        ],
+        "title": "ObservationContext",
+        "type": "string"
+      },
+      "Unit": {
+        "enum": [
+          "bpm",
+          "mmHg",
+          "mg/dL",
+          "degC",
+          "%",
+          "ppm",
+          "uSv/h"
+        ],
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "items": {
+        "items": {
+          "$ref": "#/$defs/DailyCheckin"
+        },
+        "title": "Items",
+        "type": "array"
+      },
+      "total": {
+        "minimum": 0,
+        "title": "Total",
+        "type": "integer"
+      },
+      "limit": {
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "items",
+      "total",
+      "limit",
+      "offset"
+    ],
+    "title": "Page[DailyCheckin]",
+    "type": "object"
+  },
+  "Page[HealthReading]": {
+    "$defs": {
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "HealthReading": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "indicator": {
+            "$ref": "#/$defs/HealthIndicator"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/$defs/Unit"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/$defs/Source"
+          },
+          "context": {
+            "$ref": "#/$defs/ObservationContext"
+          },
+          "checkin_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Checkin Id"
+          },
+          "simulation_run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Simulation Run Id"
+          },
+          "tick_index": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Tick Index"
+          },
+          "is_demo": {
+            "const": true,
+            "default": true,
+            "title": "Is Demo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "indicator",
+          "value",
+          "unit",
+          "astronaut_id",
+          "observed_at",
+          "source",
+          "context"
+        ],
+        "title": "HealthReading",
+        "type": "object"
+      },
+      "ObservationContext": {
+        "enum": [
+          "resting",
+          "exercise",
+          "recovery",
+          "unspecified"
+        ],
+        "title": "ObservationContext",
+        "type": "string"
+      },
+      "Source": {
+        "enum": [
+          "manual",
+          "simulated"
+        ],
+        "title": "Source",
+        "type": "string"
+      },
+      "Unit": {
+        "enum": [
+          "bpm",
+          "mmHg",
+          "mg/dL",
+          "degC",
+          "%",
+          "ppm",
+          "uSv/h"
+        ],
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "items": {
+        "items": {
+          "$ref": "#/$defs/HealthReading"
+        },
+        "title": "Items",
+        "type": "array"
+      },
+      "total": {
+        "minimum": 0,
+        "title": "Total",
+        "type": "integer"
+      },
+      "limit": {
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "items",
+      "total",
+      "limit",
+      "offset"
+    ],
+    "title": "Page[HealthReading]",
+    "type": "object"
+  },
+  "Page[EnvironmentalReading]": {
+    "$defs": {
+      "EnvironmentalIndicator": {
+        "enum": [
+          "cabin_co2",
+          "radiation_dose_rate"
+        ],
+        "title": "EnvironmentalIndicator",
+        "type": "string"
+      },
+      "EnvironmentalReading": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "mission_id": {
+            "title": "Mission Id",
+            "type": "string"
+          },
+          "indicator": {
+            "$ref": "#/$defs/EnvironmentalIndicator"
+          },
+          "value": {
+            "minimum": 0,
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/$defs/Unit"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "source": {
+            "const": "simulated",
+            "default": "simulated",
+            "title": "Source",
+            "type": "string"
+          },
+          "simulation_run_id": {
+            "title": "Simulation Run Id",
+            "type": "string"
+          },
+          "tick_index": {
+            "minimum": 0,
+            "title": "Tick Index",
+            "type": "integer"
+          },
+          "is_demo": {
+            "const": true,
+            "default": true,
+            "title": "Is Demo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "mission_id",
+          "indicator",
+          "value",
+          "unit",
+          "observed_at",
+          "simulation_run_id",
+          "tick_index"
+        ],
+        "title": "EnvironmentalReading",
+        "type": "object"
+      },
+      "Unit": {
+        "enum": [
+          "bpm",
+          "mmHg",
+          "mg/dL",
+          "degC",
+          "%",
+          "ppm",
+          "uSv/h"
+        ],
+        "title": "Unit",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "items": {
+        "items": {
+          "$ref": "#/$defs/EnvironmentalReading"
+        },
+        "title": "Items",
+        "type": "array"
+      },
+      "total": {
+        "minimum": 0,
+        "title": "Total",
+        "type": "integer"
+      },
+      "limit": {
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "items",
+      "total",
+      "limit",
+      "offset"
+    ],
+    "title": "Page[EnvironmentalReading]",
+    "type": "object"
+  },
+  "Page[Assessment]": {
+    "$defs": {
+      "Assessment": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "evaluated_at": {
+            "format": "date-time",
+            "title": "Evaluated At",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/$defs/AssessmentStatus"
+          },
+          "ruleset_version": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Ruleset Version",
+            "type": "string"
+          },
+          "input_fingerprint": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Input Fingerprint",
+            "type": "string"
+          },
+          "coverage": {
+            "$ref": "#/$defs/Coverage"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/$defs/RuleResult"
+            },
+            "title": "Results",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "astronaut_id",
+          "evaluated_at",
+          "status",
+          "ruleset_version",
+          "input_fingerprint",
+          "coverage",
+          "results"
+        ],
+        "title": "Assessment",
+        "type": "object"
+      },
+      "AssessmentStatus": {
+        "enum": [
+          "insufficient_data",
+          "no_rule_triggered",
+          "review_suggested",
+          "crew_medical_review"
+        ],
+        "title": "AssessmentStatus",
+        "type": "string"
+      },
+      "Coverage": {
+        "additionalProperties": false,
+        "properties": {
+          "evaluated_rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evaluated Rule Ids",
+            "type": "array"
+          },
+          "insufficient_rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Insufficient Rule Ids",
+            "type": "array"
+          },
+          "not_applicable_rule_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Not Applicable Rule Ids",
+            "type": "array"
+          }
+        },
+        "title": "Coverage",
+        "type": "object"
+      },
+      "Evidence": {
+        "additionalProperties": false,
+        "properties": {
+          "record_id": {
+            "title": "Record Id",
+            "type": "string"
+          },
+          "record_type": {
+            "enum": [
+              "health_reading",
+              "environmental_reading",
+              "daily_checkin"
+            ],
+            "title": "Record Type",
+            "type": "string"
+          },
+          "observed_at": {
+            "format": "date-time",
+            "title": "Observed At",
+            "type": "string"
+          },
+          "indicator": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Indicator",
+            "type": "string"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "unit": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Unit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "record_id",
+          "record_type",
+          "observed_at",
+          "indicator",
+          "value",
+          "unit"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      },
+      "RuleOutcome": {
+        "enum": [
+          "triggered",
+          "not_triggered",
+          "insufficient_data",
+          "not_applicable"
+        ],
+        "title": "RuleOutcome",
+        "type": "string"
+      },
+      "RuleResult": {
+        "additionalProperties": false,
+        "properties": {
+          "rule_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Rule Id",
+            "type": "string"
+          },
+          "outcome": {
+            "$ref": "#/$defs/RuleOutcome"
+          },
+          "workflow_status": {
+            "$ref": "#/$defs/AssessmentStatus"
+          },
+          "explanation": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Explanation",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "missing_data": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Missing Data",
+            "type": "array"
+          },
+          "guidance_slugs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Guidance Slugs",
+            "type": "array"
+          }
+        },
+        "required": [
+          "rule_id",
+          "outcome",
+          "workflow_status",
+          "explanation"
+        ],
+        "title": "RuleResult",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "items": {
+        "items": {
+          "$ref": "#/$defs/Assessment"
+        },
+        "title": "Items",
+        "type": "array"
+      },
+      "total": {
+        "minimum": 0,
+        "title": "Total",
+        "type": "integer"
+      },
+      "limit": {
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "items",
+      "total",
+      "limit",
+      "offset"
+    ],
+    "title": "Page[Assessment]",
+    "type": "object"
+  },
+  "Page[Alert]": {
+    "$defs": {
+      "Alert": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "rule_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Rule Id",
+            "type": "string"
+          },
+          "workflow_status": {
+            "enum": [
+              "review_suggested",
+              "crew_medical_review"
+            ],
+            "title": "Workflow Status",
+            "type": "string"
+          },
+          "state": {
+            "$ref": "#/$defs/AlertState"
+          },
+          "first_assessment_id": {
+            "title": "First Assessment Id",
+            "type": "string"
+          },
+          "latest_assessment_id": {
+            "title": "Latest Assessment Id",
+            "type": "string"
+          },
+          "opened_at": {
+            "format": "date-time",
+            "title": "Opened At",
+            "type": "string"
+          },
+          "acknowledged_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Acknowledged At"
+          },
+          "resolved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Resolved At"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "astronaut_id",
+          "rule_id",
+          "workflow_status",
+          "state",
+          "first_assessment_id",
+          "latest_assessment_id",
+          "opened_at"
+        ],
+        "title": "Alert",
+        "type": "object"
+      },
+      "AlertState": {
+        "enum": [
+          "open",
+          "acknowledged",
+          "resolved"
+        ],
+        "title": "AlertState",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "items": {
+        "items": {
+          "$ref": "#/$defs/Alert"
+        },
+        "title": "Items",
+        "type": "array"
+      },
+      "total": {
+        "minimum": 0,
+        "title": "Total",
+        "type": "integer"
+      },
+      "limit": {
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "items",
+      "total",
+      "limit",
+      "offset"
+    ],
+    "title": "Page[Alert]",
+    "type": "object"
+  },
+  "Page[SimulationRun]": {
+    "$defs": {
+      "RunStatus": {
+        "enum": [
+          "paused",
+          "running",
+          "stopped",
+          "failed"
+        ],
+        "title": "RunStatus",
+        "type": "string"
+      },
+      "Scenario": {
+        "enum": [
+          "routine",
+          "exercise_recovery",
+          "reduced_sleep_stress",
+          "unusual_health_trend",
+          "environmental_change"
+        ],
+        "title": "Scenario",
+        "type": "string"
+      },
+      "SimulationRun": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "astronaut_id": {
+            "title": "Astronaut Id",
+            "type": "string"
+          },
+          "scenario": {
+            "$ref": "#/$defs/Scenario"
+          },
+          "seed": {
+            "title": "Seed",
+            "type": "integer"
+          },
+          "simulation_start_at": {
+            "format": "date-time",
+            "title": "Simulation Start At",
+            "type": "string"
+          },
+          "interval_seconds": {
+            "default": 5,
+            "maximum": 60,
+            "minimum": 1,
+            "title": "Interval Seconds",
+            "type": "integer"
+          },
+          "step_seconds": {
+            "default": 60,
+            "maximum": 3600,
+            "minimum": 1,
+            "title": "Step Seconds",
+            "type": "integer"
+          },
+          "mission_id": {
+            "title": "Mission Id",
+            "type": "string"
+          },
+          "scenario_version": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Scenario Version",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/$defs/RunStatus",
+            "default": "paused"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Started At"
+          },
+          "last_tick_index": {
+            "default": -1,
+            "minimum": -1,
+            "title": "Last Tick Index",
+            "type": "integer"
+          },
+          "last_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Last Error"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "astronaut_id",
+          "scenario",
+          "seed",
+          "simulation_start_at",
+          "mission_id",
+          "scenario_version"
+        ],
+        "title": "SimulationRun",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "items": {
+        "items": {
+          "$ref": "#/$defs/SimulationRun"
+        },
+        "title": "Items",
+        "type": "array"
+      },
+      "total": {
+        "minimum": 0,
+        "title": "Total",
+        "type": "integer"
+      },
+      "limit": {
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "items",
+      "total",
+      "limit",
+      "offset"
+    ],
+    "title": "Page[SimulationRun]",
+    "type": "object"
+  },
+  "Page[ScenarioDefinition]": {
+    "$defs": {
+      "Scenario": {
+        "enum": [
+          "routine",
+          "exercise_recovery",
+          "reduced_sleep_stress",
+          "unusual_health_trend",
+          "environmental_change"
+        ],
+        "title": "Scenario",
+        "type": "string"
+      },
+      "ScenarioDefinition": {
+        "additionalProperties": false,
+        "properties": {
+          "scenario": {
+            "$ref": "#/$defs/Scenario"
+          },
+          "version": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Version",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "required_fixture_context": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Required Fixture Context",
+            "type": "array"
+          },
+          "expected_outcomes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Expected Outcomes",
+            "type": "array"
+          }
+        },
+        "required": [
+          "scenario",
+          "version",
+          "description",
+          "required_fixture_context",
+          "expected_outcomes"
+        ],
+        "title": "ScenarioDefinition",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "items": {
+        "items": {
+          "$ref": "#/$defs/ScenarioDefinition"
+        },
+        "title": "Items",
+        "type": "array"
+      },
+      "total": {
+        "minimum": 0,
+        "title": "Total",
+        "type": "integer"
+      },
+      "limit": {
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "items",
+      "total",
+      "limit",
+      "offset"
+    ],
+    "title": "Page[ScenarioDefinition]",
+    "type": "object"
+  },
+  "Page[GuidanceArticle]": {
+    "$defs": {
+      "EnvironmentalIndicator": {
+        "enum": [
+          "cabin_co2",
+          "radiation_dose_rate"
+        ],
+        "title": "EnvironmentalIndicator",
+        "type": "string"
+      },
+      "GuidanceArticle": {
+        "additionalProperties": false,
+        "properties": {
+          "slug": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Slug",
+            "type": "string"
+          },
+          "title": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "indicators": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/HealthIndicator"
+                },
+                {
+                  "$ref": "#/$defs/EnvironmentalIndicator"
+                }
+              ]
+            },
+            "title": "Indicators",
+            "type": "array"
+          },
+          "hazard_slugs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Hazard Slugs",
+            "type": "array"
+          },
+          "educational_text": {
+            "title": "Educational Text",
+            "type": "string"
+          },
+          "limitations": {
+            "title": "Limitations",
+            "type": "string"
+          },
+          "references": {
+            "items": {
+              "$ref": "#/$defs/SourceReference"
+            },
+            "title": "References",
+            "type": "array"
+          },
+          "reviewed_on": {
+            "format": "date",
+            "title": "Reviewed On",
+            "type": "string"
+          }
+        },
+        "required": [
+          "slug",
+          "title",
+          "indicators",
+          "hazard_slugs",
+          "educational_text",
+          "limitations",
+          "references",
+          "reviewed_on"
+        ],
+        "title": "GuidanceArticle",
+        "type": "object"
+      },
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "SourceReference": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "url": {
+            "pattern": "^https://",
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "url"
+        ],
+        "title": "SourceReference",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "items": {
+        "items": {
+          "$ref": "#/$defs/GuidanceArticle"
+        },
+        "title": "Items",
+        "type": "array"
+      },
+      "total": {
+        "minimum": 0,
+        "title": "Total",
+        "type": "integer"
+      },
+      "limit": {
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "items",
+      "total",
+      "limit",
+      "offset"
+    ],
+    "title": "Page[GuidanceArticle]",
+    "type": "object"
+  },
+  "Page[Hazard]": {
+    "$defs": {
+      "EnvironmentalIndicator": {
+        "enum": [
+          "cabin_co2",
+          "radiation_dose_rate"
+        ],
+        "title": "EnvironmentalIndicator",
+        "type": "string"
+      },
+      "Hazard": {
+        "additionalProperties": false,
+        "properties": {
+          "slug": {
+            "enum": [
+              "space_radiation",
+              "isolation_confinement",
+              "distance_from_earth",
+              "gravity_fields",
+              "hostile_closed_environments"
+            ],
+            "title": "Slug",
+            "type": "string"
+          },
+          "title": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "related_indicators": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/HealthIndicator"
+                },
+                {
+                  "$ref": "#/$defs/EnvironmentalIndicator"
+                }
+              ]
+            },
+            "title": "Related Indicators",
+            "type": "array"
+          },
+          "monitoring_limitations": {
+            "title": "Monitoring Limitations",
+            "type": "string"
+          },
+          "references": {
+            "items": {
+              "$ref": "#/$defs/SourceReference"
+            },
+            "title": "References",
+            "type": "array"
+          }
+        },
+        "required": [
+          "slug",
+          "title",
+          "description",
+          "related_indicators",
+          "monitoring_limitations",
+          "references"
+        ],
+        "title": "Hazard",
+        "type": "object"
+      },
+      "HealthIndicator": {
+        "enum": [
+          "heart_rate",
+          "blood_pressure_systolic",
+          "blood_pressure_diastolic",
+          "blood_glucose",
+          "body_temperature",
+          "spo2"
+        ],
+        "title": "HealthIndicator",
+        "type": "string"
+      },
+      "SourceReference": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "url": {
+            "pattern": "^https://",
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "url"
+        ],
+        "title": "SourceReference",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "items": {
+        "items": {
+          "$ref": "#/$defs/Hazard"
+        },
+        "title": "Items",
+        "type": "array"
+      },
+      "total": {
+        "minimum": 0,
+        "title": "Total",
+        "type": "integer"
+      },
+      "limit": {
+        "maximum": 1000,
+        "minimum": 1,
+        "title": "Limit",
+        "type": "integer"
+      },
+      "offset": {
+        "minimum": 0,
+        "title": "Offset",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "items",
+      "total",
+      "limit",
+      "offset"
+    ],
+    "title": "Page[Hazard]",
+    "type": "object"
+  }
+}

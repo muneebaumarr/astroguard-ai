@@ -1,0 +1,2 @@
+# Install the shared package first: python -m pip install -e ./shared
+astroguard-contracts==0.1.0

@@ -1,0 +1,698 @@
+{
+  "missions": [
+    {
+      "id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+      "created_at": "2026-11-07T12:00:00Z",
+      "name": "Aurora Demo",
+      "environment": "microgravity",
+      "started_at": "2026-11-07T12:00:00Z",
+      "ended_at": null,
+      "description": "Entirely fictional educational mission",
+      "is_demo": true
+    }
+  ],
+  "astronauts": [
+    {
+      "id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "created_at": "2026-11-07T12:00:00Z",
+      "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+      "display_name": "Maya Demo",
+      "role": "Demo crew",
+      "is_demo": true
+    },
+    {
+      "id": "9acf47a0-a2ce-5a7e-b12a-9c61b31d337d",
+      "created_at": "2026-11-07T12:00:00Z",
+      "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+      "display_name": "Leo Demo",
+      "role": "Demo crew",
+      "is_demo": true
+    }
+  ],
+  "checkins": [
+    {
+      "id": "40377fdd-ecee-5304-860c-5c427c2a9df1",
+      "created_at": "2026-11-07T12:00:00Z",
+      "checkin_date": "2026-11-07",
+      "observed_at": "2026-11-07T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 70.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "is_demo": true
+    },
+    {
+      "id": "289a7c0c-3176-5806-909c-a4f8fdec43cc",
+      "created_at": "2026-11-08T12:00:00Z",
+      "checkin_date": "2026-11-08",
+      "observed_at": "2026-11-08T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 71.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "is_demo": true
+    },
+    {
+      "id": "6b99df65-14c1-5bdc-bc09-f8b781d7599e",
+      "created_at": "2026-11-09T12:00:00Z",
+      "checkin_date": "2026-11-09",
+      "observed_at": "2026-11-09T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 72.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "is_demo": true
+    },
+    {
+      "id": "31add3ee-df29-5328-a7f4-36dd28d116b5",
+      "created_at": "2026-11-10T12:00:00Z",
+      "checkin_date": "2026-11-10",
+      "observed_at": "2026-11-10T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 73.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "is_demo": true
+    },
+    {
+      "id": "58bc7d8e-f32b-5e53-a24c-2212d3fcaf8b",
+      "created_at": "2026-11-11T12:00:00Z",
+      "checkin_date": "2026-11-11",
+      "observed_at": "2026-11-11T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 74.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "is_demo": true
+    },
+    {
+      "id": "670a1785-3212-5df5-b2b5-9edcd0a438ae",
+      "created_at": "2026-11-12T12:00:00Z",
+      "checkin_date": "2026-11-12",
+      "observed_at": "2026-11-12T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 75.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "is_demo": true
+    },
+    {
+      "id": "7a101698-c447-5412-b101-7dcec6e6166a",
+      "created_at": "2026-11-13T12:00:00Z",
+      "checkin_date": "2026-11-13",
+      "observed_at": "2026-11-13T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 76.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "is_demo": true
+    },
+    {
+      "id": "54b7624b-4fbd-53fd-b501-c2b42e98d030",
+      "created_at": "2026-11-07T12:00:00Z",
+      "checkin_date": "2026-11-07",
+      "observed_at": "2026-11-07T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 70.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "9acf47a0-a2ce-5a7e-b12a-9c61b31d337d",
+      "is_demo": true
+    },
+    {
+      "id": "a28b1aac-88a4-5b7d-8929-8069228966ee",
+      "created_at": "2026-11-08T12:00:00Z",
+      "checkin_date": "2026-11-08",
+      "observed_at": "2026-11-08T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 71.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "9acf47a0-a2ce-5a7e-b12a-9c61b31d337d",
+      "is_demo": true
+    },
+    {
+      "id": "f9e69794-3463-57a4-bcc6-bff90428fbba",
+      "created_at": "2026-11-09T12:00:00Z",
+      "checkin_date": "2026-11-09",
+      "observed_at": "2026-11-09T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 72.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "9acf47a0-a2ce-5a7e-b12a-9c61b31d337d",
+      "is_demo": true
+    },
+    {
+      "id": "f35bec3c-bebe-5f6c-9f14-8dc0e3574e4d",
+      "created_at": "2026-11-10T12:00:00Z",
+      "checkin_date": "2026-11-10",
+      "observed_at": "2026-11-10T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 73.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "9acf47a0-a2ce-5a7e-b12a-9c61b31d337d",
+      "is_demo": true
+    },
+    {
+      "id": "95c718a8-c863-5632-8b88-ab532835218a",
+      "created_at": "2026-11-11T12:00:00Z",
+      "checkin_date": "2026-11-11",
+      "observed_at": "2026-11-11T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 74.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "9acf47a0-a2ce-5a7e-b12a-9c61b31d337d",
+      "is_demo": true
+    },
+    {
+      "id": "56b5a414-4f75-5be6-9055-b001dab5d78b",
+      "created_at": "2026-11-12T12:00:00Z",
+      "checkin_date": "2026-11-12",
+      "observed_at": "2026-11-12T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 75.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "9acf47a0-a2ce-5a7e-b12a-9c61b31d337d",
+      "is_demo": true
+    },
+    {
+      "id": "15d05a8e-4d21-5b92-bc12-a6befa1fe931",
+      "created_at": "2026-11-13T12:00:00Z",
+      "checkin_date": "2026-11-13",
+      "observed_at": "2026-11-13T12:00:00Z",
+      "context": "resting",
+      "readings": [
+        {
+          "indicator": "heart_rate",
+          "value": 76.0,
+          "unit": "bpm"
+        }
+      ],
+      "sleep_hours": 7.0,
+      "mood": 4,
+      "stress": 2,
+      "symptoms": [],
+      "exercise_minutes": null,
+      "notes": "Fictional demo observation",
+      "astronaut_id": "9acf47a0-a2ce-5a7e-b12a-9c61b31d337d",
+      "is_demo": true
+    }
+  ],
+  "health_readings": [
+    {
+      "id": "972e847e-699c-51ee-b1ec-bd7dff41afd0",
+      "created_at": "2026-11-07T12:00:00Z",
+      "indicator": "heart_rate",
+      "value": 70.0,
+      "unit": "bpm",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "observed_at": "2026-11-07T12:00:00Z",
+      "source": "manual",
+      "context": "resting",
+      "checkin_id": "40377fdd-ecee-5304-860c-5c427c2a9df1",
+      "simulation_run_id": null,
+      "tick_index": null,
+      "is_demo": true
+    },
+    {
+      "id": "c9c2784c-a279-5714-bf84-53a16332beb8",
+      "created_at": "2026-11-08T12:00:00Z",
+      "indicator": "heart_rate",
+      "value": 71.0,
+      "unit": "bpm",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "observed_at": "2026-11-08T12:00:00Z",
+      "source": "manual",
+      "context": "resting",
+      "checkin_id": "289a7c0c-3176-5806-909c-a4f8fdec43cc",
+      "simulation_run_id": null,
+      "tick_index": null,
+      "is_demo": true
+    },
+    {
+      "id": "53da7c43-ace9-5db9-a4a5-6ca072865cf9",
+      "created_at": "2026-11-09T12:00:00Z",
+      "indicator": "heart_rate",
+      "value": 72.0,
+      "unit": "bpm",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "observed_at": "2026-11-09T12:00:00Z",
+      "source": "manual",
+      "context": "resting",
+      "checkin_id": "6b99df65-14c1-5bdc-bc09-f8b781d7599e",
+      "simulation_run_id": null,
+      "tick_index": null,
+      "is_demo": true
+    },
+    {
+      "id": "ee9aed79-98df-5e9c-894d-9221a5e72fe2",
+      "created_at": "2026-11-10T12:00:00Z",
+      "indicator": "heart_rate",
+      "value": 73.0,
+      "unit": "bpm",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "observed_at": "2026-11-10T12:00:00Z",
+      "source": "manual",
+      "context": "resting",
+      "checkin_id": "31add3ee-df29-5328-a7f4-36dd28d116b5",
+      "simulation_run_id": null,
+      "tick_index": null,
+      "is_demo": true
+    },
+    {
+      "id": "10a54a7f-4bd7-5bd0-a044-a6dec1a429ea",
+      "created_at": "2026-11-11T12:00:00Z",
+      "indicator": "heart_rate",
+      "value": 74.0,
+      "unit": "bpm",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "observed_at": "2026-11-11T12:00:00Z",
+      "source": "manual",
+      "context": "resting",
+      "checkin_id": "58bc7d8e-f32b-5e53-a24c-2212d3fcaf8b",
+      "simulation_run_id": null,
+      "tick_index": null,
+      "is_demo": true
+    },
+    {
+      "id": "c2370893-a97d-55c1-8e64-fa93d08b7820",
+      "created_at": "2026-11-12T12:00:00Z",
+      "indicator": "heart_rate",
+      "value": 75.0,
+      "unit": "bpm",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "observed_at": "2026-11-12T12:00:00Z",
+      "source": "manual",
+      "context": "resting",
+      "checkin_id": "670a1785-3212-5df5-b2b5-9edcd0a438ae",
+      "simulation_run_id": null,
+      "tick_index": null,
+      "is_demo": true
+    },
+    {
+      "id": "637eae72-a99c-5fb4-aa55-a6cedd4c18ba",
+      "created_at": "2026-11-13T12:00:00Z",
+      "indicator": "heart_rate",
+      "value": 76.0,
+      "unit": "bpm",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "observed_at": "2026-11-13T12:00:00Z",
+      "source": "manual",
+      "context": "resting",
+      "checkin_id": "7a101698-c447-5412-b101-7dcec6e6166a",
+      "simulation_run_id": null,
+      "tick_index": null,
+      "is_demo": true
+    },
+    {
+      "id": "9ea4198f-3773-5035-b230-8e12e7de901c",
+      "created_at": "2026-11-07T12:00:00Z",
+      "indicator": "heart_rate",
+      "value": 70.0,
+      "unit": "bpm",
+      "astronaut_id": "9acf47a0-a2ce-5a7e-b12a-9c61b31d337d",
+      "observed_at": "2026-11-07T12:00:00Z",
+      "source": "manual",
+      "context": "resting",
+      "checkin_id": "54b7624b-4fbd-53fd-b501-c2b42e98d030",
+      "simulation_run_id": null,
+      "tick_index": null,
+      "is_demo": true
+    },
+    {
+      "id": "70cdcea0-ffef-578a-93ee-762086520fa6",
+      "created_at": "2026-11-08T12:00:00Z",
+      "indicator": "heart_rate",
+      "value": 71.0,
+      "unit": "bpm",
+      "astronaut_id": "9acf47a0-a2ce-5a7e-b12a-9c61b31d337d",
+      "observed_at": "2026-11-08T12:00:00Z",
+      "source": "manual",
+      "context": "resting",
+      "checkin_id": "a28b1aac-88a4-5b7d-8929-8069228966ee",
+      "simulation_run_id": null,
+      "tick_index": null,
+      "is_demo": true
+    },
+    {
+      "id": "929e263c-5eff-5e44-ba41-51f2db757c78",
+      "created_at": "2026-11-09T12:00:00Z",
+      "indicator": "heart_rate",
+      "value": 72.0,
+      "unit": "bpm",
+      "astronaut_id": "9acf47a0-a2ce-5a7e-b12a-9c61b31d337d",
+      "observed_at": "2026-11-09T12:00:00Z",
+      "source": "manual",
+      "context": "resting",
+      "checkin_id": "f9e69794-3463-57a4-bcc6-bff90428fbba",
+      "simulation_run_id": null,
+      "tick_index": null,
+      "is_demo": true
+    },
+    {
+      "id": "d2c26b3c-f7e5-5f6b-8ac1-f1a11afafdf8",
+      "created_at": "2026-11-10T12:00:00Z",
+      "indicator": "heart_rate",
+      "value": 73.0,
+      "unit": "bpm",
+      "astronaut_id": "9acf47a0-a2ce-5a7e-b12a-9c61b31d337d",
+      "observed_at": "2026-11-10T12:00:00Z",
+      "source": "manual",
+      "context": "resting",
+      "checkin_id": "f35bec3c-bebe-5f6c-9f14-8dc0e3574e4d",
+      "simulation_run_id": null,
+      "tick_index": null,
+      "is_demo": true
+    },
+    {
+      "id": "6b44be11-5af9-5032-b3aa-5b771d09ddd0",
+      "created_at": "2026-11-11T12:00:00Z",
+      "indicator": "heart_rate",
+      "value": 74.0,
+      "unit": "bpm",
+      "astronaut_id": "9acf47a0-a2ce-5a7e-b12a-9c61b31d337d",
+      "observed_at": "2026-11-11T12:00:00Z",
+      "source": "manual",
+      "context": "resting",
+      "checkin_id": "95c718a8-c863-5632-8b88-ab532835218a",
+      "simulation_run_id": null,
+      "tick_index": null,
+      "is_demo": true
+    },
+    {
+      "id": "f8c89508-b3f4-5739-93b7-457426132180",
+      "created_at": "2026-11-12T12:00:00Z",
+      "indicator": "heart_rate",
+      "value": 75.0,
+      "unit": "bpm",
+      "astronaut_id": "9acf47a0-a2ce-5a7e-b12a-9c61b31d337d",
+      "observed_at": "2026-11-12T12:00:00Z",
+      "source": "manual",
+      "context": "resting",
+      "checkin_id": "56b5a414-4f75-5be6-9055-b001dab5d78b",
+      "simulation_run_id": null,
+      "tick_index": null,
+      "is_demo": true
+    },
+    {
+      "id": "01e2e603-3b31-58b1-bf0c-823247e7f7f1",
+      "created_at": "2026-11-13T12:00:00Z",
+      "indicator": "heart_rate",
+      "value": 76.0,
+      "unit": "bpm",
+      "astronaut_id": "9acf47a0-a2ce-5a7e-b12a-9c61b31d337d",
+      "observed_at": "2026-11-13T12:00:00Z",
+      "source": "manual",
+      "context": "resting",
+      "checkin_id": "15d05a8e-4d21-5b92-bc12-a6befa1fe931",
+      "simulation_run_id": null,
+      "tick_index": null,
+      "is_demo": true
+    },
+    {
+      "id": "5d2dc24b-ed36-5ca5-b24d-18c2cf24a660",
+      "created_at": "2026-11-07T12:00:00Z",
+      "indicator": "spo2",
+      "value": 98.0,
+      "unit": "%",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "observed_at": "2026-11-07T12:00:00Z",
+      "source": "simulated",
+      "context": "resting",
+      "checkin_id": null,
+      "simulation_run_id": "2033e2db-74bf-5172-9be3-e9735d4c9b37",
+      "tick_index": 0,
+      "is_demo": true
+    }
+  ],
+  "environmental_readings": [
+    {
+      "id": "d65f01bc-8333-553f-9263-c2ba72a4145e",
+      "created_at": "2026-11-07T12:00:00Z",
+      "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+      "indicator": "cabin_co2",
+      "value": 800.0,
+      "unit": "ppm",
+      "observed_at": "2026-11-07T12:00:00Z",
+      "source": "simulated",
+      "simulation_run_id": "2033e2db-74bf-5172-9be3-e9735d4c9b37",
+      "tick_index": 0,
+      "is_demo": true
+    },
+    {
+      "id": "cf840482-af48-5fd6-82e7-19216053f528",
+      "created_at": "2026-11-07T12:00:00Z",
+      "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+      "indicator": "radiation_dose_rate",
+      "value": 10.0,
+      "unit": "uSv/h",
+      "observed_at": "2026-11-07T12:00:00Z",
+      "source": "simulated",
+      "simulation_run_id": "2033e2db-74bf-5172-9be3-e9735d4c9b37",
+      "tick_index": 0,
+      "is_demo": true
+    }
+  ],
+  "assessments": [
+    {
+      "id": "5036e978-eebd-513a-90d8-39c59f01f546",
+      "created_at": "2026-11-07T12:00:00Z",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "evaluated_at": "2026-11-07T12:00:00Z",
+      "status": "insufficient_data",
+      "ruleset_version": "demo-v1",
+      "input_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+      "coverage": {
+        "evaluated_rule_ids": [],
+        "insufficient_rule_ids": [
+          "resting_hr_change"
+        ],
+        "not_applicable_rule_ids": []
+      },
+      "results": [
+        {
+          "rule_id": "resting_hr_change",
+          "outcome": "insufficient_data",
+          "workflow_status": "insufficient_data",
+          "explanation": "Not enough fictional samples",
+          "evidence": [],
+          "missing_data": [
+            "Three baseline and three recent resting samples"
+          ],
+          "guidance_slugs": []
+        }
+      ]
+    },
+    {
+      "id": "c2237433-8a63-55bf-884a-e18bc1b60055",
+      "created_at": "2026-11-07T12:00:00Z",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "evaluated_at": "2026-11-07T12:00:00Z",
+      "status": "review_suggested",
+      "ruleset_version": "demo-v1",
+      "input_fingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+      "coverage": {
+        "evaluated_rule_ids": [
+          "demo_pattern"
+        ],
+        "insufficient_rule_ids": [],
+        "not_applicable_rule_ids": []
+      },
+      "results": [
+        {
+          "rule_id": "demo_pattern",
+          "outcome": "triggered",
+          "workflow_status": "review_suggested",
+          "explanation": "Authored fictional response example",
+          "evidence": [],
+          "missing_data": [],
+          "guidance_slugs": []
+        }
+      ]
+    }
+  ],
+  "alerts": [
+    {
+      "id": "24b51680-7db3-5989-a87e-0919d9b4afe6",
+      "created_at": "2026-11-07T12:00:00Z",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "rule_id": "demo_pattern",
+      "workflow_status": "review_suggested",
+      "state": "open",
+      "first_assessment_id": "c2237433-8a63-55bf-884a-e18bc1b60055",
+      "latest_assessment_id": "c2237433-8a63-55bf-884a-e18bc1b60055",
+      "opened_at": "2026-11-07T12:00:00Z",
+      "acknowledged_at": null,
+      "resolved_at": null
+    }
+  ],
+  "simulation_runs": [
+    {
+      "id": "2033e2db-74bf-5172-9be3-e9735d4c9b37",
+      "created_at": "2026-11-07T12:00:00Z",
+      "astronaut_id": "63d3a559-94ef-5f41-8531-b103c9f0bcf8",
+      "scenario": "routine",
+      "seed": 42,
+      "simulation_start_at": "2026-11-07T12:00:00Z",
+      "interval_seconds": 5,
+      "step_seconds": 60,
+      "mission_id": "45ed3a5f-2e3f-58e2-8cf3-8c9b0c44381e",
+      "scenario_version": "demo-v1",
+      "status": "paused",
+      "started_at": null,
+      "last_tick_index": 0,
+      "last_error": null
+    }
+  ],
+  "command_receipts": [
+    {
+      "id": "ad822780-6d0e-574f-a4a3-427d9042ec37",
+      "created_at": "2026-11-07T12:00:00Z",
+      "operation": "create_checkin",
+      "request_hash": "2222222222222222222222222222222222222222222222222222222222222222",
+      "result_type": "daily_checkin",
+      "result_id": "40377fdd-ecee-5304-860c-5c427c2a9df1"
+    }
+  ]
+}
