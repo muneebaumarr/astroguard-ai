@@ -2,7 +2,7 @@
 
 Astronaut health monitoring and educational decision-support prototype.
 
-**Status: Phase 0 shared contracts complete. Application features are not implemented.**
+**Status: Phase 1 frontend/backend foundation implemented. Health monitoring features are not active yet.**
 
 All profiles and measurements are fictional. AstroGuard is not a medical device,
 does not diagnose conditions or provide approved mission procedures, and is not
@@ -16,6 +16,10 @@ The backend and future database package depend on `astroguard_contracts`.
 The database must never import backend modules. Shared contracts contain no ORM models.
 The approved REST prefix is `/api/v1`.
 
+The foundation provides six read-only API endpoints, a transactional in-memory
+adapter and a responsive React crew workspace backed by actual mission/profile API
+responses. Measurements show "No data"; feature pages outside Phase 1 are placeholders.
+
 Planned features include daily check-ins, simulated health and cabin telemetry,
 history charts, explainable demonstration assessments, alerts and sourced education
 about NASA's five spaceflight hazards. All remain future implementation work.
@@ -24,8 +28,8 @@ about NASA's five spaceflight hazards. All remain future implementation work.
 
 | Directory | Current purpose | Owner |
 |---|---|---|
-| frontend | Boundary documentation; React begins in Phase 1 | Developer A |
-| backend | Boundary documentation and shared dependency declaration | Developer A |
+| frontend | React/Vite/Tailwind workspace, profile selection and component tests | Developer A |
+| backend | FastAPI read endpoints, memory adapter, configuration and tests | Developer A |
 | database | Teammate handoff and shared dependency declaration; no database code | Developer B |
 | shared | Independently installable contracts, fixtures, schemas, examples and tests | Both review; A coordinates |
 | docs | Architecture, installation, ownership and exact repository signatures | Both |
@@ -51,9 +55,8 @@ No activation or execution-policy change is required. The earlier `.venv` uses
 Python 3.15; use `.venv313` for this project. Environments are not committed.
 
 Install only the shared runtime package with `python -m pip install -e ./shared`.
-Backend/database requirement files reference that installed distribution. They do
-not currently install or start an application. Developer B will add independent
-database packaging in their implementation phase.
+For the running frontend/backend, use the [Phase 1 setup and PowerShell startup instructions](docs/phase1-development.md).
+Developer B will add independent database packaging in their implementation phase.
 
 To refresh committed contract examples and schemas after an agreed DTO change:
 
@@ -72,6 +75,7 @@ To refresh committed contract examples and schemas after an agreed DTO change:
 - [Exact repository interface signatures](docs/repository-interfaces.md)
 - [Approved architecture and Phase 0 clarifications](docs/architecture.md)
 - [Installation, ownership and adapter obligations](docs/development.md)
+- [Phase 1 setup, configuration, commands and verification](docs/phase1-development.md)
 
 Interfaces are synchronous and expose explicit commit/rollback. Services own IDs,
 timestamps and transactions. Adapters return detached DTOs and enforce persistence
@@ -93,9 +97,9 @@ separate from mission environmental readings.
 6. Exchange migrations and fixture definitions, never local SQLite files or environments.
 
 Developer B can begin immediately from the shared protocols and deterministic
-fixtures without waiting for the frontend. Developer A's next step is the application
-foundation and memory adapter, followed by the first check-in workflow. Neither
-step is included in Phase 0.
+fixtures without waiting for the frontend. Developer A's foundation and memory
+adapter are now implemented. The next approved work would be the first manual
+check-in workflow; it is not part of this Phase 1 delivery.
 
 ## Scientific references
 

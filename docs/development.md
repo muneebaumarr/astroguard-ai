@@ -1,5 +1,8 @@
 # Installation and ownership
 
+Phase 0 contract installation is documented below. The running Phase 1 application,
+its configuration and startup commands are documented in [phase1-development.md](phase1-development.md).
+
 Use Python 3.13 on both laptops. From repository root in PowerShell:
 
 ```powershell
@@ -14,11 +17,12 @@ for the first command. Do not replace a working environment without checking its
 contents. No activation or PowerShell execution-policy change is necessary.
 
 The shared package is independently editable-installable. In a runtime environment,
-install `-e ./shared` before consuming backend/database requirements. Those requirement
-files name the same installed distribution; they do not create runnable applications.
+install `-e ./shared` before consuming backend/database requirements. Both requirement
+files name the same installed shared distribution. Phase 1 additionally supplies an
+installable backend and its runtime dependencies; the database remains a handoff.
 Developer B will later add database/pyproject.toml with dependency
 `astroguard-contracts==0.1.0`, then document `pip install -e ./database`.
-Developer A will similarly add backend runtime packaging and dependencies in Phase 1.
+Developer A's backend runtime packaging and dependencies are now provided in Phase 1.
 
 ## Ownership and Git workflow
 
