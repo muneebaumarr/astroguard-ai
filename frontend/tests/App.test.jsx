@@ -116,6 +116,20 @@ test('selecting another astronaut fetches details and updates profile', async ()
   expect(fetch.mock.calls.some(([url]) => url.endsWith(`/astronauts/${astronauts[1].id}`))).toBe(true)
 })
 
+test('orbital view keeps NASA imagery illustrative and crew cards switch the API-backed profile', async () => {
+  const user = userEvent.setup()
+  renderApp()
+  await screen.findByRole('heading', { name: new RegExp(astronauts[0].display_name) })
+  const stage = screen.getByRole('region', { name: 'Orbital telemetry view' })
+  expect(stage.querySelector('img')).toHaveAttribute('src', '/images/spacewalk.jpg')
+  expect(stage.querySelector('img')).toHaveAttribute('alt', '')
+  expect(within(stage).getByRole('link', { name: /Background: NASA/ })).toHaveAttribute('href', 'https://www.nasa.gov/image-article/astronaut-frank-rubio-installs-roll-out-solar-array-during-spacewalk/')
+  await user.click(within(stage).getByRole('button', { name: `Select ${astronauts[1].display_name} crew profile` }))
+  expect(await screen.findByRole('heading', { name: new RegExp(astronauts[1].display_name) })).toBeInTheDocument()
+  expect(screen.getByRole('combobox', { name: 'CREW PROFILE' })).toHaveValue(astronauts[1].id)
+  expect(screen.getByRole('button', { name: `Select ${astronauts[1].display_name} crew profile` })).toHaveAttribute('aria-pressed', 'true')
+})
+
 test('a delayed old response cannot replace the newly selected profile or mission', async () => {
   let releaseFirst
   const otherMission = { ...mission, id: '175f7daa-ae9d-4b54-ae07-5ade216214d1', name: 'Second Fictional Mission' }

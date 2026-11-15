@@ -12,7 +12,7 @@ export function AppShell({ data }) {
   const connected = data.status === 'ready'
   const mission = data.status === 'ready' ? data.profile.mission : null
 
-  return <div className="application">
+  return <div className={`application ${location.pathname === '/' ? 'orbital-layout' : ''}`}>
     <a className="skip-link" href="#main-content">Skip to main content</a>
     <aside className={`sidebar ${menuOpen ? 'is-open' : ''}`}>
       <NavLink to="/" className="brand" onClick={() => setMenuOpen(false)} aria-label="AstroGuard home">
@@ -24,7 +24,7 @@ export function AppShell({ data }) {
       <span className="nav-caption">WORKSPACE</span>
       <nav aria-label="Main navigation" id="main-navigation">
         {navigation.map(({ path, label, icon: Icon }) => <NavLink key={path} to={path} end={path === '/'} onClick={() => setMenuOpen(false)}
-          className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+          aria-label={label} title={label} className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
           <Icon size={18} strokeWidth={1.65} /><span>{label}</span></NavLink>)}
       </nav>
       <div className="sidebar-bottom"><div className="protocol-mark"><Shield size={17} />Designed around the crew</div>

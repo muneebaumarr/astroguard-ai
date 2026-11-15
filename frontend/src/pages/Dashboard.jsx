@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useOutletContext, Link } from 'react-router'
-import { Activity, Heart, Thermometer, Wind, Radio, Play, Pause, SkipForward, RefreshCw } from 'lucide-react'
+import { Activity, Heart, Thermometer, Wind, Radio, Play, Pause, SkipForward, RefreshCw, Scan, UserRound } from 'lucide-react'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { PageHeading } from '../components/common/PageHeading'
 import { ProfileGate } from '../components/common/ProfileGate'
@@ -23,10 +23,10 @@ export function Dashboard() {
   return <><PageHeading title="Crew health overview" aside={<Link className="outline-label" to="/demo"><Radio size={14} />Open Mission Simulator</Link>}>
     Mission control · fictional astronaut telemetry and educational context.
   </PageHeading><ProfileGate data={data}>{data.profile.status === 'ready' && <MissionControl
-    key={`${data.profile.astronaut.id}:${data.profile.mission.id}`} astronaut={data.profile.astronaut} mission={data.profile.mission} crew={data.astronauts} adapter={data.health?.adapter} />}</ProfileGate></>
+    key={`${data.profile.astronaut.id}:${data.profile.mission.id}`} astronaut={data.profile.astronaut} mission={data.profile.mission} crew={data.astronauts} adapter={data.health?.adapter} onSelectCrew={data.setSelectedId} />}</ProfileGate></>
 }
 
-function MissionControl({ astronaut, mission, crew, adapter }) {
+function MissionControl({ astronaut, mission, crew, adapter, onSelectCrew }) {
   const live = useLiveDashboard(astronaut.id, mission.id)
   const [scenario, setScenario] = useState('routine')
   const ready = live.status === 'ready' && !live.busy
@@ -38,9 +38,33 @@ function MissionControl({ astronaut, mission, crew, adapter }) {
   const environment = ordered(selectedEnvironment.length ? selectedEnvironment : live.cabin || [])
   const checkin = live.checkins[0], assessment = live.assessments[0]
   return <div className="mission-control">
+    <section className="orbital-stage" aria-label="Orbital telemetry view">
+    <img className="orbital-background" src="/images/spacewalk.jpg" alt="" aria-hidden="true" />
+    <div className="orbital-shade" aria-hidden="true" />
     <section className="panel control-header" aria-label="Selected astronaut">
       <div><span className="eyebrow cyan">SIMULATED DATA · FICTIONAL CREW</span><h2>Welcome aboard, <span>{astronaut.display_name}.</span></h2><p>{astronaut.role} · {mission.name} · {mission.environment.replaceAll('_', ' ')}</p></div>
       <div className={`playback-badge ${live.playing ? 'is-playing' : ''}`}><span />{live.playing ? 'Playback playing' : 'Playback paused'}<small>Backend run: {live.run?.status || 'not initialized'}</small></div>
+    </section>
+    <section className="live-metrics" aria-label="Health and cabin indicators">{sensors.map(sensor => {
+      const series = (sensor.environment ? environment : health).filter(value => value.indicator === sensor.indicator)
+      const latest = series.at(-1) || (sensor.environment ? live.environment : live.health).find(value => value.indicator === sensor.indicator)
+      return <article className={`panel metric-card live-metric hud-${sensor.indicator}`} key={sensor.indicator} style={{ '--sensor-color': '#f6ad32' }} aria-label={sensor.label}>
+        <div className="metric-top"><span><sensor.icon size={18} />{sensor.label}</span><span className="hud-index" aria-hidden="true">{sensor.environment ? 'ENV' : 'BIO'}</span></div>
+        <div className="metric-value" key={`${latest?.id}:${latest?.value}`}><span className="reading-number">{latest?.value ?? 'No data'}</span><span>{sensor.unit}</span></div>
+        <Sparkline points={series.slice(-24)} color="#f6ad32" /><p className="sensor-time">{latest ? `${time(latest.observed_at)} UTC · Simulated` : 'Awaiting an explicit tick'}</p><small>{sensor.environment ? 'Mission cabin sensor' : 'Astronaut sensor'}</small>
+      </article>
+    })}</section>
+    <aside className="orbital-crew" aria-label="Fictional crew profiles"><div className="hud-rail-heading"><span>CREW PROFILES</span><Radio size={13} /></div>
+      {crew.filter(person => person.mission_id === mission.id).map((person, index) => <button className={`crew-hud-card ${person.id === astronaut.id ? 'selected' : ''}`} key={person.id}
+        aria-label={`Select ${person.display_name} crew profile`} aria-pressed={person.id === astronaut.id} disabled={!onSelectCrew} onClick={() => onSelectCrew?.(person.id)}>
+        <span className="crew-avatar" aria-hidden="true"><UserRound size={38} strokeWidth={1} /><span>{person.display_name.split(' ').map(word => word[0]).slice(0, 2).join('')}</span></span>
+        <span className="crew-hud-copy"><strong>{person.display_name}</strong><small>{person.role}</small><em>Fictional profile · {String(index + 1).padStart(2, '0')}</em><span className="crew-signal" aria-hidden="true">{[2, 4, 6, 8, 5, 3, 4].map((height, bar) => <i key={bar} style={{ '--bar-size': height }} />)}</span></span>
+      </button>)}
+      <div className="hud-mission-note"><span>MISSION CONTEXT</span><strong>{mission.name}</strong><small>{mission.environment.replaceAll('_', ' ')} · Educational demo</small></div>
+    </aside>
+    <div className="orbital-reticle" aria-hidden="true"><Scan size={64} strokeWidth={.6} /><span>VISUAL CONTEXT</span></div>
+    <div className="orbital-caption"><span className="orbital-tag">ASTROGUARD / ORBITAL VIEW</span><p>API-backed readings. Fictional mission.</p><a href="https://www.nasa.gov/image-article/astronaut-frank-rubio-installs-roll-out-solar-array-during-spacewalk/" target="_blank" rel="noopener noreferrer">Background: NASA · illustrative spacewalk photograph ↗</a></div>
+    <span className="orbital-corner-label" aria-hidden="true">OBSERVATION / 01</span>
     </section>
     <section className="panel overview-controls" aria-label="Overview simulation controls">
       <div className="form-field"><label htmlFor="overview-scenario">Scenario</label><select id="overview-scenario" value={scenario} disabled={!ready || live.playing || Boolean(live.active)} onChange={event => setScenario(event.target.value)}>{live.scenarios.map(item => <option key={item.scenario} value={item.scenario}>{item.scenario.replaceAll('_', ' ')}</option>)}</select></div>
@@ -58,16 +82,6 @@ function MissionControl({ astronaut, mission, crew, adapter }) {
     </section>
     {live.status === 'loading' && <p role="status">Loading saved telemetry…</p>}
     {live.error && <div className="history-error panel" role="alert"><p>{live.error}</p>{live.retryCommand && <button className="button" disabled={live.busy} onClick={live.retryCommand}>Retry same command</button>}</div>}
-    <div className="section-heading"><h2><Activity size={18} />Telemetry instruments</h2><span>API-backed · {live.playing ? 'Updating' : 'Stored observations'}</span></div>
-    <section className="live-metrics" aria-label="Health and cabin indicators">{sensors.map(sensor => {
-      const series = (sensor.environment ? environment : health).filter(value => value.indicator === sensor.indicator)
-      const latest = series.at(-1) || (sensor.environment ? live.environment : live.health).find(value => value.indicator === sensor.indicator)
-      return <article className="panel metric-card live-metric" key={sensor.indicator} style={{ '--sensor-color': sensor.color }} aria-label={sensor.label}>
-        <div className="metric-top"><span>{sensor.label}</span><sensor.icon size={19} /></div>
-        <div className="metric-value" key={`${latest?.id}:${latest?.value}`}><span className="reading-number">{latest?.value ?? 'No data'}</span><span>{sensor.unit}</span></div>
-        <Sparkline points={series.slice(-24)} color={sensor.color} /><p className="sensor-time">{latest ? `${time(latest.observed_at)} UTC · Simulated` : 'Awaiting an explicit tick'}</p><small>{sensor.environment ? 'Mission cabin sensor' : 'Astronaut sensor'}</small>
-      </article>
-    })}</section>
     <div className="section-heading"><h2>Live trend charts</h2><span>Latest 120 observations per sensor · UTC</span></div>
     <div className="live-charts">{sensors.map(sensor => <Trend key={sensor.indicator} sensor={sensor} readings={sensor.environment ? environment : health} />)}</div>
     <section className="mission-summary" aria-label="Mission summary">
