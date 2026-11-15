@@ -6,6 +6,7 @@ import { MissionCrew } from '../pages/MissionCrew'
 import { NotFound, Placeholder } from '../pages/Placeholder'
 import { navigation } from './navigation'
 import { DailyCheckin } from '../pages/DailyCheckin'
+import { MissionSimulator } from '../pages/MissionSimulator'
 
 export function App() {
   const data = useMissionData()
@@ -13,6 +14,7 @@ export function App() {
     <Route index element={<Dashboard />} />
     <Route path="mission" element={<MissionCrew />} />
     <Route path="check-in" element={<DailyCheckin />} />
+    <Route path="demo" element={<MissionSimulator />} />
     {navigation.filter(item => item.empty).map(item => <Route key={item.path} path={item.path} element={<Placeholder {...item} />} />)}
     <Route path="*" element={<NotFound />} />
   </Route></Routes>

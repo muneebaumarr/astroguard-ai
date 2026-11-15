@@ -106,7 +106,10 @@ test('submits correct units and numeric types, displays saved result and refetch
   await user.type(input('Sleep duration'), '0')
   await user.selectOptions(input('Mood'), '4')
   await user.type(input('Exercise activity'), '30')
-  await user.type(input('Symptoms'), 'Fictional headache\nFictional fatigue')
+  // Paste the multiline observation as a user would, avoiding a full controlled-form
+  // render for every character while the other test files run concurrently.
+  await user.click(input('Symptoms'))
+  await user.paste('Fictional headache\nFictional fatigue')
   await user.click(screen.getByRole('button', { name: 'Save check-in' }))
   expect(await screen.findByText('Check-in saved successfully')).toBeInTheDocument()
   const [, options] = posts()[0]

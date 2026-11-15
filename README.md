@@ -2,7 +2,7 @@
 
 Astronaut health monitoring and educational decision-support prototype.
 
-**Status: Phase 2 manual check-ins and limited educational assessments implemented. Live monitoring is not active.**
+**Status: Phase 3 explicit fictional telemetry simulator implemented alongside manual check-ins. No real sensor monitoring is active.**
 
 All profiles and measurements are fictional. AstroGuard is not a medical device,
 does not diagnose conditions or provide approved mission procedures, and is not
@@ -19,12 +19,15 @@ The approved REST prefix is `/api/v1`.
 The foundation provides six read-only API endpoints, a transactional in-memory
 adapter and a responsive React crew workspace backed by actual mission/profile API
 responses. Daily Check-In now saves manual observations and shows prior entries and
-educational assessments. The overview's live measurement cards still show "No data";
-simulation, advanced history and full assessment/alert workflows remain unimplemented.
+educational assessments. The overview retrieves saved fictional health and cabin telemetry;
+open Mission Simulator to start a run and advance explicit ticks, then return to Overview.
+Refresh telemetry reloads saved readings without generating new ones. Backend restarts
+clear in-memory data. Advanced history and full
+assessment/alert workflows remain unimplemented.
 
-Planned features include daily check-ins, simulated health and cabin telemetry,
-history charts, explainable demonstration assessments, alerts and sourced education
-about NASA's five spaceflight hazards. All remain future implementation work.
+Daily check-ins, limited educational input review and explicit simulated health/cabin
+telemetry are implemented. Historical charts, broader assessment/alert workflows and
+sourced hazard education remain future work.
 
 ## Repository
 
@@ -80,6 +83,7 @@ To refresh committed contract examples and schemas after an agreed DTO change:
 - [Installation, ownership and adapter obligations](docs/development.md)
 - [Phase 1 setup, configuration, commands and verification](docs/phase1-development.md)
 - [Phase 2 check-ins, API additions, run commands and manual acceptance](docs/phase2-development.md)
+- [Phase 3 simulator, endpoints and quick demo](docs/phase3-development.md)
 
 Interfaces are synchronous and expose explicit commit/rollback. Services own IDs,
 timestamps and transactions. Adapters return detached DTOs and enforce persistence
@@ -103,7 +107,7 @@ separate from mission environmental readings.
 Developer B can begin immediately from the shared protocols and deterministic
 fixtures without waiting for the frontend. Developer A's foundation and memory
 adapter and manual check-in workflow are now implemented. Early SQLite integration
-will use Developer B's adapter once it is supplied. Phase 3 has not started.
+will use Developer B's adapter once it is supplied. Phase 3 is implemented; Phases 4–6 have not started.
 
 ## Scientific references
 

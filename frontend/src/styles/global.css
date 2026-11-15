@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+.simulator-context { display:flex; justify-content:space-between; align-items:center; padding:24px; }
+.simulator-context h2 { font-size:24px; margin:12px 0; }
+.simulator-context p { color:#abc1d9; }
+.simulator > .notice { margin:18px 0; }
+.simulator-columns { display:grid; grid-template-columns:1fr 1fr; gap:22px; margin:24px 0; }
+.simulator-controls { padding:24px; min-width:0; }
+.simulator-controls h2 { font-size:18px; margin-bottom:24px; }
+.simulator-controls fieldset { border:0; padding:0; margin:0; }
+.simulator-controls .form-field { margin-bottom:19px; }
+.simulator .button, .simulator .text-button { display:inline-flex; gap:8px; align-items:center; }
+.run-facts { display:grid; grid-template-columns:1fr 1fr; gap:23px; margin:25px 0; }
+.run-facts dt { color:#99b1cc; font-size:12px; margin-bottom:8px; }
+.run-facts dd { margin:0; font-size:16px; text-transform:capitalize; }
+.simulator-actions { display:flex; flex-wrap:wrap; gap:12px; }
+.sensor-time { font-size:11px; line-height:1.8; color:#a6bcd4; overflow-wrap:anywhere; }
+@media(max-width:1000px) { .simulator-columns { grid-template-columns:1fr; } }
+
 /* Manual check-in workspace */
 .checkin-profile { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px; }
 .checkin-profile h2 { font-size:23px; margin:10px 0 7px; }
