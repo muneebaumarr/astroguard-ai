@@ -28,8 +28,9 @@ creation command with:
 & "$env:LOCALAPPDATA\Programs\Python\Python313\python.exe" -m venv .venv313
 ```
 
-Use the explicit .venv313 interpreter. The older .venv is Python 3.15 and is not the
-project's selected environment. No activation or execution-policy change is needed.
+Use an explicitly verified Python 3.13 interpreter. Both .venv313 and the repaired
+.venv on this laptop now use Python 3.13; install the editable packages into whichever
+environment you use. No activation or execution-policy change is needed.
 
 ## Start locally
 

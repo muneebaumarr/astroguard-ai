@@ -85,7 +85,7 @@ def test_cors(client):
     assert "access-control-allow-origin" not in denied.headers
 
 
-def test_no_phase_two_endpoints_or_get_side_effects(client):
+def test_existing_endpoints_and_get_side_effects_remain_unchanged(client):
     adapter = client.app.state.adapter
     before = {name: len(records) for name, records in adapter._state.items()}
     for _ in range(3):
@@ -93,8 +93,12 @@ def test_no_phase_two_endpoints_or_get_side_effects(client):
         client.get("/api/v1/missions")
     assert before == {name: len(records) for name, records in adapter._state.items()}
     paths = set(client.get("/openapi.json").json()["paths"])
-    assert paths == {"/api/v1/health", "/api/v1/ready", "/api/v1/missions", "/api/v1/missions/{id}", "/api/v1/astronauts", "/api/v1/astronauts/{id}"}
-    assert client.post(f"/api/v1/astronauts/{ASTRONAUT_IDS[0]}/checkins", json={}).status_code == 404
+    assert paths == {"/api/v1/health", "/api/v1/ready", "/api/v1/missions", "/api/v1/missions/{id}", "/api/v1/astronauts", "/api/v1/astronauts/{id}",
+        "/api/v1/astronauts/{id}/checkins", "/api/v1/astronauts/{id}/checkins/{checkin_id}",
+        "/api/v1/astronauts/{id}/readings", "/api/v1/astronauts/{id}/assessments",
+        "/api/v1/astronauts/{id}/assessments/{assessment_id}"}
+    assert not any("simulation" in path or "telemetry" in path for path in paths)
+    assert client.post(f"/api/v1/astronauts/{ASTRONAUT_IDS[0]}/checkins", json={}).status_code == 422
 
 
 def test_empty_repository():

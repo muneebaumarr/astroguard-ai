@@ -2,7 +2,7 @@
 
 Astronaut health monitoring and educational decision-support prototype.
 
-**Status: Phase 1 frontend/backend foundation implemented. Health monitoring features are not active yet.**
+**Status: Phase 2 manual check-ins and limited educational assessments implemented. Live monitoring is not active.**
 
 All profiles and measurements are fictional. AstroGuard is not a medical device,
 does not diagnose conditions or provide approved mission procedures, and is not
@@ -18,7 +18,9 @@ The approved REST prefix is `/api/v1`.
 
 The foundation provides six read-only API endpoints, a transactional in-memory
 adapter and a responsive React crew workspace backed by actual mission/profile API
-responses. Measurements show "No data"; feature pages outside Phase 1 are placeholders.
+responses. Daily Check-In now saves manual observations and shows prior entries and
+educational assessments. The overview's live measurement cards still show "No data";
+simulation, advanced history and full assessment/alert workflows remain unimplemented.
 
 Planned features include daily check-ins, simulated health and cabin telemetry,
 history charts, explainable demonstration assessments, alerts and sourced education
@@ -51,8 +53,9 @@ path instead. On this laptop it is:
 & "$env:LOCALAPPDATA\Programs\Python\Python313\python.exe" -m venv .venv313
 ```
 
-No activation or execution-policy change is required. The earlier `.venv` uses
-Python 3.15; use `.venv313` for this project. Environments are not committed.
+No activation or execution-policy change is required. Both `.venv` and `.venv313`
+have been verified with Python 3.13 on this laptop. Use the environment where you
+installed both editable packages. Environments are not committed.
 
 Install only the shared runtime package with `python -m pip install -e ./shared`.
 For the running frontend/backend, use the [Phase 1 setup and PowerShell startup instructions](docs/phase1-development.md).
@@ -76,6 +79,7 @@ To refresh committed contract examples and schemas after an agreed DTO change:
 - [Approved architecture and Phase 0 clarifications](docs/architecture.md)
 - [Installation, ownership and adapter obligations](docs/development.md)
 - [Phase 1 setup, configuration, commands and verification](docs/phase1-development.md)
+- [Phase 2 check-ins, API additions, run commands and manual acceptance](docs/phase2-development.md)
 
 Interfaces are synchronous and expose explicit commit/rollback. Services own IDs,
 timestamps and transactions. Adapters return detached DTOs and enforce persistence
@@ -98,8 +102,8 @@ separate from mission environmental readings.
 
 Developer B can begin immediately from the shared protocols and deterministic
 fixtures without waiting for the frontend. Developer A's foundation and memory
-adapter are now implemented. The next approved work would be the first manual
-check-in workflow; it is not part of this Phase 1 delivery.
+adapter and manual check-in workflow are now implemented. Early SQLite integration
+will use Developer B's adapter once it is supplied. Phase 3 has not started.
 
 ## Scientific references
 
