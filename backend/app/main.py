@@ -8,6 +8,7 @@ from astroguard_contracts.repositories import AdapterFactory
 
 from app.api.v1.routes import router
 from app.api.v1.checkins import router as checkin_router
+from app.api.v1.simulation import router as simulation_router
 from app.core.config import Settings
 from app.core.errors import install_error_handlers
 from app.repositories.memory import MemoryAdapterFactory
@@ -40,6 +41,7 @@ def create_app(settings: Settings | None = None, adapter: AdapterFactory | None 
                        expose_headers=["X-Request-ID"])
     app.include_router(router, prefix=API_PREFIX)
     app.include_router(checkin_router, prefix=API_PREFIX)
+    app.include_router(simulation_router, prefix=API_PREFIX)
     return app
 
 

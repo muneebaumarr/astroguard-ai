@@ -12,6 +12,7 @@ const page = items => ({ items, total: items.length, limit: 100, offset: 0 })
 
 function defaultResponse(url) {
   const path = new URL(url).pathname
+  if (path.endsWith('/telemetry/latest')) return json({ readings: [], as_of: null })
   if (path.endsWith('/health')) return json({ status: 'ok', adapter: 'memory', contract_version: '0.1.0' })
   if (path === '/api/v1/missions') return json(page([mission]))
   if (path === '/api/v1/astronauts') return json(page(astronauts))
@@ -31,7 +32,7 @@ test('renders API-backed profile, connection and honest empty health cards', asy
   renderApp()
   expect(await screen.findByRole('heading', { name: new RegExp(astronauts[0].display_name) })).toBeInTheDocument()
   expect(screen.getByText('API connected')).toBeInTheDocument()
-  expect(screen.getAllByText('No data')).toHaveLength(7)
+  expect(screen.getAllByText('No data')).toHaveLength(9)
   expect(screen.getByText('No assessment available')).toBeInTheDocument()
   expect(screen.getAllByText('Fictional demo').length).toBeGreaterThan(0)
   expect(screen.getByText(/All profiles are fictional/)).toBeInTheDocument()
@@ -39,10 +40,47 @@ test('renders API-backed profile, connection and honest empty health cards', asy
   expect(fetch.mock.calls.every(([url]) => !url.includes('/dashboard') && !url.includes('/readings'))).toBe(true)
 })
 
+test('dashboard refetches saved fictional telemetry after refresh-style remount without generating readings', async () => {
+  vi.stubGlobal('fetch', vi.fn(async url => {
+    if (url.includes(`/astronauts/${astronauts[0].id}/telemetry/latest`)) return json({ readings: [{ indicator: 'heart_rate', value: 73.25, unit: 'bpm', observed_at: '2026-01-01T00:01:00Z' }] })
+    if (url.includes('/missions/') && url.endsWith('/telemetry/latest')) return json({ readings: [{ indicator: 'cabin_co2', value: 812, unit: 'ppm', observed_at: '2026-01-01T00:01:00Z' }] })
+    return defaultResponse(url)
+  }))
+  const first = renderApp()
+  expect(await screen.findByText('73.25')).toBeInTheDocument()
+  expect(screen.getByText('812')).toBeInTheDocument()
+  first.unmount()
+  renderApp()
+  expect(await screen.findByText('73.25')).toBeInTheDocument()
+  const user = userEvent.setup()
+  await user.click(screen.getByRole('button', { name: 'Refresh telemetry' }))
+  expect(await screen.findByText('73.25')).toBeInTheDocument()
+  await user.selectOptions(screen.getByRole('combobox', { name: 'CREW PROFILE' }), astronauts[1].id)
+  await screen.findByRole('heading', { name: new RegExp(astronauts[1].display_name) })
+  await waitFor(() => expect(screen.queryByText('Loading saved telemetry…')).not.toBeInTheDocument())
+  expect(screen.queryByText('73.25')).not.toBeInTheDocument()
+  expect(screen.getByText('812')).toBeInTheDocument()
+  expect(fetch.mock.calls.every(([, options]) => !options?.method || options.method === 'GET')).toBe(true)
+})
+
+test('dashboard exposes telemetry failures and retries with its refresh control', async () => {
+  let fail = true
+  vi.stubGlobal('fetch', vi.fn(async url => {
+    if (fail && url.endsWith('/telemetry/latest')) throw new Error('Offline')
+    return defaultResponse(url)
+  }))
+  renderApp()
+  expect(await screen.findByRole('alert')).toHaveTextContent('Unable to reach the API')
+  fail = false
+  await userEvent.setup().click(screen.getByRole('button', { name: 'Refresh telemetry' }))
+  await waitFor(() => expect(screen.queryByRole('alert')).not.toBeInTheDocument())
+  expect(screen.getByRole('link', { name: 'Open Mission Simulator' })).toHaveAttribute('href', '/demo')
+})
+
 test.each([
   ['Daily Check-In', 'Daily check-in'], ['Health History', 'Health history'],
   ['Assessments & Alerts', 'Assessments & alerts'], ['Guidance', 'Health guidance'],
-  ['Spaceflight Hazards', 'Spaceflight hazards'], ['Demo Controls', 'Demo controls'],
+  ['Spaceflight Hazards', 'Spaceflight hazards'], ['Mission Simulator', 'Mission simulator'],
 ])('navigation opens %s workspace', async (label, heading) => {
   const user = userEvent.setup()
   renderApp()
@@ -50,6 +88,8 @@ test.each([
   expect(screen.getByRole('heading', { name: heading, level: 1 })).toBeInTheDocument()
   if (label === 'Daily Check-In') {
     expect(await screen.findByRole('form', { name: 'Daily health check-in' })).toBeInTheDocument()
+  } else if (label === 'Mission Simulator') {
+    expect(await screen.findByRole('form', { name: 'Simulation configuration' })).toBeInTheDocument()
   } else expect(screen.getByText('Workspace coming soon')).toBeInTheDocument()
 })
 

@@ -96,8 +96,12 @@ def test_existing_endpoints_and_get_side_effects_remain_unchanged(client):
     assert paths == {"/api/v1/health", "/api/v1/ready", "/api/v1/missions", "/api/v1/missions/{id}", "/api/v1/astronauts", "/api/v1/astronauts/{id}",
         "/api/v1/astronauts/{id}/checkins", "/api/v1/astronauts/{id}/checkins/{checkin_id}",
         "/api/v1/astronauts/{id}/readings", "/api/v1/astronauts/{id}/assessments",
-        "/api/v1/astronauts/{id}/assessments/{assessment_id}"}
-    assert not any("simulation" in path or "telemetry" in path for path in paths)
+        "/api/v1/astronauts/{id}/assessments/{assessment_id}",
+        "/api/v1/simulation/scenarios", "/api/v1/simulation/runs", "/api/v1/simulation/runs/{id}",
+        "/api/v1/simulation/runs/{id}/steps", "/api/v1/simulation/runs/{id}/pause",
+        "/api/v1/simulation/runs/{id}/resume", "/api/v1/simulation/runs/{id}/stop",
+        "/api/v1/astronauts/{id}/telemetry/latest", "/api/v1/missions/{id}/telemetry/latest",
+        "/api/v1/missions/{id}/environmental-readings"}
     assert client.post(f"/api/v1/astronauts/{ASTRONAUT_IDS[0]}/checkins", json={}).status_code == 422
 
 

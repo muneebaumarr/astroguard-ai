@@ -31,7 +31,7 @@ async function collection(path, signal) {
   const items = []
   let offset = 0
   do {
-    const page = await get(`${path}?limit=100&offset=${offset}`, signal)
+    const page = await get(`${path}${path.includes('?') ? '&' : '?'}limit=100&offset=${offset}`, signal)
     if (!Array.isArray(page.items) || !Number.isInteger(page.total) || page.total < 0) {
       throw new ApiError('The API returned an invalid collection.')
     }
@@ -54,4 +54,15 @@ export const api = {
   createCheckin: (id, body, key, signal) => request(`/astronauts/${encodeURIComponent(id)}/checkins`, {
     method: 'POST', signal, headers: { 'Content-Type': 'application/json', 'Idempotency-Key': key }, body: JSON.stringify(body),
   }),
+  simulationScenarios: signal => collection('/simulation/scenarios', signal),
+  healthTelemetry: (id, signal) => get(`/astronauts/${encodeURIComponent(id)}/telemetry/latest`, signal),
+  environmentalTelemetry: (id, signal) => get(`/missions/${encodeURIComponent(id)}/telemetry/latest`, signal),
+  simulationRuns: signal => collection('/simulation/runs', signal),
+  simulationRun: (id, signal) => get(`/simulation/runs/${encodeURIComponent(id)}`, signal),
+  simulationCommand: (action, id, body, key, signal) => request(action === 'create' ? '/simulation/runs' : `/simulation/runs/${encodeURIComponent(id)}/${action}`, {
+    method: 'POST', signal, headers: { 'Content-Type': 'application/json', 'Idempotency-Key': key },
+    ...(body === null ? {} : { body: JSON.stringify(body) }),
+  }),
+  runHealth: (astronautId, runId, signal) => collection(`/astronauts/${encodeURIComponent(astronautId)}/readings?source=simulated&simulation_run_id=${encodeURIComponent(runId)}`, signal),
+  runEnvironment: (missionId, runId, signal) => collection(`/missions/${encodeURIComponent(missionId)}/environmental-readings?simulation_run_id=${encodeURIComponent(runId)}`, signal),
 }
