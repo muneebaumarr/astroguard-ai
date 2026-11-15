@@ -98,6 +98,7 @@ def test_existing_endpoints_and_get_side_effects_remain_unchanged(client):
         "/api/v1/astronauts/{id}/readings", "/api/v1/astronauts/{id}/assessments",
         "/api/v1/astronauts/{id}/assessments/{assessment_id}",
         "/api/v1/astronauts/{id}/alerts", "/api/v1/astronauts/{id}/alerts/{alert_id}/acknowledgement",
+        "/api/v1/hazards", "/api/v1/hazards/{slug}", "/api/v1/guidance", "/api/v1/guidance/{slug}",
         "/api/v1/simulation/scenarios", "/api/v1/simulation/runs", "/api/v1/simulation/runs/{id}",
         "/api/v1/simulation/runs/{id}/steps", "/api/v1/simulation/runs/{id}/pause",
         "/api/v1/simulation/runs/{id}/resume", "/api/v1/simulation/runs/{id}/stop",

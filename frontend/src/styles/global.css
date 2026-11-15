@@ -1310,3 +1310,19 @@ main:focus {
 .assessment-history ul { padding: 0; list-style: none; display: grid; gap: 14px; }.assessment-history button { text-align: left; }
 .alert-panel .panel-heading { flex-wrap: wrap; gap: 10px; }.alert-panel a { color: #6dd7ec; font-size: 12px; }
 @media (max-width: 800px) { .assessment-columns { grid-template-columns: minmax(0, 1fr); }.assessment-toolbar { flex-direction: column; align-items: start; } }
+.education-banner { padding: 22px 26px; margin-bottom: 24px; background: linear-gradient(115deg, #123044, #101b2e); }
+.education-banner p, .context-guidance > p { font-size: 12px; color: #a5b9d0; line-height: 1.9; margin-top: 12px; }
+.hazard-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-bottom: 24px; }
+.hazard-choice { display: flex; flex-direction: column; align-items: start; gap: 18px; padding: 22px 16px; text-align: left; transition: border-color .18s, background .18s; }
+.hazard-choice > svg { color: #69ddec; }.hazard-number { color: #6884a6; font-size: 11px; font-family: monospace; }
+.hazard-choice strong { font-size: 15px; min-height: 42px; line-height: 1.5; }.hazard-choice > span:last-child { color: #829cbb; font-size: 10px; }
+.hazard-choice.selected, .hazard-choice:hover { border-color: #4fc6da; background: #112b40; }.hazard-choice:focus-visible { outline: 2px solid #78e5ed; outline-offset: 3px; }
+.hazard-detail { padding: clamp(22px, 4vw, 40px); }.hazard-detail > h2 { font-size: 28px; margin: 14px 0 24px; }
+.education-copy { display: grid; gap: 18px; }.education-copy h3, .education-sources h3, .education-limit h3 { font-size: 14px; color: #dcecfb; margin-bottom: 9px; }
+.education-copy p, .education-limit p, .guidance-card > p { font-size: 13px; color: #a2b6d0; line-height: 1.9; }
+.education-limit { border-left: 2px solid #54bbd0; background: #112638; padding: 18px; margin: 22px 0; }
+.education-sources { margin: 22px 0; }.education-sources ul { padding-left: 16px; }.education-sources a, .education-links a { color: #76dce9; font-size: 12px; }.education-sources li { margin: 10px 0; }.education-sources p { color: #8299b7; font-size: 10px; }
+.guidance-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }.guidance-card { padding: 26px; min-width: 0; }.guidance-card h2 { font-size: 19px; line-height: 1.5; margin: 15px 0; }.guidance-card > button { margin: 18px 0; text-align: left; }.guidance-card .education-copy { margin-top: 10px; }
+.education-links { display: flex; flex-direction: column; gap: 10px; }.education-empty { padding: 36px; color: #a0b4cf; }.context-guidance { padding: 24px; margin-bottom: 24px; }.context-guidance .panel-heading { flex-wrap: wrap; gap: 12px; }.context-guidance h2 { font-size: 18px; }.context-guidance > ul { list-style: none; padding: 0; display: grid; gap: 14px; margin-top: 20px; }.context-guidance > ul > li { border: 1px solid #29415e; border-radius: 10px; padding: 16px; }.context-guidance a { color: #75dbea; font-size: 14px; }.context-guidance ul ul { padding-left: 18px; font-size: 11px; color: #97abc6; line-height: 1.8; margin-top: 10px; }
+@media (max-width: 1100px) { .hazard-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .hazard-grid, .guidance-grid { grid-template-columns: minmax(0, 1fr); }.hazard-choice { display: grid; grid-template-columns: 24px 30px minmax(0, 1fr); align-items: center; gap: 14px; }.hazard-choice strong { min-height: 0; }.hazard-choice > span:last-child { grid-column: 3; }.guidance-card { padding: 20px; } }
