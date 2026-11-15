@@ -240,7 +240,8 @@ class AlertRepository(Records[d.Alert]):
 
     def list(self, astronaut_id: d.UUIDString, query: d.AlertQuery) -> d.Page[d.Alert]:
         records = [r for r in self._table().values() if r.astronaut_id == astronaut_id
-                   and (query.state is None or r.state == query.state)]
+                    and (query.state is None or r.state == query.state
+                         or (query.state == AlertState.OPEN and r.state == AlertState.ACKNOWLEDGED))]
         records.sort(key=lambda r: (r.opened_at, r.id), reverse=True)
         return d.Page[d.Alert](items=deepcopy(records[query.offset:query.offset + query.limit]),
                                total=len(records), limit=query.limit, offset=query.offset)

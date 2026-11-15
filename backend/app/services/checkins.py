@@ -4,7 +4,7 @@ import json
 from uuid import UUID, uuid5
 
 from astroguard_contracts import dto as d
-from astroguard_contracts.errors import ConcurrentWrite, RepositoryUnavailable
+from astroguard_contracts.errors import Conflict, RepositoryUnavailable
 from astroguard_contracts.repositories import AdapterFactory, UnitOfWork
 
 from .errors import CheckinConflict, IdempotencyConflict, ResourceNotFound
@@ -55,8 +55,10 @@ class CheckinService:
                     result = d.CheckinResult(checkin=checkin, readings=readings, assessment=assessment, alerts=alerts)
                     uow.commit()
                     return result
-            except ConcurrentWrite:
-                if attempt == 2:
+            except Conflict as exc:
+                # A competing SQL transaction may commit this command between our
+                # receipt lookup and insert. Reopen the transaction and replay it.
+                if isinstance(exc, CheckinConflict) or attempt == 2:
                     raise
         raise AssertionError("unreachable")
 

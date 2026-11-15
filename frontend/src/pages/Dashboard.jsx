@@ -6,6 +6,7 @@ import { PageHeading } from '../components/common/PageHeading'
 import { ProfileGate } from '../components/common/ProfileGate'
 import { useLiveDashboard } from '../hooks/useLiveDashboard'
 import { RecentAlerts } from '../components/common/AssessmentDetails'
+import { PersistenceNote } from '../components/common/PersistenceNote'
 
 const sensors = [
   { indicator: 'heart_rate', label: 'Heart rate', unit: 'bpm', icon: Heart, color: '#38d9eb', domain: [50, 120] },
@@ -22,10 +23,10 @@ export function Dashboard() {
   return <><PageHeading title="Crew health overview" aside={<Link className="outline-label" to="/demo"><Radio size={14} />Open Mission Simulator</Link>}>
     Mission control · fictional astronaut telemetry and educational context.
   </PageHeading><ProfileGate data={data}>{data.profile.status === 'ready' && <MissionControl
-    key={`${data.profile.astronaut.id}:${data.profile.mission.id}`} astronaut={data.profile.astronaut} mission={data.profile.mission} crew={data.astronauts} />}</ProfileGate></>
+    key={`${data.profile.astronaut.id}:${data.profile.mission.id}`} astronaut={data.profile.astronaut} mission={data.profile.mission} crew={data.astronauts} adapter={data.health?.adapter} />}</ProfileGate></>
 }
 
-function MissionControl({ astronaut, mission, crew }) {
+function MissionControl({ astronaut, mission, crew, adapter }) {
   const live = useLiveDashboard(astronaut.id, mission.id)
   const [scenario, setScenario] = useState('routine')
   const ready = live.status === 'ready' && !live.busy
@@ -75,7 +76,7 @@ function MissionControl({ astronaut, mission, crew }) {
       <article className="panel"><span className="eyebrow cyan">MISSION ACTIVITY</span><h3>{live.playing ? 'Fictional telemetry streaming' : 'Mission context connected'}</h3><p>{health.length} astronaut readings · {environment.length} cabin readings in the displayed history.</p><p>{health.at(-1) ? `Latest astronaut observation: ${health.at(-1).observed_at}` : 'No telemetry observations yet.'}</p><Link to="/mission">Explore mission & crew</Link></article>
     </section>
     <RecentAlerts alerts={live.alerts} assessments={live.assessments} compact />
-    <div className="notice"><p>All profiles are fictional. No live health monitoring or clinical assessment is active. Cabin radiation is not personal dosimetry. Refresh preserves saved data while the same backend process runs; backend restarts clear memory. Playback stops when you leave Overview.</p></div>
+    <div className="notice"><p>All profiles are fictional. No live health monitoring or clinical assessment is active. Cabin radiation is not personal dosimetry. <PersistenceNote adapter={adapter} /> Playback stops when you leave Overview.</p></div>
   </div>
 }
 

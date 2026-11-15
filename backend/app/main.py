@@ -12,26 +12,25 @@ from app.api.v1.simulation import router as simulation_router
 from app.api.v1.education import router as education_router
 from app.core.config import Settings
 from app.core.errors import install_error_handlers
-from app.repositories.memory import MemoryAdapterFactory
+from app.repositories.factory import create_adapter, close_adapter
 
 
 def create_app(settings: Settings | None = None, adapter: AdapterFactory | None = None) -> FastAPI:
     settings = settings or Settings.from_env()
-    if settings.repository_backend != "memory":
+    if settings.repository_backend not in ("memory", "sqlite"):
         raise RuntimeError(
-            f"REPOSITORY_BACKEND={settings.repository_backend!r} is unavailable in Phase 1. "
-            "The database adapter must be supplied by Developer B; no memory fallback is allowed."
+            f"REPOSITORY_BACKEND={settings.repository_backend!r} is unsupported; no memory fallback is allowed."
         )
 
     @asynccontextmanager
     async def lifespan(app: FastAPI):
-        # Each application lifespan gets a fresh process-local fixture store.
-        app.state.adapter = adapter if adapter is not None else MemoryAdapterFactory()
+        # SQLite reopens the configured file; memory starts with fresh fictional fixtures.
+        app.state.adapter = adapter if adapter is not None else create_adapter(settings)
         try:
             yield
         finally:
             if adapter is None:
-                app.state.adapter.close()
+                close_adapter(app.state.adapter)
             # Caller owns injected adapters and their lifecycle.
 
     app = FastAPI(title="AstroGuard AI", version="0.1.0", lifespan=lifespan,

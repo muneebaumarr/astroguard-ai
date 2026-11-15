@@ -4,7 +4,7 @@ from hashlib import sha256
 from uuid import UUID, uuid5
 
 from astroguard_contracts import dto as d
-from astroguard_contracts.errors import ConcurrentWrite
+from astroguard_contracts.errors import Conflict
 from .errors import CheckinConflict, IdempotencyConflict, ResourceNotFound
 from .initial_assessment import evaluate
 
@@ -104,8 +104,8 @@ class AssessmentService:
                         result_type="alert" if alert_id else "assessment", result_id=result.id))
                     uow.commit()
                     return result
-            except ConcurrentWrite:
-                if attempt == 2:
+            except Conflict as exc:
+                if isinstance(exc, CheckinConflict) or attempt == 2:
                     raise
 
     @staticmethod

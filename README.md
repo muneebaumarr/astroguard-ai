@@ -2,7 +2,7 @@
 
 Astronaut health monitoring and educational decision-support prototype.
 
-**Status: Phases 0–6 implemented, including the spaceflight hazards explorer and sourced educational guidance. No real sensor monitoring is active.**
+**Status: Phases 0–6 implemented and SQLite integrated. Committed observations now persist across backend restarts when using SQLite. No real sensor monitoring is active.**
 
 All profiles and measurements are fictional. AstroGuard is not a medical device,
 does not diagnose conditions or provide approved mission procedures, and is not
@@ -12,7 +12,7 @@ endorsed by NASA or CSA.
 
 React/Vite -> FastAPI services -> shared repository interfaces -> memory or SQLite adapter.
 
-The backend and future database package depend on `astroguard_contracts`.
+The backend and independent database package depend on `astroguard_contracts`.
 The database must never import backend modules. Shared contracts contain no ORM models.
 The approved REST prefix is `/api/v1`.
 
@@ -22,7 +22,9 @@ responses. Daily Check-In now saves manual observations and shows prior entries 
 educational assessments. Overview retrieves saved fictional health/cabin telemetry and
 provides scenario selection, Start, Play, Pause, single-tick and Stop controls. Play
 requests an explicit backend tick approximately every two seconds without overlap.
-Refresh telemetry only reads saved records. Backend restarts clear in-memory data.
+Refresh telemetry only reads saved records. SQLite retains committed data across
+backend restarts; the optional memory adapter still resets on restart.
+See [SQLite setup, cutover and persistence verification](docs/sqlite-integration.md).
 See [Phase 4 development and demo instructions](docs/phase4-development.md) and
 [Phase 5 rules, alert lifecycle and acceptance checks](docs/phase5-development.md), plus
 [Phase 6 education, sources and demo instructions](docs/phase6-development.md).
@@ -39,7 +41,7 @@ ticks now generate explainable assessments and deduplicated alerts atomically.
 |---|---|---|
 | frontend | React/Vite/Tailwind workspace, profile selection and component tests | Developer A |
 | backend | FastAPI read endpoints, memory adapter, configuration and tests | Developer A |
-| database | Teammate handoff and shared dependency declaration; no database code | Developer B |
+| database | Independent SQLite/SQLAlchemy adapter, migrations, seed and persistence tests | Developer B |
 | shared | Independently installable contracts, fixtures, schemas, examples and tests | Both review; A coordinates |
 | docs | Architecture, installation, ownership and exact repository signatures | Both |
 
@@ -111,8 +113,8 @@ separate from mission environmental readings.
 Developer B can begin immediately from the shared protocols and deterministic
 fixtures without waiting for the frontend. Developer A's foundation and memory
 adapter and manual check-in workflow are now implemented. Early SQLite integration
-will use Developer B's adapter once it is supplied. Phases 0–6 are implemented;
-durable database integration remains a separate handoff.
+now uses Developer B's independent adapter when configured for SQLite. Phases 0–6
+and durable SQLite integration are implemented.
 
 ## Scientific references
 
