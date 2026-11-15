@@ -8,6 +8,7 @@ from starlette.exceptions import HTTPException
 
 from astroguard_contracts.dto import ErrorDetail, ErrorResponse
 from astroguard_contracts.errors import Conflict, RepositoryUnavailable
+from app.services.errors import CheckinConflict, ResourceNotFound
 
 logger = logging.getLogger(__name__)
 
@@ -41,6 +42,14 @@ def install_error_handlers(app: FastAPI):
     @app.exception_handler(Conflict)
     async def conflict(request: Request, exc: Conflict):
         return error_response(request, 409, "conflict", "The operation conflicts with stored data")
+
+    @app.exception_handler(CheckinConflict)
+    async def checkin_conflict(request: Request, exc: CheckinConflict):
+        return error_response(request, 409, exc.code, str(exc))
+
+    @app.exception_handler(ResourceNotFound)
+    async def missing_resource(request: Request, exc: ResourceNotFound):
+        return error_response(request, 404, "not_found", str(exc))
 
     @app.exception_handler(RepositoryUnavailable)
     async def unavailable(request: Request, exc: RepositoryUnavailable):

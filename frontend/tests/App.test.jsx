@@ -43,12 +43,14 @@ test.each([
   ['Daily Check-In', 'Daily check-in'], ['Health History', 'Health history'],
   ['Assessments & Alerts', 'Assessments & alerts'], ['Guidance', 'Health guidance'],
   ['Spaceflight Hazards', 'Spaceflight hazards'], ['Demo Controls', 'Demo controls'],
-])('navigation opens %s placeholder', async (label, heading) => {
+])('navigation opens %s workspace', async (label, heading) => {
   const user = userEvent.setup()
   renderApp()
   await user.click(within(screen.getByRole('navigation', { name: 'Main navigation' })).getByRole('link', { name: label }))
   expect(screen.getByRole('heading', { name: heading, level: 1 })).toBeInTheDocument()
-  expect(screen.getByText('Workspace coming soon')).toBeInTheDocument()
+  if (label === 'Daily Check-In') {
+    expect(await screen.findByRole('form', { name: 'Daily health check-in' })).toBeInTheDocument()
+  } else expect(screen.getByText('Workspace coming soon')).toBeInTheDocument()
 })
 
 test('selecting another astronaut fetches details and updates profile', async () => {

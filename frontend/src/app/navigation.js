@@ -2,7 +2,7 @@ import { LayoutDashboard, ClipboardPlus, ChartNoAxesCombined, ShieldCheck, BookO
 
 export const navigation = [
   { path: '/', label: 'Overview', icon: LayoutDashboard },
-  { path: '/check-in', label: 'Daily Check-In', icon: ClipboardPlus, title: 'Daily check-in', description: 'A dedicated space for your daily health observations.', empty: 'Check-in entry is not available yet.' },
+  { path: '/check-in', label: 'Daily Check-In', icon: ClipboardPlus },
   { path: '/history', label: 'Health History', icon: ChartNoAxesCombined, title: 'Health history', description: 'Your measurements, with the context that matters.', empty: 'Historical measurements are not available in this workspace yet.' },
   { path: '/assessments', label: 'Assessments & Alerts', icon: ShieldCheck, title: 'Assessments & alerts', description: 'Understand the evidence behind each review.', empty: 'No assessment is available. Health evaluation is not active.' },
   { path: '/guidance', label: 'Guidance', icon: BookOpen, title: 'Health guidance', description: 'Educational context for life beyond Earth.', empty: 'The sourced guidance library is being prepared.' },

@@ -1,4 +1,59 @@
 @import "tailwindcss";
+
+/* Manual check-in workspace */
+.checkin-profile { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px; }
+.checkin-profile h2 { font-size:23px; margin:10px 0 7px; }
+.checkin-profile p { color:#a5bad2; font-size:13px; }
+.checkin-workspace > .notice { margin:18px 0; }
+.checkin-workspace > .saved-checkin { margin:20px 0 24px; }
+.checkin-columns { display:grid; grid-template-columns:minmax(0, 2fr) minmax(260px, 1fr); gap:22px; align-items:start; }
+.checkin-form { padding:26px; min-width:0; }
+.checkin-form fieldset { border:0; padding:0 0 25px; margin:0 0 24px; border-bottom:1px solid #29394e; min-width:0; }
+.checkin-form legend { color:#dcecf8; font-size:16px; font-weight:550; margin-bottom:18px; }
+.form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px 18px; }
+.form-field { min-width:0; margin-bottom:4px; }
+.form-field label { display:flex; align-items:center; gap:6px; flex-wrap:wrap; color:#c4d6e8; font-size:13px; margin-bottom:10px; }
+.form-field label small { font-size:11px; font-weight:400; color:#93a8c0; margin-left:auto; }
+.field-unit { color:#85cfdf; font-size:12px; }
+.form-field input, .form-field select, .form-field textarea { width:100%; min-height:43px; padding:10px 12px; border:1px solid #3e536d; border-radius:6px; background:#0a1523; color:#e6f2fc; }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus { outline:2px solid #65dbea; outline-offset:2px; }
+.form-field [aria-invalid=true] { border-color:#e9a197; }
+.form-field textarea { resize:vertical; line-height:1.7; }
+.form-field + .form-field:has(textarea) { margin-top:20px; }
+.field-help, .section-help { color:#a0b5cd; font-size:12px; line-height:1.7; margin:8px 0; }
+.section-help { margin:-5px 0 20px; }
+.field-error { color:#ffc0b5; font-size:13px; line-height:1.7; margin:9px 0; }
+.form-actions { display:flex; flex-direction:column; gap:9px; align-items:flex-start; }
+.form-actions .button { min-width:180px; }
+.save-confirmation { display:flex; align-items:center; gap:15px; padding:20px; margin:18px 0; border:1px solid #3d786b; border-radius:8px; background:#112c2c; color:#a9eddb; }
+.save-confirmation p { color:#b6d5d2; font-size:12px; margin-top:7px; line-height:1.6; }
+.save-confirmation .button { margin-left:auto; flex-shrink:0; }
+.checkin-history { min-width:0; }
+.checkin-history .panel-heading { padding:20px 16px; }
+.checkin-history .state { min-height:180px; padding:25px 17px; }
+.text-button { border:0; background:transparent; color:#8ed8e6; font-size:12px; padding:7px; }
+.checkin-list { list-style:none; padding:0; margin:0; max-height:650px; overflow:auto; }
+.checkin-list li + li { border-top:1px solid #28394d; }
+.checkin-list button { display:flex; flex-direction:column; gap:10px; width:100%; padding:18px; text-align:left; border:0; background:transparent; }
+.checkin-list button:hover, .checkin-list button[aria-pressed=true] { background:#173449; }
+.checkin-list strong { font-size:14px; font-weight:500; }
+.checkin-list span { font-size:12px; color:#a0b8d1; }
+.checkin-list small { font-size:11px; color:#8bd2df; }
+.history-error { padding:20px; font-size:13px; line-height:1.8; }
+.history-error .button { margin-top:15px; }
+.saved-checkin { margin-top:24px; scroll-margin-top:90px; }
+.saved-body { padding:24px; color:#bdcfe2; font-size:13px; line-height:1.8; overflow-wrap:anywhere; }
+.saved-body h3 { font-size:14px; color:#deebf9; margin:17px 0 10px; }
+.saved-values { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; padding:22px 0; }
+.saved-values dt { font-size:12px; color:#9fb8d2; }
+.saved-values dd { margin:5px 0 0; font-size:21px; color:#dfedf9; }
+.saved-values dd span { font-size:12px; color:#8db8cc; }
+.educational-assessment { padding:0 20px 18px; border:1px solid #36536a; border-radius:7px; background:#0e2331; margin-top:23px; }
+.educational-assessment p { margin-top:12px; }
+.assessment-limit { color:#9fced9; }
+.preserve-whitespace { white-space:pre-wrap; }
+@media(max-width:1150px) { .checkin-columns { grid-template-columns:1fr; } .checkin-list { max-height:350px; } }
+@media(max-width:650px) { .checkin-form { padding:21px 17px; } .form-grid { grid-template-columns:1fr; } .checkin-profile { align-items:flex-start; flex-direction:column; } .save-confirmation { flex-wrap:wrap; } .save-confirmation .button { margin-left:0; } .saved-values { grid-template-columns:repeat(2,minmax(0,1fr)); } .saved-body { padding:18px; } }
 :root {
   font-family:Inter,"Segoe UI",Arial,sans-serif;
   color:#e7eef7;

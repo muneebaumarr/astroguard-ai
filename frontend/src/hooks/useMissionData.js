@@ -4,8 +4,16 @@ import { api } from '../services/api'
 export function useMissionData() {
   const [attempt, setAttempt] = useState(0)
   const [data, setData] = useState({ status: 'loading', astronauts: [], missions: [], health: null, error: null })
-  const [selectedId, setSelectedId] = useState('')
+  const [selectedId, setSelectedId] = useState(() => {
+    try { return sessionStorage.getItem('astroguard.selectedAstronaut') || '' } catch { return '' }
+  })
   const [profile, setProfile] = useState({ status: 'idle', astronaut: null, mission: null, error: null })
+
+  useEffect(() => {
+    if (selectedId) {
+      try { sessionStorage.setItem('astroguard.selectedAstronaut', selectedId) } catch { /* Selection still works without browser storage. */ }
+    }
+  }, [selectedId])
 
   useEffect(() => {
     const controller = new AbortController()
