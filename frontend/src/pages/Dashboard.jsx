@@ -5,6 +5,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { PageHeading } from '../components/common/PageHeading'
 import { ProfileGate } from '../components/common/ProfileGate'
 import { useLiveDashboard } from '../hooks/useLiveDashboard'
+import { RecentAlerts } from '../components/common/AssessmentDetails'
 
 const sensors = [
   { indicator: 'heart_rate', label: 'Heart rate', unit: 'bpm', icon: Heart, color: '#38d9eb', domain: [50, 120] },
@@ -73,6 +74,7 @@ function MissionControl({ astronaut, mission, crew }) {
       <article className="panel"><span className="eyebrow cyan">EDUCATIONAL ASSESSMENT</span><h3>{assessment ? assessment.status.replaceAll('_', ' ') : 'No assessment available'}</h3><p>{assessment ? `Evaluated ${assessment.evaluated_at}` : 'No stored educational review for this astronaut.'}</p><p>Workflow context only; no clinical diagnosis or safety clearance.</p></article>
       <article className="panel"><span className="eyebrow cyan">MISSION ACTIVITY</span><h3>{live.playing ? 'Fictional telemetry streaming' : 'Mission context connected'}</h3><p>{health.length} astronaut readings · {environment.length} cabin readings in the displayed history.</p><p>{health.at(-1) ? `Latest astronaut observation: ${health.at(-1).observed_at}` : 'No telemetry observations yet.'}</p><Link to="/mission">Explore mission & crew</Link></article>
     </section>
+    <RecentAlerts alerts={live.alerts} assessments={live.assessments} compact />
     <div className="notice"><p>All profiles are fictional. No live health monitoring or clinical assessment is active. Cabin radiation is not personal dosimetry. Refresh preserves saved data while the same backend process runs; backend restarts clear memory. Playback stops when you leave Overview.</p></div>
   </div>
 }

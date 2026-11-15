@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { api } from '../services/api'
 
 export function useLiveDashboard(astronautId, missionId) {
-  const [view, setView] = useState({ status: 'loading', health: [], environment: [], scenarios: [], runs: [], run: null, active: null, checkins: [], assessments: [] })
+  const [view, setView] = useState({ status: 'loading', health: [], environment: [], scenarios: [], runs: [], run: null, active: null, checkins: [], assessments: [], alerts: [] })
   const [busy, setBusy] = useState(false)
   const [playing, setPlaying] = useState(false)
   const [error, setError] = useState('')
@@ -16,16 +16,17 @@ export function useLiveDashboard(astronautId, missionId) {
   }
 
   async function load(signal) {
-    const [health, environment, history, cabin, scenarios, runs, checkins, assessments] = await Promise.all([
+    const [health, environment, history, cabin, scenarios, runs, checkins, assessments, alerts] = await Promise.all([
       api.healthTelemetry(astronautId, signal), api.environmentalTelemetry(missionId, signal),
       api.healthHistory(astronautId, signal), api.environmentHistory(missionId, signal),
       api.simulationScenarios(signal), api.simulationRuns(signal), api.checkins(astronautId, signal), api.assessments(astronautId, signal),
+      api.alerts(astronautId, signal),
     ])
     const own = runs.filter(run => run.astronaut_id === astronautId && run.mission_id === missionId)
       .sort((a, b) => b.created_at.localeCompare(a.created_at) || b.id.localeCompare(a.id))
     const run = own.find(run => ['paused', 'running'].includes(run.status)) || own[0] || null
     const result = { status: 'ready', health: health.readings, environment: environment.readings, history, cabin, scenarios, runs,
-      run, active: runs.find(run => ['paused', 'running'].includes(run.status)) || null,
+      run, active: runs.find(run => ['paused', 'running'].includes(run.status)) || null, alerts,
       checkins: [...checkins].sort((a, b) => b.observed_at.localeCompare(a.observed_at)),
       assessments: [...assessments].sort((a, b) => b.evaluated_at.localeCompare(a.evaluated_at)) }
     if (alive.current && !signal.aborted) { state.current = result; setView(result) }

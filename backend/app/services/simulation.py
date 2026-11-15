@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from hashlib import sha256
 import json
 from uuid import UUID, uuid5
@@ -9,6 +9,8 @@ from astroguard_contracts.repositories import AdapterFactory
 
 from app.simulation.generator import VERSION, generate_tick
 from .errors import CheckinConflict, IdempotencyConflict, ResourceNotFound
+from .assessments import persist
+from .initial_assessment import evaluate
 
 
 class InvalidTransition(CheckinConflict):
@@ -86,6 +88,11 @@ class SimulationService:
                 raise InvalidTransition("The run version or simulation timestamp cannot be advanced.") from exc
             uow.health_readings.add_many(health)
             uow.environmental_readings.add_many(environment)
+            # Each generated tick is evaluated in the same transaction as its readings.
+            for tick in range(run.last_tick_index + 1, run.last_tick_index + request.steps + 1):
+                persist(uow, evaluate(run.astronaut_id, [r for r in health if r.tick_index == tick],
+                    [r for r in environment if r.tick_index == tick], None,
+                    now + timedelta(microseconds=tick - run.last_tick_index - 1)))
             updated = d.SimulationRun.model_validate(run.model_dump() | {
                 "last_tick_index": run.last_tick_index + request.steps, "started_at": run.started_at or now})
             updated = uow.simulation_runs.update(updated, expected_last_tick=run.last_tick_index)

@@ -2,7 +2,7 @@
 
 Astronaut health monitoring and educational decision-support prototype.
 
-**Status: Phase 4 mission-control Overview implemented with live fictional playback, sensor cards and stored-telemetry charts. No real sensor monitoring is active.**
+**Status: Phase 5 explainable educational assessments and alerts implemented alongside live fictional telemetry. No real sensor monitoring is active.**
 
 All profiles and measurements are fictional. AstroGuard is not a medical device,
 does not diagnose conditions or provide approved mission procedures, and is not
@@ -23,11 +23,13 @@ educational assessments. Overview retrieves saved fictional health/cabin telemet
 provides scenario selection, Start, Play, Pause, single-tick and Stop controls. Play
 requests an explicit backend tick approximately every two seconds without overlap.
 Refresh telemetry only reads saved records. Backend restarts clear in-memory data.
-See [Phase 4 development and demo instructions](docs/phase4-development.md).
+See [Phase 4 development and demo instructions](docs/phase4-development.md) and
+[Phase 5 rules, alert lifecycle and acceptance checks](docs/phase5-development.md).
 
 Daily check-ins, limited educational input review and explicit simulated health/cabin
 telemetry and Overview trend charts are implemented. The separate Health History
-workspace, broader assessment/alert workflows and sourced hazard education remain future work.
+workspace and sourced hazard education remain future work. Check-ins and simulation
+ticks now generate explainable assessments and deduplicated alerts atomically.
 
 ## Repository
 
@@ -107,7 +109,8 @@ separate from mission environmental readings.
 Developer B can begin immediately from the shared protocols and deterministic
 fixtures without waiting for the frontend. Developer A's foundation and memory
 adapter and manual check-in workflow are now implemented. Early SQLite integration
-will use Developer B's adapter once it is supplied. Phase 3 is implemented; Phases 4–6 have not started.
+will use Developer B's adapter once it is supplied. Phases 0–5 are implemented;
+Phase 6 has not started.
 
 ## Scientific references
 

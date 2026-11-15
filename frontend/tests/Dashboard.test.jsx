@@ -40,6 +40,7 @@ beforeEach(() => {
   vi.spyOn(api, 'simulationRuns').mockImplementation(async () => copy(runs))
   vi.spyOn(api, 'checkins').mockImplementation(async () => copy(checkins))
   vi.spyOn(api, 'assessments').mockImplementation(async () => copy(assessments))
+  vi.spyOn(api, 'alerts').mockResolvedValue([])
   vi.spyOn(api, 'simulationCommand').mockImplementation(async (action, id, body) => {
     if (action === 'create') { const run = seed(); Object.assign(run, body); return copy(run) }
     const run = runs.find(value => value.id === id)
@@ -233,4 +234,16 @@ test('a backend-running run is paused through the existing API before an explici
   expect(api.simulationCommand.mock.calls.map(call => call[0])).toEqual(['pause', 'steps'])
   expect(result.current.run.status).toBe('paused')
   expect(result.current.history).toHaveLength(3)
+})
+
+test('Overview shows actual recent alert priority, reason and supporting assessment link', async () => {
+  assessments.push({ id: 'demo-assessment', evaluated_at: '2026-11-15T12:00:00Z', status: 'review_suggested',
+    results: [{ rule_id: 'demo_cabin_co2', explanation: 'Fictional cabin CO2 demo review boundary crossed.' }] })
+  api.alerts.mockResolvedValue([{ id: 'demo-alert', rule_id: 'demo_cabin_co2', state: 'open', workflow_status: 'review_suggested',
+    latest_assessment_id: 'demo-assessment', opened_at: '2026-11-15T12:00:00Z' }])
+  render(show())
+  expect(await screen.findByText('Fictional cabin CO2 demo review boundary crossed.')).toBeInTheDocument()
+  const alerts = screen.getByRole('region', { name: 'Recent alerts' })
+  expect(within(alerts).getByText('review suggested')).toBeInTheDocument()
+  expect(within(alerts).getByRole('link', { name: 'Supporting assessment' })).toHaveAttribute('href', '/assessments?assessment=demo-assessment')
 })

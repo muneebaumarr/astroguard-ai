@@ -190,7 +190,7 @@ def test_educational_assessment_determinism_and_symptom_evidence(client):
     expected = assess_checkin(result.checkin, result.readings)
     assert expected == result.assessment == assess_checkin(result.checkin, result.readings)
     assert expected.status == "review_suggested"
-    assert expected.coverage.insufficient_rule_ids == ["clinical_context"]
+    assert expected.coverage.insufficient_rule_ids == ["demo_oxygen", "demo_temperature", "demo_cabin_co2", "demo_radiation", "clinical_context"]
     assert any(e.record_id == result.checkin.id and e.indicator == "reported_symptom_count" and e.value == 1 for r in expected.results for e in r.evidence)
 
 
