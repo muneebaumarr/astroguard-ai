@@ -8,6 +8,7 @@ from dotenv import dotenv_values
 @dataclass(frozen=True)
 class Settings:
     repository_backend: str = "memory"
+    database_url: str | None = None
     cors_origins: tuple[str, ...] = ("http://127.0.0.1:5173", "http://localhost:5173")
 
     @classmethod
@@ -17,6 +18,7 @@ class Settings:
         defaults = cls()
         return cls(
             repository_backend=values.get("REPOSITORY_BACKEND", "memory"),
+            database_url=values.get("DATABASE_URL") or None,
             cors_origins=tuple(origin.strip() for origin in
                 values.get("CORS_ORIGINS", ",".join(defaults.cors_origins)).split(",") if origin.strip()),
         )

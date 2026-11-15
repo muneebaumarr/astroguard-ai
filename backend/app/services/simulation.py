@@ -4,7 +4,7 @@ import json
 from uuid import UUID, uuid5
 
 from astroguard_contracts import dto as d
-from astroguard_contracts.errors import ConcurrentWrite, RepositoryUnavailable
+from astroguard_contracts.errors import Conflict, RepositoryUnavailable
 from astroguard_contracts.repositories import AdapterFactory
 
 from app.simulation.generator import VERSION, generate_tick
@@ -57,8 +57,8 @@ class SimulationService:
                         request_hash=digest, result_type="simulation_run", result_id=run.id))
                     uow.commit()
                     return result
-            except ConcurrentWrite:
-                if attempt == 2:
+            except Conflict as exc:
+                if isinstance(exc, CheckinConflict) or attempt == 2:
                     raise
         raise AssertionError("unreachable")
 

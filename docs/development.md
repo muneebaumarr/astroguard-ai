@@ -19,10 +19,10 @@ contents. No activation or PowerShell execution-policy change is necessary.
 The shared package is independently editable-installable. In a runtime environment,
 install `-e ./shared` before consuming backend/database requirements. Both requirement
 files name the same installed shared distribution. Phase 1 additionally supplies an
-installable backend and its runtime dependencies; the database remains a handoff.
-Developer B will later add database/pyproject.toml with dependency
-`astroguard-contracts==0.1.0`, then document `pip install -e ./database`.
-Developer A's backend runtime packaging and dependencies are now provided in Phase 1.
+installable backend and its runtime dependencies. Developer B's independent database
+package is now supplied and integrated through the shared adapter boundary. Install
+`-e ./database` and the backend sqlite extra for persistent runtime storage. See
+[SQLite setup and persistence verification](sqlite-integration.md) for current commands.
 
 ## Ownership and Git workflow
 

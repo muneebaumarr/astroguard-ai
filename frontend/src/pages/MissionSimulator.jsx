@@ -5,6 +5,7 @@ import { PageHeading } from '../components/common/PageHeading'
 import { ProfileGate } from '../components/common/ProfileGate'
 import { LoadingState } from '../components/common/States'
 import { api } from '../services/api'
+import { PersistenceNote } from '../components/common/PersistenceNote'
 
 function latest(readings) {
   const result = new Map()
@@ -22,10 +23,10 @@ export function MissionSimulator() {
   const data = useOutletContext()
   return <><PageHeading title="Mission simulator">Fictional sensor telemetry, one deliberate tick at a time.</PageHeading>
     <ProfileGate data={data}>{data.profile.status === 'ready' && <SimulatorWorkspace key={data.selectedId}
-      astronaut={data.profile.astronaut} mission={data.profile.mission} crew={data.astronauts} />}</ProfileGate></>
+      astronaut={data.profile.astronaut} mission={data.profile.mission} crew={data.astronauts} adapter={data.health?.adapter} />}</ProfileGate></>
 }
 
-function SimulatorWorkspace({ astronaut, mission, crew }) {
+function SimulatorWorkspace({ astronaut, mission, crew, adapter }) {
   const [view, setView] = useState({ status: 'loading', runs: [], scenarios: [], run: null, health: [], environment: [], active: null })
   const [generation, setGeneration] = useState(0)
   const [form, setForm] = useState({ scenario: 'routine', seed: '42', start: new Date().toISOString().slice(0, 19) })
@@ -141,7 +142,7 @@ function SimulatorWorkspace({ astronaut, mission, crew }) {
         {run?.status === 'running' && <button className="button" disabled={!ready} onClick={() => command('pause', run.id, null)}>Pause to step</button>}
         <button className="button" disabled={!ready || !['paused', 'running'].includes(run?.status)} onClick={() => command('stop', run.id, null)}><Square size={14} />Stop run</button>
         <button className="text-button" disabled={busy} onClick={() => setGeneration(value => value + 1)}><RefreshCw size={14} />Refresh saved state</button></div>
-      <p className="field-help">Refresh reads stored records. Backend restarts clear memory.</p>
+      <p className="field-help">Refresh reads stored records. <PersistenceNote adapter={adapter} /></p>
     </section></div>
     <div className="section-heading"><h2>Latest fictional health telemetry</h2><span>Selected run only</span></div>
     <div className="metrics-grid">{sensors.filter(value => value[3] === 'health').map(sensor => <SensorCard key={sensor[0]} sensor={sensor} readings={view.health} />)}</div>

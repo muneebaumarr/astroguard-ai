@@ -202,7 +202,7 @@ class SqliteCheckinRepository(_Repository):
         vitals = self._s.scalars(
             select(HealthReadingRow)
             .where(HealthReadingRow.checkin_id == row.id)
-            .order_by(HealthReadingRow.id.asc())
+            .order_by(HealthReadingRow.indicator.asc(), HealthReadingRow.id.asc())
         ).all()
         return DailyCheckin(
             id=row.id, created_at=row.created_at, astronaut_id=row.astronaut_id,

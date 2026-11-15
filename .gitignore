@@ -16,6 +16,7 @@ coverage/
 *.db-*
 *.sqlite-*
 *.sqlite3-*
+database/var/
 .env
 .env.*
 !.env.example

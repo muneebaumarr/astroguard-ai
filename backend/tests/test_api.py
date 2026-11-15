@@ -66,14 +66,16 @@ def test_ready_unavailable_and_clean_shutdown():
 
 def test_config_never_falls_back_to_memory():
     with pytest.raises(RuntimeError, match="no memory fallback"):
-        create_app(Settings(repository_backend="sqlite"))
+        create_app(Settings(repository_backend="unsupported"))
 
 
 def test_configuration_from_environment(monkeypatch):
     monkeypatch.setenv("REPOSITORY_BACKEND", "sqlite")
     monkeypatch.setenv("CORS_ORIGINS", "http://127.0.0.1:5173, http://localhost:5173")
+    monkeypatch.setenv("DATABASE_URL", "sqlite:///C:/example/astroguard.db")
     settings = Settings.from_env()
     assert settings.repository_backend == "sqlite"
+    assert settings.database_url == "sqlite:///C:/example/astroguard.db"
     assert settings.cors_origins == ("http://127.0.0.1:5173", "http://localhost:5173")
 
 

@@ -1,14 +1,14 @@
-# Backend foundation
+# FastAPI backend
 
 Developer A owns API routes, services, memory adapter, simulation and assessments.
 Depend on astroguard_contracts; inject repositories through its UnitOfWork.
-Phase 1 provides a FastAPI app factory, six read-only /api/v1 endpoints and a
-process-local memory adapter implementing every shared repository protocol.
-The memory store loads the unchanged fictional fixtures and resets on restart.
-Phase 2 adds atomic manual check-in submission/retrieval and limited educational
-assessment retrieval. No simulator, clinical scoring engine or database routes are implemented.
+Phases 0–6 provide /api/v1 profiles, check-ins, deterministic telemetry, educational
+assessments/alerts and a read-only education catalog. Runtime repositories use either
+the memory adapter or Developer B's independent `astroguard_db` SQLite adapter.
+Settings() defaults to memory for explicit tests; backend/.env.example selects SQLite
+for normal local setup. Missing/broken SQLite never silently falls back to memory.
 
-Install the shared package first, then `pip install -e './backend[test]'` from
-repository root. See ../docs/phase1-development.md for the complete PowerShell setup,
-configuration, tests, startup commands and adapter behavior.
-See ../docs/phase2-development.md for the current check-in workflow and API additions.
+Install shared, database, then backend with its sqlite/test extras. Apply migrations
+and seed explicitly using `python -m app.prepare_database --seed`; startup and GET
+requests do not migrate or seed. See [SQLite integration](../docs/sqlite-integration.md)
+for exact PowerShell commands, configuration, cutover limitations and tests.
