@@ -56,6 +56,8 @@ export const api = {
   }),
   simulationScenarios: signal => collection('/simulation/scenarios', signal),
   healthTelemetry: (id, signal) => get(`/astronauts/${encodeURIComponent(id)}/telemetry/latest`, signal),
+  healthHistory: (id, signal) => collection(`/astronauts/${encodeURIComponent(id)}/readings?source=simulated`, signal),
+  environmentHistory: (id, signal) => collection(`/missions/${encodeURIComponent(id)}/environmental-readings`, signal),
   environmentalTelemetry: (id, signal) => get(`/missions/${encodeURIComponent(id)}/telemetry/latest`, signal),
   simulationRuns: signal => collection('/simulation/runs', signal),
   simulationRun: (id, signal) => get(`/simulation/runs/${encodeURIComponent(id)}`, signal),

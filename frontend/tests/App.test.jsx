@@ -12,6 +12,8 @@ const page = items => ({ items, total: items.length, limit: 100, offset: 0 })
 
 function defaultResponse(url) {
   const path = new URL(url).pathname
+  if (path.endsWith('/readings') || path.endsWith('/environmental-readings') || path.endsWith('/checkins') || path.endsWith('/assessments') || path === '/api/v1/simulation/runs') return json(page([]))
+  if (path === '/api/v1/simulation/scenarios') return json(page([{ scenario: 'routine', description: 'Fictional routine' }]))
   if (path.endsWith('/telemetry/latest')) return json({ readings: [], as_of: null })
   if (path.endsWith('/health')) return json({ status: 'ok', adapter: 'memory', contract_version: '0.1.0' })
   if (path === '/api/v1/missions') return json(page([mission]))
@@ -32,12 +34,15 @@ test('renders API-backed profile, connection and honest empty health cards', asy
   renderApp()
   expect(await screen.findByRole('heading', { name: new RegExp(astronauts[0].display_name) })).toBeInTheDocument()
   expect(screen.getByText('API connected')).toBeInTheDocument()
-  expect(screen.getAllByText('No data')).toHaveLength(9)
+  expect(screen.getAllByText('No data')).toHaveLength(5)
+  expect(screen.getAllByText(/^No stored .* history\.$/)).toHaveLength(5)
   expect(screen.getByText('No assessment available')).toBeInTheDocument()
   expect(screen.getAllByText('Fictional demo').length).toBeGreaterThan(0)
   expect(screen.getByText(/All profiles are fictional/)).toBeInTheDocument()
   expect(fetch.mock.calls.some(([url]) => url.endsWith(`/astronauts/${astronauts[0].id}`))).toBe(true)
-  expect(fetch.mock.calls.every(([url]) => !url.includes('/dashboard') && !url.includes('/readings'))).toBe(true)
+  await waitFor(() => expect(screen.getByRole('button', { name: 'Start simulation' })).toBeEnabled())
+  expect(fetch.mock.calls.some(([url]) => url.includes(`/astronauts/${astronauts[0].id}/readings?source=simulated`))).toBe(true)
+  expect(fetch.mock.calls.every(([url, options]) => !url.includes('/dashboard') && !options?.method)).toBe(true)
 })
 
 test('dashboard refetches saved fictional telemetry after refresh-style remount without generating readings', async () => {
