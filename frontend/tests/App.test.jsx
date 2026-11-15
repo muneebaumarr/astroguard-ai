@@ -12,6 +12,7 @@ const page = items => ({ items, total: items.length, limit: 100, offset: 0 })
 
 function defaultResponse(url) {
   const path = new URL(url).pathname
+  if (path === '/api/v1/hazards' || path === '/api/v1/guidance') return json(page([]))
   if (path.endsWith('/alerts') || path.endsWith('/readings') || path.endsWith('/environmental-readings') || path.endsWith('/checkins') || path.endsWith('/assessments') || path === '/api/v1/simulation/runs') return json(page([]))
   if (path === '/api/v1/simulation/scenarios') return json(page([{ scenario: 'routine', description: 'Fictional routine' }]))
   if (path.endsWith('/telemetry/latest')) return json({ readings: [], as_of: null })
@@ -98,6 +99,10 @@ test.each([
   } else if (label === 'Assessments & Alerts') {
     expect(await screen.findByRole('heading', { name: 'Latest assessment' })).toBeInTheDocument()
     expect(await screen.findByText('No assessments recorded.')).toBeInTheDocument()
+  } else if (label === 'Guidance') {
+    expect(await screen.findByText('No educational topics match this selection.')).toBeInTheDocument()
+  } else if (label === 'Spaceflight Hazards') {
+    expect(await screen.findByText('No hazard education is available.')).toBeInTheDocument()
   } else expect(screen.getByText('Workspace coming soon')).toBeInTheDocument()
 })
 

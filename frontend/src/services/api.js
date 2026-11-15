@@ -43,6 +43,10 @@ async function collection(path, signal) {
 }
 
 export const api = {
+  hazards: signal => collection('/hazards', signal),
+  hazard: (slug, signal) => get(`/hazards/${encodeURIComponent(slug)}`, signal),
+  guidance: (signal) => collection('/guidance', signal),
+  guidanceArticle: (slug, signal) => get(`/guidance/${encodeURIComponent(slug)}`, signal),
   health: (signal) => get('/health', signal),
   missions: (signal) => collection('/missions', signal),
   mission: (id, signal) => get(`/missions/${encodeURIComponent(id)}`, signal),

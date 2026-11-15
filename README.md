@@ -2,7 +2,7 @@
 
 Astronaut health monitoring and educational decision-support prototype.
 
-**Status: Phase 5 explainable educational assessments and alerts implemented alongside live fictional telemetry. No real sensor monitoring is active.**
+**Status: Phases 0–6 implemented, including the spaceflight hazards explorer and sourced educational guidance. No real sensor monitoring is active.**
 
 All profiles and measurements are fictional. AstroGuard is not a medical device,
 does not diagnose conditions or provide approved mission procedures, and is not
@@ -24,11 +24,13 @@ provides scenario selection, Start, Play, Pause, single-tick and Stop controls. 
 requests an explicit backend tick approximately every two seconds without overlap.
 Refresh telemetry only reads saved records. Backend restarts clear in-memory data.
 See [Phase 4 development and demo instructions](docs/phase4-development.md) and
-[Phase 5 rules, alert lifecycle and acceptance checks](docs/phase5-development.md).
+[Phase 5 rules, alert lifecycle and acceptance checks](docs/phase5-development.md), plus
+[Phase 6 education, sources and demo instructions](docs/phase6-development.md).
 
 Daily check-ins, limited educational input review and explicit simulated health/cabin
 telemetry and Overview trend charts are implemented. The separate Health History
-workspace and sourced hazard education remain future work. Check-ins and simulation
+workspace remains future work. Guidance and Spaceflight Hazards now provide a sourced
+educational library and fictional crew-context topic suggestions. Check-ins and simulation
 ticks now generate explainable assessments and deduplicated alerts atomically.
 
 ## Repository
@@ -109,8 +111,8 @@ separate from mission environmental readings.
 Developer B can begin immediately from the shared protocols and deterministic
 fixtures without waiting for the frontend. Developer A's foundation and memory
 adapter and manual check-in workflow are now implemented. Early SQLite integration
-will use Developer B's adapter once it is supplied. Phases 0–5 are implemented;
-Phase 6 has not started.
+will use Developer B's adapter once it is supplied. Phases 0–6 are implemented;
+durable database integration remains a separate handoff.
 
 ## Scientific references
 

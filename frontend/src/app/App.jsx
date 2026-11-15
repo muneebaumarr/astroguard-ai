@@ -8,6 +8,8 @@ import { navigation } from './navigation'
 import { DailyCheckin } from '../pages/DailyCheckin'
 import { MissionSimulator } from '../pages/MissionSimulator'
 import { Assessments } from '../pages/Assessments'
+import { Hazards } from '../pages/Hazards'
+import { Guidance } from '../pages/Guidance'
 
 export function App() {
   const data = useMissionData()
@@ -17,6 +19,8 @@ export function App() {
     <Route path="check-in" element={<DailyCheckin />} />
     <Route path="demo" element={<MissionSimulator />} />
     <Route path="assessments" element={<Assessments />} />
+    <Route path="hazards" element={<Hazards />} />
+    <Route path="guidance" element={<Guidance />} />
     {navigation.filter(item => item.empty).map(item => <Route key={item.path} path={item.path} element={<Placeholder {...item} />} />)}
     <Route path="*" element={<NotFound />} />
   </Route></Routes>

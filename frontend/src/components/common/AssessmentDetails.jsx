@@ -14,7 +14,7 @@ export function AssessmentDetails({ assessment }) {
         <strong>{humanize(item.indicator)}: {item.value} {item.unit}</strong><span>{item.observed_at} · {humanize(item.record_type)}</span>
       </li>)}</ul>}
       {result.missing_data.length > 0 && <p className="field-help">Missing context: {result.missing_data.join(', ')}</p>}
-    </li>)}</ul><p className="field-help">{educationalDisclaimer}</p></div>
+    </li>)}</ul><p className="field-help">{educationalDisclaimer}</p><Link className="text-button" to="/guidance">Explore educational topic suggestions for this astronaut</Link></div>
 }
 
 export function RecentAlerts({ alerts = [], assessments = [], onAcknowledge, busy = false, compact = false }) {
