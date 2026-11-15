@@ -12,7 +12,7 @@ const page = items => ({ items, total: items.length, limit: 100, offset: 0 })
 
 function defaultResponse(url) {
   const path = new URL(url).pathname
-  if (path.endsWith('/readings') || path.endsWith('/environmental-readings') || path.endsWith('/checkins') || path.endsWith('/assessments') || path === '/api/v1/simulation/runs') return json(page([]))
+  if (path.endsWith('/alerts') || path.endsWith('/readings') || path.endsWith('/environmental-readings') || path.endsWith('/checkins') || path.endsWith('/assessments') || path === '/api/v1/simulation/runs') return json(page([]))
   if (path === '/api/v1/simulation/scenarios') return json(page([{ scenario: 'routine', description: 'Fictional routine' }]))
   if (path.endsWith('/telemetry/latest')) return json({ readings: [], as_of: null })
   if (path.endsWith('/health')) return json({ status: 'ok', adapter: 'memory', contract_version: '0.1.0' })
@@ -95,6 +95,9 @@ test.each([
     expect(await screen.findByRole('form', { name: 'Daily health check-in' })).toBeInTheDocument()
   } else if (label === 'Mission Simulator') {
     expect(await screen.findByRole('form', { name: 'Simulation configuration' })).toBeInTheDocument()
+  } else if (label === 'Assessments & Alerts') {
+    expect(await screen.findByRole('heading', { name: 'Latest assessment' })).toBeInTheDocument()
+    expect(await screen.findByText('No assessments recorded.')).toBeInTheDocument()
   } else expect(screen.getByText('Workspace coming soon')).toBeInTheDocument()
 })
 

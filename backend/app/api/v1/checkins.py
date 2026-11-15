@@ -5,11 +5,12 @@ from fastapi.exceptions import RequestValidationError
 from pydantic import ValidationError
 
 from astroguard_contracts import dto as d
-from astroguard_contracts.enums import HealthIndicator, Source
+from astroguard_contracts.enums import HealthIndicator, Source, AlertState
 from astroguard_contracts.repositories import AdapterFactory
 
 from app.api.dependencies import get_adapter
 from app.services.checkins import CheckinService
+from app.services.assessments import AssessmentService
 from .routes import Limit, Offset
 
 router = APIRouter()
@@ -60,3 +61,20 @@ def assessments(id: d.UUIDString, adapter: Adapter,
 @router.get("/astronauts/{id}/assessments/{assessment_id}", response_model=d.Assessment)
 def assessment(id: d.UUIDString, assessment_id: d.UUIDString, adapter: Adapter):
     return CheckinService(adapter).assessment(id, assessment_id)
+
+
+@router.post("/astronauts/{id}/assessments", response_model=d.Assessment)
+def evaluate_observations(id: d.UUIDString, command_id: CommandID, adapter: Adapter):
+    return AssessmentService(adapter).command(id, command_id)
+
+
+@router.get("/astronauts/{id}/alerts", response_model=d.Page[d.Alert])
+def alerts(id: d.UUIDString, adapter: Adapter, state: AlertState | None = None, limit: Limit = 100, offset: Offset = 0):
+    with adapter.create_uow() as uow:
+        CheckinService.require_astronaut(uow, id)
+        return uow.alerts.list(id, d.AlertQuery(state=state, limit=limit, offset=offset))
+
+
+@router.post("/astronauts/{id}/alerts/{alert_id}/acknowledgement", response_model=d.Alert)
+def acknowledge(id: d.UUIDString, alert_id: d.UUIDString, command_id: CommandID, adapter: Adapter):
+    return AssessmentService(adapter).command(id, command_id, alert_id)

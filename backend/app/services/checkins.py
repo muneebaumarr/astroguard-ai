@@ -9,6 +9,7 @@ from astroguard_contracts.repositories import AdapterFactory, UnitOfWork
 
 from .errors import CheckinConflict, IdempotencyConflict, ResourceNotFound
 from .initial_assessment import assess_checkin, assessment_id_for
+from .assessments import persist, original_created_alerts
 
 
 class CheckinService:
@@ -48,10 +49,10 @@ class CheckinService:
                         source="manual", context=checkin.context, checkin_id=checkin_id,
                         **value.model_dump()) for value in checkin.readings]
                     readings = uow.health_readings.add_many(readings)
-                    assessment = uow.assessments.add(assess_checkin(checkin, readings))
+                    assessment, alerts = persist(uow, assess_checkin(checkin, readings))
                     uow.command_receipts.add(d.CommandReceipt(id=command_id, created_at=now,
                         operation=operation, request_hash=digest, result_type="daily_checkin", result_id=checkin_id))
-                    result = d.CheckinResult(checkin=checkin, readings=readings, assessment=assessment, alerts=[])
+                    result = d.CheckinResult(checkin=checkin, readings=readings, assessment=assessment, alerts=alerts)
                     uow.commit()
                     return result
             except ConcurrentWrite:
@@ -80,7 +81,7 @@ class CheckinService:
             (r.indicator, r.value, r.unit) for r in sorted(checkin.readings, key=lambda r: r.indicator)
         ]:
             raise RepositoryUnavailable("Stored command measurements are incomplete")
-        return d.CheckinResult(checkin=checkin, readings=readings, assessment=assessment, alerts=[])
+        return d.CheckinResult(checkin=checkin, readings=readings, assessment=assessment, alerts=original_created_alerts(uow, assessment))
 
     def list(self, astronaut_id: str, query: d.CheckinQuery) -> d.Page[d.DailyCheckin]:
         with self.adapter.create_uow() as uow:

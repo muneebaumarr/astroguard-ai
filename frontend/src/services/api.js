@@ -51,6 +51,12 @@ export const api = {
   checkins: (id, signal) => collection(`/astronauts/${encodeURIComponent(id)}/checkins`, signal),
   checkin: (id, checkinId, signal) => get(`/astronauts/${encodeURIComponent(id)}/checkins/${encodeURIComponent(checkinId)}`, signal),
   assessments: (id, signal) => collection(`/astronauts/${encodeURIComponent(id)}/assessments`, signal),
+  alerts: (id, signal) => collection(`/astronauts/${encodeURIComponent(id)}/alerts`, signal),
+  assessmentCommand: (id, action, alertId, key, signal) => request(action === 'evaluate'
+    ? `/astronauts/${encodeURIComponent(id)}/assessments`
+    : `/astronauts/${encodeURIComponent(id)}/alerts/${encodeURIComponent(alertId)}/acknowledgement`, {
+    method: 'POST', signal, headers: { 'Idempotency-Key': key },
+  }),
   createCheckin: (id, body, key, signal) => request(`/astronauts/${encodeURIComponent(id)}/checkins`, {
     method: 'POST', signal, headers: { 'Content-Type': 'application/json', 'Idempotency-Key': key }, body: JSON.stringify(body),
   }),
