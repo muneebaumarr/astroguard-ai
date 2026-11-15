@@ -2,7 +2,7 @@
 
 Astronaut health monitoring and educational decision-support prototype.
 
-**Status: Phase 3 explicit fictional telemetry simulator implemented alongside manual check-ins. No real sensor monitoring is active.**
+**Status: Phase 4 mission-control Overview implemented with live fictional playback, sensor cards and stored-telemetry charts. No real sensor monitoring is active.**
 
 All profiles and measurements are fictional. AstroGuard is not a medical device,
 does not diagnose conditions or provide approved mission procedures, and is not
@@ -19,15 +19,15 @@ The approved REST prefix is `/api/v1`.
 The foundation provides six read-only API endpoints, a transactional in-memory
 adapter and a responsive React crew workspace backed by actual mission/profile API
 responses. Daily Check-In now saves manual observations and shows prior entries and
-educational assessments. The overview retrieves saved fictional health and cabin telemetry;
-open Mission Simulator to start a run and advance explicit ticks, then return to Overview.
-Refresh telemetry reloads saved readings without generating new ones. Backend restarts
-clear in-memory data. Advanced history and full
-assessment/alert workflows remain unimplemented.
+educational assessments. Overview retrieves saved fictional health/cabin telemetry and
+provides scenario selection, Start, Play, Pause, single-tick and Stop controls. Play
+requests an explicit backend tick approximately every two seconds without overlap.
+Refresh telemetry only reads saved records. Backend restarts clear in-memory data.
+See [Phase 4 development and demo instructions](docs/phase4-development.md).
 
 Daily check-ins, limited educational input review and explicit simulated health/cabin
-telemetry are implemented. Historical charts, broader assessment/alert workflows and
-sourced hazard education remain future work.
+telemetry and Overview trend charts are implemented. The separate Health History
+workspace, broader assessment/alert workflows and sourced hazard education remain future work.
 
 ## Repository
 
